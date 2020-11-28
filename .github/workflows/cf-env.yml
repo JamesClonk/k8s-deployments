@@ -14,5 +14,5 @@ jobs:
       working-directory: cf-env
       run: ./deploy.sh
       env:
-        KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG_CONTENT }}
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
         INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}
