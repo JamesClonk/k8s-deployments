@@ -1,0 +1,19 @@
+name: Kubernetes Deployments
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  cf-env:
+    if: "!contains(github.event.head_commit.message, 'skip')"
+    name: cf-env
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy cf-env
+      working-directory: cf-env
+      run: ./deploy.sh
+      env:
+        KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG_CONTENT }}
+        INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}

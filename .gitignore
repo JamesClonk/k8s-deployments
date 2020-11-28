@@ -13,3 +13,9 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# vendir tmp directories
+.vendir*
+
+# optional/hidden env configuration files
+.env*
