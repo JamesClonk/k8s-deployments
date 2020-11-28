@@ -1,0 +1,7 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.27.0
+overrides:
+- image: gcr.io/kuar-demo/kuard-amd64:v0.10.0-green
+  newImage: gcr.io/kuar-demo/kuard-amd64@sha256:b45e6382fef12c72da3abbf226cb339438810aae18928bd2a811134b50398141
+  preresolved: true

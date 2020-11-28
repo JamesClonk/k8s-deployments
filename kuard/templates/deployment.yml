@@ -1,0 +1,49 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+  namespace: kuard
+spec:
+  selector:
+    matchLabels: #@ labels("app")
+  replicas: #@ data.values.kuard.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("app")
+    spec:
+      serviceAccountName: kuard
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 65534
+      affinity: #@ podAntiAffinity("app")
+      containers:
+      - name: kuard
+        image: #@ data.values.kuard.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "5m"
+          limits:
+            memory: "32Mi"
+            cpu: "50m"
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+        livenessProbe:
+          httpGet:
+            path: /healthy
+            port: 8080

@@ -1,0 +1,14 @@
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard
+  namespace: kuard
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector: #@ labels("app")
