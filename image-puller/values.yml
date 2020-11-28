@@ -1,0 +1,61 @@
+#@data/values
+---
+image_puller:
+  image: "jamesclonk/image-puller:ef9d2a272282c4ccb199d146e71a4d8fbbdad15c"
+
+  cronjob: true
+  run_job: false
+
+  images:
+  #! direct jc.io stuff
+  - "jamesclonk/image-puller:ef9d2a272282c4ccb199d146e71a4d8fbbdad15c"
+  - "jamesclonk/repo-mirrorer:0f100962dfc32b5a15da6cc73ba3f98e007832a8"
+  - "jamesclonk/backman:1.15.0"
+  - "jamesclonk/cf-env:89d20c44e3d6b1a4e0c0502e9d1f5bc908e81264"
+  - "jamesclonk/home-info-dashboard:c6255d798c767b01d4e676240e8f95d564cf407a"
+  - "jamesclonk/irvisualizer:13f771d9672486bd9cf191b7f559911fe33042e1"
+  - "jamesclonk/ircollector:71b58ed77aebf7930f8ce52fa2fbb554d11ef5bb"
+  - "jamesclonk/jcio-frontend:d566dd41b65011a921713c7837043e659920e7c5"
+  - "jamesclonk/moviedb-frontend:87286a8dd8d0ff6fb9108880b51887854ad0872c"
+  - "jamesclonk/moviedb-backend:6abf341bd5f1d050e43ac34be3f56b0f72e4af75"
+  - "jamesclonk/basic-auth:678636aaca212f20c4e263d05b75efabdc6aef2c"
+
+  #! other stuff
+  - "jamesclonk/backman:latest"
+  - "jamesclonk/web-container:latest"
+  - "jamesclonk/docker-simple:latest"
+
+  #! cert-manager
+  - "quay.io/jetstack/cert-manager-cainjector:v1.1.0"
+  - "quay.io/jetstack/cert-manager-controller:v1.1.0"
+  - "quay.io/jetstack/cert-manager-webhook:v1.1.0"
+
+  #! ingress-nginx
+  - "docker.io/jettech/kube-webhook-certgen:v1.5.0"
+  - "jamesclonk/basic-auth:678636aaca212f20c4e263d05b75efabdc6aef2c"
+  - "k8s.gcr.io/ingress-nginx/controller:v0.41.2@sha256:1f4f402b9c14f3ae92b11ada1dfe9893a88f0faeb0b2f4b903e2c67a0c3bf0de"
+
+  #! kubernetes-dashboard
+  - "kubernetesui/dashboard:v2.0.4"
+  - "kubernetesui/metrics-scraper:v1.0.4"
+
+  #! grafana
+  - "busybox:1.31.1"
+  - "grafana/grafana:7.3.1"
+
+  #! kube-state-metrics
+  - "quay.io/coreos/kube-state-metrics:v2.0.0-alpha.2"
+
+  #! loki
+  - "grafana/loki:1.6.0"
+  - "grafana/promtail:1.6.0"
+
+  #! prometheus
+  - "jimmidyson/configmap-reload:v0.4.0"
+  - "prom/alertmanager:v0.21.0"
+  - "prom/node-exporter:v1.0.1"
+  - "prom/prometheus:v2.21.0"
+  - "prom/pushgateway:v1.2.0"
+
+  #! prometheus-msteams
+  - "quay.io/prometheusmsteams/prometheus-msteams:v1.4.1"

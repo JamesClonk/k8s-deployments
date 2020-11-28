@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: image-puller-config
+  namespace: image-puller
+  labels: #@ labels()
+  annotations:
+    kapp.k14s.io/versioned: ""
+#@yaml/text-templated-strings
+data:
+  images.dat: |
+    (@- for image in data.values.image_puller.images: @)
+    (@= image @)
+    (@- end @)

@@ -1,0 +1,5 @@
+#@ def labels():
+  app: image-puller
+  app.kubernetes.io/name: image-puller
+  app.kubernetes.io/instance: image-puller
+#@ end
