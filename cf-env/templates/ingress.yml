@@ -1,0 +1,29 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: cf-env
+  namespace: cf-env
+  labels: #@ labels("ingress")
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - secretName: cf-env-tls
+    hosts:
+    #@ for/end host in data.values.domains:
+    - #@ "cf-env." + host
+  rules:
+  #@ for/end host in data.values.domains:
+  - host: #@ "cf-env." + host
+    http:
+      paths:
+      - backend:
+          serviceName: cf-env
+          servicePort: 80

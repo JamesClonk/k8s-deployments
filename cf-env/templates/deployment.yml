@@ -1,0 +1,46 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cf-env
+  namespace: cf-env
+spec:
+  selector:
+    matchLabels: #@ labels("app")
+  replicas: #@ data.values.cf_env.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("app")
+    spec:
+      serviceAccountName: cf-env
+      securityContext:
+        runAsUser: 1007
+        runAsGroup: 1007
+        fsGroup: 1007
+      affinity: #@ podAntiAffinity("app")
+      containers:
+      - name: cf-env
+        image: #@ data.values.cf_env.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "5m"
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
