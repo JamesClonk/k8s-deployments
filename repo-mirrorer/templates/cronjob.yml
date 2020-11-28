@@ -1,0 +1,52 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+#@ def jobTemplate():
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: repo-mirrorer
+        image: #@ data.values.repo_mirrorer.image
+        env:
+        - name: GITLAB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: repo-mirrorer-secret
+              key: gitlab-token
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "50m"
+        limits:
+          memory: "128Mi"
+          cpu: "150m"
+#@ end
+
+#@ if data.values.repo_mirrorer.cronjob:
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: repo-mirrorer
+  namespace: repo-mirrorer
+  labels: #@ labels()
+spec:
+  schedule: "9 9 * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec: #@ jobTemplate()
+#@ end
+
+#@ if data.values.repo_mirrorer.run_job:
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: repo-mirrorer
+  namespace: repo-mirrorer
+  labels: #@ labels()
+spec: #@ jobTemplate()
+#@ end

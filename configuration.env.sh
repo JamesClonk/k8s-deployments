@@ -13,3 +13,10 @@ export INGRESS_DOMAIN="${INGRESS_DOMAIN:=example.org}" # for example "mydomain.o
 export INGRESS_BASIC_AUTH_USERNAME="${INGRESS_BASIC_AUTH_USERNAME:=username}" # for example "my-username"
 export INGRESS_BASIC_AUTH_PASSWORD="${INGRESS_BASIC_AUTH_PASSWORD:=not-secret}" # for example "my-super-secret-password"
 ########################################################################################################################
+
+
+########################################################################################################################
+####### repo-mirrorer ##################################################################################################
+########################################################################################################################
+export REPO_MIRRORER_GITLAB_TOKEN="${REPO_MIRRORER_GITLAB_TOKEN:=my-gitlab-token}" # your gitlab token
+########################################################################################################################

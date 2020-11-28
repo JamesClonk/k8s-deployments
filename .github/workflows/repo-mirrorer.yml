@@ -1,0 +1,17 @@
+name: repo-mirrorer cronjob
+
+on:
+  workflow_dispatch:
+
+jobs:
+  repo-mirrorer:
+    name: repo-mirrorer
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy repo-mirrorer cronjob
+      working-directory: repo-mirrorer
+      run: ./deploy.sh
+      env:
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        REPO_MIRRORER_GITLAB_TOKEN: ${{ secrets.REPO_MIRRORER_GITLAB_TOKEN }}

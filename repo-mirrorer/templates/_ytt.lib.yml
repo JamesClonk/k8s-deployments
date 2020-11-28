@@ -1,0 +1,5 @@
+#@ def labels():
+  app: repo-mirrorer
+  app.kubernetes.io/name: repo-mirrorer
+  app.kubernetes.io/instance: repo-mirrorer
+#@ end
