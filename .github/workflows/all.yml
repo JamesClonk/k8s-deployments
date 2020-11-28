@@ -30,3 +30,13 @@ jobs:
     - name: deploy kuard demo app
       working-directory: kuard
       run: ./deploy.sh
+
+  image-puller:
+    if: "!contains(github.event.head_commit.message, 'skip')"
+    name: image-puller
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy image-puller cronjob
+      working-directory: image-puller
+      run: ./deploy.sh
