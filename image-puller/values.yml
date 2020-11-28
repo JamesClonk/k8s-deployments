@@ -25,6 +25,12 @@ image_puller:
   - "jamesclonk/web-container:latest"
   - "jamesclonk/docker-simple:latest"
 
+  #! kuard
+  - "gcr.io/kuar-demo/kuard-amd64:v0.10.0-green"
+
+  #! pgweb
+  - "sosedoff/pgweb:0.11.7"
+
   #! cert-manager
   - "quay.io/jetstack/cert-manager-cainjector:v1.1.0"
   - "quay.io/jetstack/cert-manager-controller:v1.1.0"
