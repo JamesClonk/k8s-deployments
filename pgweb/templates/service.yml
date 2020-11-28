@@ -1,0 +1,14 @@
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgweb
+  namespace: pgweb
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 8081
+    targetPort: 8081
+  selector: #@ labels("dashboard")

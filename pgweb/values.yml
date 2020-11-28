@@ -1,0 +1,27 @@
+#@data/values
+---
+domains:
+- "${INGRESS_DOMAIN}"
+
+pgweb:
+  replicas: 1
+  image: "sosedoff/pgweb:0.11.7"
+
+  enable_network_policy: true
+
+databases:
+  home_info:
+    username: "${HOME_INFO_DB_USERNAME}"
+    password: "${HOME_INFO_DB_PASSWORD}"
+    host: "${HOME_INFO_DB_HOST}"
+    db_name: "${HOME_INFO_DB_NAME}"
+  irvisualizer:
+    username: "${IR_VISUALIZER_DB_USERNAME}"
+    password: "${IR_VISUALIZER_DB_PASSWORD}"
+    host: "${IR_VISUALIZER_DB_HOST}"
+    db_name: "${IR_VISUALIZER_DB_NAME}"
+  jcio:
+    username: "${JCIO_MOVIEDB_USERNAME}"
+    password: "${JCIO_MOVIEDB_PASSWORD}"
+    host: "${JCIO_MOVIEDB_HOST}"
+    db_name: "${JCIO_MOVIEDB_NAME}"

@@ -1,0 +1,74 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgweb
+  namespace: pgweb
+  labels: #@ labels("dashboard")
+spec:
+  selector:
+    matchLabels: #@ labels("dashboard")
+  replicas: #@ data.values.pgweb.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("dashboard")
+    spec:
+      serviceAccountName: pgweb
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+      affinity: #@ podAntiAffinity("dashboard")
+      containers:
+      - name: pgweb
+        image: #@ data.values.pgweb.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8081
+        command: ["/usr/bin/pgweb"]
+        args: ["--bind=0.0.0.0", "--listen=8081", "--bookmarks-dir=/pgweb/bookmarks"]
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "150m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          failureThreshold: 5
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: pgweb-bookmarks
+          mountPath: /pgweb/bookmarks/home_info.toml
+          subPath: home_info.toml
+        - name: pgweb-bookmarks
+          mountPath: /pgweb/bookmarks/irvisualizer.toml
+          subPath: irvisualizer.toml
+        - name: pgweb-bookmarks
+          mountPath: /pgweb/bookmarks/jcio.toml
+          subPath: jcio.toml
+      volumes:
+      - name: pgweb-bookmarks
+        secret:
+          secretName: pgweb
