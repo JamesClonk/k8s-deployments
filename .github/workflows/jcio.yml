@@ -1,0 +1,22 @@
+name: jcio - homepage application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backman:
+    name: jcio
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy jcio homepage app
+      working-directory: jcio
+      run: ./deploy.sh
+      env:
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}
+        JCIO_HTTP_HMAC_SECRET: ${{ secrets.JCIO_HTTP_HMAC_SECRET }}
+        JCIO_MOVIEDB_HOST: ${{ secrets.JCIO_MOVIEDB_HOST }}
+        JCIO_MOVIEDB_NAME: ${{ secrets.JCIO_MOVIEDB_NAME }}
+        JCIO_MOVIEDB_USERNAME: ${{ secrets.JCIO_MOVIEDB_USERNAME }}
+        JCIO_MOVIEDB_PASSWORD: ${{ secrets.JCIO_MOVIEDB_PASSWORD }}

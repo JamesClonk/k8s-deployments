@@ -1,0 +1,82 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jcio-frontend
+  namespace: jcio
+  labels: #@ labels("ingress")
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - secretName: jcio-tls
+    hosts:
+    #@ for host in data.values.domains:
+    - #@ host
+    - #@ "www." + host
+    #@ end
+  rules:
+  #@ for/end host in data.values.domains:
+  - host: #@ host
+    http:
+      paths:
+      - backend:
+          serviceName: jcio-frontend
+          servicePort: 3000
+  #@ for/end host in data.values.domains:
+  - host: #@ "www." + host
+    http:
+      paths:
+      - backend:
+          serviceName: jcio-frontend
+          servicePort: 3000
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: moviedb
+  namespace: jcio
+  labels: #@ labels("ingress")
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - secretName: moviedb-tls
+    hosts:
+    #@ for host in data.values.domains:
+    - #@ "moviedb." + host
+    - #@ "moviedb-frontend." + host
+    - #@ "moviedb-backend." + host
+    #@ end
+  rules:
+  #@ for/end host in data.values.domains:
+  - host: #@ "moviedb." + host
+    http:
+      paths:
+      - backend:
+          serviceName: moviedb-frontend
+          servicePort: 3007
+  #@ for/end host in data.values.domains:
+  - host: #@ "moviedb-frontend." + host
+    http:
+      paths:
+      - backend:
+          serviceName: moviedb-frontend
+          servicePort: 3007
+  #@ for/end host in data.values.domains:
+  - host: #@ "moviedb-backend." + host
+    http:
+      paths:
+      - backend:
+          serviceName: moviedb-backend
+          servicePort: 4007

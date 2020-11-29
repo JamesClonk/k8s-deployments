@@ -1,0 +1,23 @@
+#@data/values
+---
+domains:
+- "${INGRESS_DOMAIN}"
+
+enable_network_policy: true
+
+jcio:
+  replicas: 2
+  image: "jamesclonk/jcio-frontend:d566dd41b65011a921713c7837043e659920e7c5"
+
+moviedb:
+  hmac_secret: "${JCIO_HTTP_HMAC_SECRET}"
+
+  frontend:
+    replicas: 2
+    image: "jamesclonk/moviedb-frontend:87286a8dd8d0ff6fb9108880b51887854ad0872c"
+
+  backend:
+    replicas: 2
+    image: "jamesclonk/moviedb-backend:6abf341bd5f1d050e43ac34be3f56b0f72e4af75"
+
+    db_uri: "postgres://${JCIO_MOVIEDB_USERNAME}:${JCIO_MOVIEDB_PASSWORD}@${JCIO_MOVIEDB_HOST}/${JCIO_MOVIEDB_NAME}?sslmode=require"

@@ -1,0 +1,169 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jcio-frontend
+  namespace: jcio
+  labels: #@ labels("jcio-frontend")
+spec:
+  selector:
+    matchLabels: #@ labels("jcio-frontend")
+  replicas: #@ data.values.jcio.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("jcio-frontend")
+      annotations:
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9090"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: jcio
+      affinity: #@ podAntiAffinity("jcio-frontend")
+      containers:
+      - name: jcio
+        image: #@ data.values.jcio.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 3000
+        - containerPort: 9090
+        env:
+        - name: PORT
+          value: "3000"
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: JCIO_ENV
+          value: production
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "50m"
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 3000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviedb-frontend
+  namespace: jcio
+  labels: #@ labels("moviedb-frontend")
+spec:
+  selector:
+    matchLabels: #@ labels("moviedb-frontend")
+  replicas: #@ data.values.moviedb.frontend.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("moviedb-frontend")
+    spec:
+      affinity: #@ podAntiAffinity("moviedb-frontend")
+      containers:
+      - name: moviedb-frontend
+        image: #@ data.values.moviedb.frontend.image
+        ports:
+        - containerPort: 3007
+        env:
+        - name: PORT
+          value: "3007"
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: JCIO_ENV
+          value: production
+        - name: JCIO_MOVIEDB_BACKEND
+          value: "http://moviedb-backend.jcio:4007"
+        envFrom:
+        - secretRef:
+            name: jcio
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "50m"
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3007
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          httpGet:
+            path: /ready
+            port: 3007
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviedb-backend
+  namespace: jcio
+  labels: #@ labels("moviedb-backend")
+spec:
+  selector:
+    matchLabels: #@ labels("moviedb-backend")
+  replicas: #@ data.values.moviedb.backend.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("moviedb-backend")
+    spec:
+      affinity: #@ podAntiAffinity("moviedb-backend")
+      containers:
+      - name: moviedb-backend
+        image: #@ data.values.moviedb.backend.image
+        ports:
+        - containerPort: 4007
+        env:
+        - name: PORT
+          value: "4007"
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: JCIO_ENV
+          value: production
+        envFrom:
+        - secretRef:
+            name: jcio
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "50m"
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 4007
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 4007
