@@ -38,3 +38,14 @@ export IR_VISUALIZER_DB_NAME="${IR_VISUALIZER_DB_NAME:=dbname}"
 export IR_VISUALIZER_DB_USERNAME="${IR_VISUALIZER_DB_USERNAME:=username}"
 export IR_VISUALIZER_DB_PASSWORD="${IR_VISUALIZER_DB_PASSWORD:=password}"
 ########################################################################################################################
+
+
+########################################################################################################################
+####### backman ########################################################################################################
+########################################################################################################################
+export BACKMAN_USERNAME="${BACKMAN_USERNAME:=${INGRESS_BASIC_AUTH_USERNAME}}" # for example "my-username"
+export BACKMAN_PASSWORD="${BACKMAN_PASSWORD:=${INGRESS_BASIC_AUTH_PASSWORD}}" # for example "my-super-secret-password"
+export BACKMAN_S3_HOST="${BACKMAN_S3_HOST:=host}"
+export BACKMAN_S3_KEY="${BACKMAN_S3_KEY:=access_key}"
+export BACKMAN_S3_SECRET="${BACKMAN_S3_SECRET:=secret_key}"
+########################################################################################################################

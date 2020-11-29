@@ -1,0 +1,39 @@
+#@ def labels(component):
+  app: backman
+  app.kubernetes.io/name: backman
+  app.kubernetes.io/instance: backman
+  app.kubernetes.io/component: #@ component
+#@ end
+
+#@ def labelSelector(component):
+  matchExpressions:
+  - key: app
+    operator: In
+    values:
+    - backman
+  - key: app.kubernetes.io/name
+    operator: In
+    values:
+    - backman
+  - key: app.kubernetes.io/instance
+    operator: In
+    values:
+    - backman
+  - key: app.kubernetes.io/component
+    operator: In
+    values:
+    - #@ component
+#@ end
+
+#@ def podAntiAffinity(component):
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        topologyKey: kubernetes.io/hostname
+        labelSelector: #@ labelSelector(component)
+#@ end
+
+#@ def connstr(username, password, host, db_name):
+#@   return "postgres://{}:{}@{}/{}?sslmode=require".format(username, password, host, db_name)
+#@ end

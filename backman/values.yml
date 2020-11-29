@@ -1,0 +1,29 @@
+#@data/values
+---
+domains:
+- "${INGRESS_DOMAIN}"
+
+backman:
+  replicas: 1
+  image: "jamesclonk/backman:1.20.1"
+
+  enable_network_policy: true
+
+  username: "${BACKMAN_USERNAME}"
+  password: "${BACKMAN_PASSWORD}"
+
+  s3:
+    host: "${BACKMAN_S3_HOST}"
+    key: "${BACKMAN_S3_KEY}"
+    secret: "${BACKMAN_S3_SECRET}"
+
+  postgres:
+  - name: irvisualizer_db
+    database: "${IR_VISUALIZER_DB_NAME}"
+    uri: "postgres://${IR_VISUALIZER_DB_USERNAME}:${IR_VISUALIZER_DB_PASSWORD}@${IR_VISUALIZER_DB_HOST}/${IR_VISUALIZER_DB_NAME}?sslmode=require"
+  - name: home_info_db
+    database: "${HOME_INFO_DB_NAME}"
+    uri: "postgres://${HOME_INFO_DB_USERNAME}:${HOME_INFO_DB_PASSWORD}@${HOME_INFO_DB_HOST}/${HOME_INFO_DB_NAME}?sslmode=require"
+  - name: movie_db
+    database: "${JCIO_MOVIEDB_NAME}"
+    uri: "postgres://${JCIO_MOVIEDB_USERNAME}:${JCIO_MOVIEDB_PASSWORD}@${JCIO_MOVIEDB_HOST}/${JCIO_MOVIEDB_NAME}?sslmode=require"

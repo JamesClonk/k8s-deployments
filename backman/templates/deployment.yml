@@ -1,0 +1,67 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backman
+  namespace: backman
+  labels: #@ labels("gui")
+spec:
+  selector:
+    matchLabels: #@ labels("gui")
+  replicas: #@ data.values.backman.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("gui")
+      annotations:
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: backman
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+      affinity: #@ podAntiAffinity("gui")
+      containers:
+      - name: backman
+        image: #@ data.values.backman.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: TZ
+          value: "Europe/Zurich"
+        envFrom:
+        - secretRef:
+            name: backman
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1536Mi"
+            cpu: "1000m"
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          exec:
+            command:
+            - bash
+            - -c
+            - 'curl --fail http://localhost:8080/api/v1/states --header "Authorization: ${PROBE_AUTHORIZATION}"'
