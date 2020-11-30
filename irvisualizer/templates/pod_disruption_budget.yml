@@ -1,0 +1,30 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+#@ if data.values.irvisualizer.replicas > 1:
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: irvisualizer
+  namespace: irvisualizer
+  labels: #@ labels("pdb")
+spec:
+  minAvailable: 50%
+  selector:
+    matchLabels: #@ labels("frontend")
+#@ end
+
+#@ if data.values.ircollector.replicas > 1:
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: ircollector
+  namespace: irvisualizer
+  labels: #@ labels("pdb")
+spec:
+  minAvailable: 50%
+  selector:
+    matchLabels: #@ labels("backend")
+#@ end

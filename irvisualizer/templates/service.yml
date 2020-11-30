@@ -1,0 +1,27 @@
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: irvisualizer
+  namespace: irvisualizer
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector: #@ labels("frontend")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ircollector
+  namespace: irvisualizer
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector: #@ labels("backend")

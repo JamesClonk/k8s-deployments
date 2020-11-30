@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  backman:
+  home-info:
     name: home-info
     runs-on: ubuntu-latest
     steps:

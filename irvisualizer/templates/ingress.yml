@@ -1,0 +1,56 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: irvisualizer
+  namespace: irvisualizer
+  labels: #@ labels("ingress")
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - secretName: irvisualizer-tls
+    hosts:
+    #@ for/end host in data.values.domains:
+    - #@ "irvisualizer." + host
+  rules:
+  #@ for/end host in data.values.domains:
+  - host: #@ "irvisualizer." + host
+    http:
+      paths:
+      - backend:
+          serviceName: irvisualizer
+          servicePort: 8080
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ircollector
+  namespace: irvisualizer
+  labels: #@ labels("ingress")
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - secretName: ircollector-tls
+    hosts:
+    #@ for/end host in data.values.domains:
+    - #@ "ircollector." + host
+  rules:
+  #@ for/end host in data.values.domains:
+  - host: #@ "ircollector." + host
+    http:
+      paths:
+      - backend:
+          serviceName: ircollector
+          servicePort: 8080

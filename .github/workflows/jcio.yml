@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  backman:
+  jcio:
     name: jcio
     runs-on: ubuntu-latest
     steps:

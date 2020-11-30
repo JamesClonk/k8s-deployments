@@ -1,0 +1,29 @@
+#@data/values
+---
+domains:
+- "${INGRESS_DOMAIN}"
+
+enable_network_policy: true
+
+db_uri: "postgres://${IR_VISUALIZER_DB_USERNAME}:${IR_VISUALIZER_DB_PASSWORD}@${IR_VISUALIZER_DB_HOST}/${IR_VISUALIZER_DB_NAME}?sslmode=require"
+loggly_token: "${IR_VISUALIZER_LOGGLY_TOKEN}"
+
+irvisualizer:
+  replicas: 2
+  image: "jamesclonk/irvisualizer:13f771d9672486bd9cf191b7f559911fe33042e1"
+
+  auth:
+    username: "${IR_VISUALIZER_AUTH_USERNAME}"
+    password: "${IR_VISUALIZER_AUTH_PASSWORD}"
+
+ircollector:
+  replicas: 1
+  image: "jamesclonk/ircollector:71b58ed77aebf7930f8ce52fa2fbb554d11ef5bb"
+
+  auth:
+    username: "${IR_VISUALIZER_AUTH_USERNAME}"
+    password: "${IR_VISUALIZER_AUTH_PASSWORD}"
+
+  iracing_auth:
+    username: "${IR_VISUALIZER_IR_USERNAME}"
+    password: "${IR_VISUALIZER_IR_PASSWORD}"

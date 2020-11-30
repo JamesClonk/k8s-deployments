@@ -1,0 +1,24 @@
+name: irvisualizer application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  irvisualizer:
+    name: irvisualizer
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy irvisualizer app
+      working-directory: irvisualizer
+      run: ./deploy.sh
+      env:
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}
+        IR_VISUALIZER_LOGGLY_TOKEN: ${{ secrets.IR_VISUALIZER_LOGGLY_TOKEN }}
+        IR_VISUALIZER_IR_USERNAME: ${{ secrets.IR_VISUALIZER_IR_USERNAME }}
+        IR_VISUALIZER_IR_PASSWORD: ${{ secrets.IR_VISUALIZER_IR_PASSWORD }}
+        IR_VISUALIZER_DB_HOST: ${{ secrets.IR_VISUALIZER_DB_HOST }}
+        IR_VISUALIZER_DB_NAME: ${{ secrets.IR_VISUALIZER_DB_NAME }}
+        IR_VISUALIZER_DB_USERNAME: ${{ secrets.IR_VISUALIZER_DB_USERNAME }}
+        IR_VISUALIZER_DB_PASSWORD: ${{ secrets.IR_VISUALIZER_DB_PASSWORD }}

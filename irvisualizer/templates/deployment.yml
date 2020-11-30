@@ -1,0 +1,128 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: irvisualizer
+  namespace: irvisualizer
+  labels: #@ labels("frontend")
+spec:
+  selector:
+    matchLabels: #@ labels("frontend")
+  replicas: #@ data.values.irvisualizer.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("frontend")
+      annotations:
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: irvisualizer
+      affinity: #@ podAntiAffinity("frontend")
+      containers:
+      - name: irvisualizer
+        image: #@ data.values.irvisualizer.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: LOG_LEVEL
+          value: "debug"
+        envFrom:
+        - secretRef:
+            name: irvisualizer
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "64Mi"
+            cpu: "200m"
+            ephemeral-storage: "1Gi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ircollector
+  namespace: irvisualizer
+  labels: #@ labels("backend")
+spec:
+  selector:
+    matchLabels: #@ labels("backend")
+  replicas: #@ data.values.ircollector.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("backend")
+      annotations:
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: irvisualizer
+      affinity: #@ podAntiAffinity("backend")
+      containers:
+      - name: ircollector
+        image: #@ data.values.ircollector.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: LOG_LEVEL
+          value: "debug"
+        envFrom:
+        - secretRef:
+            name: irvisualizer
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "64Mi"
+            cpu: "300m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+          exec:
+            command:
+            - bash
+            - -c
+            - 'curl --fail http://localhost:8080/seasons --header "Authorization: ${PROBE_AUTHORIZATION}"'
