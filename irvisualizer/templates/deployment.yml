@@ -48,7 +48,7 @@ spec:
             ephemeral-storage: "1Gi"
           limits:
             memory: "64Mi"
-            cpu: "200m"
+            cpu: "250m"
             ephemeral-storage: "1Gi"
         readinessProbe:
           httpGet:
@@ -110,7 +110,7 @@ spec:
             cpu: "100m"
           limits:
             memory: "64Mi"
-            cpu: "300m"
+            cpu: "350m"
         readinessProbe:
           httpGet:
             path: /health
