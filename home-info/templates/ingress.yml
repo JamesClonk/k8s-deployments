@@ -1,0 +1,29 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: home-info
+  namespace: home-info
+  labels: #@ labels("ingress")
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - secretName: home-info-tls
+    hosts:
+    #@ for/end host in data.values.domains:
+    - #@ "home-info." + host
+  rules:
+  #@ for/end host in data.values.domains:
+  - host: #@ "home-info." + host
+    http:
+      paths:
+      - backend:
+          serviceName: home-info
+          servicePort: 8080

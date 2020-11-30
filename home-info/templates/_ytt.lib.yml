@@ -1,0 +1,35 @@
+#@ def labels(component):
+  app: home-info
+  app.kubernetes.io/name: home-info
+  app.kubernetes.io/instance: home-info
+  app.kubernetes.io/component: #@ component
+#@ end
+
+#@ def labelSelector(component):
+  matchExpressions:
+  - key: app
+    operator: In
+    values:
+    - home-info
+  - key: app.kubernetes.io/name
+    operator: In
+    values:
+    - home-info
+  - key: app.kubernetes.io/instance
+    operator: In
+    values:
+    - home-info
+  - key: app.kubernetes.io/component
+    operator: In
+    values:
+    - #@ component
+#@ end
+
+#@ def podAntiAffinity(component):
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        topologyKey: kubernetes.io/hostname
+        labelSelector: #@ labelSelector(component)
+#@ end

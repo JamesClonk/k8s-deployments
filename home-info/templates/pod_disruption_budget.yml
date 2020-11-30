@@ -1,0 +1,16 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+#@ if data.values.home_info.replicas > 1:
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: home-info
+  namespace: home-info
+  labels: #@ labels("pdb")
+spec:
+  minAvailable: 50%
+  selector:
+    matchLabels: #@ labels("dashboard")
+#@ end

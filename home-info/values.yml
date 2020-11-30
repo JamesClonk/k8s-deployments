@@ -1,0 +1,20 @@
+#@data/values
+---
+domains:
+- "${INGRESS_DOMAIN}"
+
+home_info:
+  replicas: 2
+  image: "jamesclonk/home-info-dashboard:6d64f8e19c7644da49ba2489424d9e034541f2ac"
+
+  enable_network_policy: true
+
+  db_uri: "postgres://${HOME_INFO_DB_USERNAME}:${HOME_INFO_DB_PASSWORD}@${HOME_INFO_DB_HOST}/${HOME_INFO_DB_NAME}?sslmode=require"
+
+  auth:
+    username: "${HOME_INFO_AUTH_USERNAME}"
+    password: "${HOME_INFO_AUTH_PASSWORD}"
+  slack:
+    token: "${HOME_INFO_SLACK_TOKEN}"
+  teams:
+    webhook_url: "${HOME_INFO_TEAMS_WEBHOOK_URL}"

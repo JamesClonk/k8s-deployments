@@ -1,0 +1,25 @@
+name: home-info - home automation application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backman:
+    name: home-info
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy home-info app
+      working-directory: home-info
+      run: ./deploy.sh
+      env:
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}
+        HOME_INFO_AUTH_USERNAME: ${{ secrets.HOME_INFO_AUTH_USERNAME }}
+        HOME_INFO_AUTH_PASSWORD: ${{ secrets.HOME_INFO_AUTH_PASSWORD }}
+        HOME_INFO_SLACK_TOKEN: ${{ secrets.HOME_INFO_SLACK_TOKEN }}
+        HOME_INFO_TEAMS_WEBHOOK_URL: ${{ secrets.HOME_INFO_TEAMS_WEBHOOK_URL }}
+        HOME_INFO_DB_HOST: ${{ secrets.HOME_INFO_DB_HOST }}
+        HOME_INFO_DB_NAME: ${{ secrets.HOME_INFO_DB_NAME }}
+        HOME_INFO_DB_USERNAME: ${{ secrets.HOME_INFO_DB_USERNAME }}
+        HOME_INFO_DB_PASSWORD: ${{ secrets.HOME_INFO_DB_PASSWORD }}
