@@ -1,0 +1,10 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.27.0
+overrides:
+- image: busybox:1.32.0
+  newImage: index.docker.io/library/busybox@sha256:9f1c79411e054199210b4d489ae600a061595967adb643cd923f8515ad8123d2
+  preresolved: true
+- image: syncthing/syncthing:1.11.1
+  newImage: index.docker.io/syncthing/syncthing@sha256:30f6afeb506d88ef38ab980c24c18a83d7838f91df31da914e8416e03dbadd65
+  preresolved: true

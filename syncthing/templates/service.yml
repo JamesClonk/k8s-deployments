@@ -1,0 +1,29 @@
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-gui
+  namespace: syncthing
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 8384
+    targetPort: 8384
+  selector: #@ labels("server")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: syncthing-server
+  namespace: syncthing
+  labels: #@ labels("svc")
+spec:
+  type: NodePort
+  ports:
+  - port: 22000
+    targetPort: 22000
+    nodePort: 32222
+  selector: #@ labels("server")

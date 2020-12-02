@@ -1,0 +1,22 @@
+#@data/values
+---
+domains:
+- "${INGRESS_DOMAIN}"
+
+busybox:
+  image: "busybox:1.32.0"
+
+syncthing:
+  image: "syncthing/syncthing:1.11.1"
+
+  storage:
+    class_name: hcloud-volumes
+    driver: csi.hetzner.cloud
+    size: 10Gi
+    reclaim: false
+    volume_handle: "" # <-- must be set if 'reclaim=true'
+
+  username: "${SYNCTHING_USERNAME}"
+  password: "${SYNCTHING_PASSWORD}"
+
+  enable_network_policy: true

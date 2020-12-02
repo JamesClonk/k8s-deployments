@@ -1,0 +1,91 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+  namespace: syncthing
+  labels: #@ labels("server")
+spec:
+  selector:
+    matchLabels: #@ labels("server")
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: #@ labels("server")
+    spec:
+      serviceAccountName: syncthing
+      securityContext:
+        runAsUser: 2007
+        runAsGroup: 2007
+        fsGroup: 2007
+      #! busybox "cp" does not have a -n flag, and -u does not seem to work! :(
+#!      initContainers:
+#!      - name: bootstrap
+#!        image: #@ data.values.busybox.image
+#!        command: ["sh", "-c", "mkdir -p /var/syncthing/config; cp -u /var/syncthing/bootstrap/config.xml /var/syncthing/config/config.xml; chown -R 2007:2007 /var/syncthing || true"]
+#!        securityContext:
+#!          runAsUser: 0
+#!        volumeMounts:
+#!        - name: storage
+#!          mountPath: /var/syncthing
+#!        - name: syncthing-config
+#!          mountPath: /var/syncthing/bootstrap/config.xml
+#!          subPath: config.xml
+      containers:
+      - name: syncthing
+        image: #@ data.values.syncthing.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8384
+        - containerPort: 22000
+        command: ["/bin/entrypoint.sh"]
+        args: ["/bin/syncthing", "-config", "/var/syncthing/config", "-data", "/var/syncthing/data"]
+        env:
+        - name: PUID
+          value: "2007"
+        - name: PGID
+          value: "2007"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "350m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8384
+          failureThreshold: 5
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8384
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: storage
+          mountPath: /var/syncthing
+      volumes:
+      - name: syncthing-config
+        secret:
+          secretName: syncthing
+          defaultMode: 432
+      - name: storage
+        persistentVolumeClaim:
+          claimName: syncthing

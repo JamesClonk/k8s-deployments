@@ -77,3 +77,11 @@ export IR_VISUALIZER_AUTH_PASSWORD="${IR_VISUALIZER_AUTH_PASSWORD:=${INGRESS_BAS
 export IR_VISUALIZER_IR_USERNAME="${IR_VISUALIZER_IR_USERNAME:=username}"
 export IR_VISUALIZER_IR_PASSWORD="${IR_VISUALIZER_IR_PASSWORD:=password}"
 ########################################################################################################################
+
+
+########################################################################################################################
+####### syncthing ######################################################################################################
+########################################################################################################################
+export SYNCTHING_USERNAME="${SYNCTHING_USERNAME:=${INGRESS_BASIC_AUTH_USERNAME}}"
+export SYNCTHING_PASSWORD="${SYNCTHING_PASSWORD:=${INGRESS_BASIC_AUTH_PASSWORD}}"
+########################################################################################################################
