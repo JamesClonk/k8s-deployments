@@ -19,11 +19,17 @@ backman:
 
   postgres:
   - name: irvisualizer_db
+    host: "${IR_VISUALIZER_DB_HOST}"
     database: "${IR_VISUALIZER_DB_NAME}"
-    uri: "postgres://${IR_VISUALIZER_DB_USERNAME}:${IR_VISUALIZER_DB_PASSWORD}@${IR_VISUALIZER_DB_HOST}/${IR_VISUALIZER_DB_NAME}?sslmode=require"
+    username: "${IR_VISUALIZER_DB_USERNAME}"
+    password: "${IR_VISUALIZER_DB_PASSWORD}"
   - name: home_info_db
+    host: "${HOME_INFO_DB_HOST}"
     database: "${HOME_INFO_DB_NAME}"
-    uri: "postgres://${HOME_INFO_DB_USERNAME}:${HOME_INFO_DB_PASSWORD}@${HOME_INFO_DB_HOST}/${HOME_INFO_DB_NAME}?sslmode=require"
+    username: "${HOME_INFO_DB_USERNAME}"
+    password: "${HOME_INFO_DB_PASSWORD}"
   - name: movie_db
+    host: "${JCIO_MOVIEDB_HOST}"
     database: "${JCIO_MOVIEDB_NAME}"
-    uri: "postgres://${JCIO_MOVIEDB_USERNAME}:${JCIO_MOVIEDB_PASSWORD}@${JCIO_MOVIEDB_HOST}/${JCIO_MOVIEDB_NAME}?sslmode=require"
+    username: "${JCIO_MOVIEDB_USERNAME}"
+    password: "${JCIO_MOVIEDB_PASSWORD}"
