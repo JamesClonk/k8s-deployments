@@ -20,4 +20,8 @@ moviedb:
     replicas: 2
     image: "jamesclonk/moviedb-backend:6abf341bd5f1d050e43ac34be3f56b0f72e4af75"
 
-    db_uri: "postgres://${JCIO_MOVIEDB_USERNAME}:${JCIO_MOVIEDB_PASSWORD}@${JCIO_MOVIEDB_HOST}/${JCIO_MOVIEDB_NAME}?sslmode=require"
+    database:
+      host: "${JCIO_MOVIEDB_HOST}"
+      database: "${JCIO_MOVIEDB_NAME}"
+      username: "${JCIO_MOVIEDB_USERNAME}"
+      password: "${JCIO_MOVIEDB_PASSWORD}"
