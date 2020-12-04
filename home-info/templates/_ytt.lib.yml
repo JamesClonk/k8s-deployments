@@ -33,3 +33,7 @@
         topologyKey: kubernetes.io/hostname
         labelSelector: #@ labelSelector(component)
 #@ end
+
+#@ def connstr(username, password, host, db_name):
+#@   return "postgres://{}:{}@{}/{}?sslmode=require".format(username, password, host, db_name)
+#@ end

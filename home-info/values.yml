@@ -9,7 +9,11 @@ home_info:
 
   enable_network_policy: true
 
-  db_uri: "postgres://${HOME_INFO_DB_USERNAME}:${HOME_INFO_DB_PASSWORD}@${HOME_INFO_DB_HOST}/${HOME_INFO_DB_NAME}?sslmode=require"
+  database:
+    host: "${HOME_INFO_DB_HOST}"
+    database: "${HOME_INFO_DB_NAME}"
+    username: "${HOME_INFO_DB_USERNAME}"
+    password: "${HOME_INFO_DB_PASSWORD}"
 
   auth:
     username: "${HOME_INFO_AUTH_USERNAME}"

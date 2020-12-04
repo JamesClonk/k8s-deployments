@@ -11,7 +11,7 @@ export KUBECONFIG_DATA="${KUBECONFIG_DATA:=NONE}" # your kubeconfig
 ########################################################################################################################
 export INGRESS_DOMAIN="${INGRESS_DOMAIN:=example.org}" # for example "mydomain.org"
 export INGRESS_BASIC_AUTH_USERNAME="${INGRESS_BASIC_AUTH_USERNAME:=username}" # for example "my-username"
-export INGRESS_BASIC_AUTH_PASSWORD="${INGRESS_BASIC_AUTH_PASSWORD:=not-secret}" # for example "my-super-secret-password"
+export INGRESS_BASIC_AUTH_PASSWORD="${INGRESS_BASIC_AUTH_PASSWORD:=password}" # for example "my-super-secret-password"
 ########################################################################################################################
 
 
@@ -63,8 +63,8 @@ export JCIO_HTTP_HMAC_SECRET="${JCIO_HTTP_HMAC_SECRET:=secret}"
 ########################################################################################################################
 export HOME_INFO_AUTH_USERNAME="${HOME_INFO_AUTH_USERNAME:=username}"
 export HOME_INFO_AUTH_PASSWORD="${HOME_INFO_AUTH_PASSWORD:=password}"
-export HOME_INFO_SLACK_TOKEN="${HOME_INFO_SLACK_TOKEN:=secret}"
-export HOME_INFO_TEAMS_WEBHOOK_URL="${HOME_INFO_TEAMS_WEBHOOK_URL:=secret}"
+export HOME_INFO_SLACK_TOKEN="${HOME_INFO_SLACK_TOKEN:=token}"
+export HOME_INFO_TEAMS_WEBHOOK_URL="${HOME_INFO_TEAMS_WEBHOOK_URL:=http://example/deadbeef}"
 ########################################################################################################################
 
 
