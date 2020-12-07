@@ -19,7 +19,7 @@ image_puller:
   - "jamesclonk/moviedb-frontend:87286a8dd8d0ff6fb9108880b51887854ad0872c"
   - "jamesclonk/moviedb-backend:6abf341bd5f1d050e43ac34be3f56b0f72e4af75"
   - "jamesclonk/basic-auth:678636aaca212f20c4e263d05b75efabdc6aef2c"
-  - "jamesclonk/pgbackup:a887b028e59eb320d4bdcddbb708da9b4f7ead27"
+  - "jamesclonk/pgbackup:aee0398bd7634f209ecd7e1ec03f55002c3c3a57"
 
   #! other stuff
   - "jamesclonk/web-container:latest"
