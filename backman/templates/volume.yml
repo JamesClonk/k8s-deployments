@@ -1,0 +1,53 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:assert", "assert")
+#@ load("_ytt.lib.yml", "labels")
+
+#@ if len(data.values.backman.storage.class_name) == 0:
+#@  assert.fail("data.values.backman.storage.class_name cannot be empty")
+#@ end
+#@ if len(data.values.backman.storage.size) == 0:
+#@  assert.fail("data.values.backman.storage.size cannot be empty")
+#@ end
+
+#@ if data.values.backman.storage.reclaim:
+#@ if len(data.values.backman.storage.volume_handle) == 0:
+#@  assert.fail("data.values.backman.storage.volume_handle cannot be empty")
+#@ end
+#@ if len(data.values.backman.storage.driver) == 0:
+#@  assert.fail("data.values.backman.storage.driver cannot be empty")
+#@ end
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-backman
+  namespace: backman
+  labels: #@ labels("pv")
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: #@ data.values.backman.storage.size
+  csi:
+    driver: #@ data.values.backman.storage.driver
+    fsType: ext4
+    volumeHandle: #@ str(data.values.backman.storage.volume_handle)
+  storageClassName: #@ data.values.backman.storage.class_name
+#@ end
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: backman
+  namespace: backman
+  labels: #@ labels("pvc")
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: #@ data.values.backman.storage.size
+  storageClassName: #@ data.values.backman.storage.class_name
+  #@ if/end data.values.backman.storage.reclaim:
+  volumeName: pvc-backman

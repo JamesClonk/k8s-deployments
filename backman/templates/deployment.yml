@@ -13,6 +13,8 @@ spec:
     matchLabels: #@ labels("gui")
   replicas: #@ data.values.backman.replicas
   revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels: #@ labels("gui")
@@ -65,3 +67,10 @@ spec:
             - bash
             - -c
             - 'curl --fail http://localhost:8080/api/v1/states --header "Authorization: ${PROBE_AUTHORIZATION}"'
+        volumeMounts:
+        - name: storage
+          mountPath: /var/run/backman
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: backman
