@@ -3,5 +3,5 @@ kind: Config
 minimumRequiredVersion: 0.27.0
 overrides:
 - image: jamesclonk/backman:1.21.1
-  newImage: index.docker.io/jamesclonk/backman@sha256:93b9f99425e97fb6827b8b139ee3b98a1d3d2007e08efe5fd9a867cf363b2fca
+  newImage: index.docker.io/jamesclonk/backman@sha256:6b9012b22c1008753c9dc366c791e24b9efd3053ca501398efff02de9e736d14
   preresolved: true
