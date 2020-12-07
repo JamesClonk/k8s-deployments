@@ -3,18 +3,19 @@
 
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: syncthing
   namespace: syncthing
   labels: #@ labels("server")
 spec:
+  serviceName: syncthing-headless
   selector:
     matchLabels: #@ labels("server")
   replicas: 1
   revisionHistoryLimit: 5
-  strategy:
-    type: Recreate
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels: #@ labels("server")

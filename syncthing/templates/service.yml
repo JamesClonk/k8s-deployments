@@ -17,6 +17,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: syncthing-headless
+  namespace: syncthing
+  labels: #@ labels("svc")
+spec:
+  clusterIP: None
+  ports:
+  - port: 8384
+    targetPort: 8384
+  selector: #@ labels("server")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: syncthing-server
   namespace: syncthing
   labels: #@ labels("svc")
