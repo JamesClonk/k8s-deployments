@@ -3,6 +3,7 @@
   app.kubernetes.io/name: irvisualizer
   app.kubernetes.io/instance: irvisualizer
   app.kubernetes.io/component: #@ component
+  app.kubernetes.io/database-access: enabled
 #@ end
 
 #@ def labelSelector(component):
@@ -35,5 +36,5 @@
 #@ end
 
 #@ def connstr(username, password, host, db_name):
-#@   return "postgres://{}:{}@{}/{}?sslmode=require".format(username, password, host, db_name)
+#@   return "postgres://{}:{}@{}/{}?sslmode=disable".format(username, password, host, db_name)
 #@ end
