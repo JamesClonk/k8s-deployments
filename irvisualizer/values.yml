@@ -19,11 +19,11 @@ loggly_token: "${IR_VISUALIZER_LOGGLY_TOKEN}"
 
 irvisualizer:
   replicas: 2
-  image: "jamesclonk/irvisualizer:13f771d9672486bd9cf191b7f559911fe33042e1"
+  image: "jamesclonk/irvisualizer:c33e79a2f59ca1f2de339ad0a0cfddb49f204ad4"
 
 ircollector:
   replicas: 1
-  image: "jamesclonk/ircollector:71b58ed77aebf7930f8ce52fa2fbb554d11ef5bb"
+  image: "jamesclonk/ircollector:cf9b9c7919a0b5082f65fa6daf5b58b022cf976b"
 
   iracing_auth:
     username: "${IR_VISUALIZER_IR_USERNAME}"
