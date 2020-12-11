@@ -4,8 +4,8 @@ domains:
 - "${INGRESS_DOMAIN}"
 
 home_info:
-  replicas: 2
-  image: "jamesclonk/home-info-dashboard:6d64f8e19c7644da49ba2489424d9e034541f2ac"
+  replicas: 1
+  image: "jamesclonk/home-info-dashboard:e6f928f1263bed71611f4b5f222f5272b6991f14"
 
   enable_network_policy: true
 
