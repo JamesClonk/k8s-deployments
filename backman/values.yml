@@ -5,7 +5,7 @@ domains:
 
 backman:
   replicas: 1
-  image: "jamesclonk/backman:1.21.1"
+  image: "jamesclonk/backman:1.22.1"
 
   enable_network_policy: true
 
