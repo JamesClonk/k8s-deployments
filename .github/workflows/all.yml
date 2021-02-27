@@ -123,6 +123,17 @@ jobs:
       working-directory: syncthing
       run: ./deploy.sh
 
+  minecraft:
+    if: "!contains(github.event.head_commit.message, 'skip')"
+    name: minecraft
+    needs: [ backman ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy minecraft server
+      working-directory: minecraft
+      run: ./deploy.sh
+
   image-puller:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: image-puller

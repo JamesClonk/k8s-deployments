@@ -1,0 +1,26 @@
+#@ def labels(component):
+  app: minecraft
+  app.kubernetes.io/name: minecraft
+  app.kubernetes.io/instance: minecraft
+  app.kubernetes.io/component: #@ component
+#@ end
+
+#@ def labelSelector(component):
+  matchExpressions:
+  - key: app
+    operator: In
+    values:
+    - minecraft
+  - key: app.kubernetes.io/name
+    operator: In
+    values:
+    - minecraft
+  - key: app.kubernetes.io/instance
+    operator: In
+    values:
+    - minecraft
+  - key: app.kubernetes.io/component
+    operator: In
+    values:
+    - #@ component
+#@ end

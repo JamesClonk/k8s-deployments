@@ -22,6 +22,9 @@ deployments=(
 	# put my files into the clouds!
 	"syncthing"
 
+	# building stuff with blocks..
+	"minecraft"
+
 	# also some cronjobs for good fun..
 	"image-puller"
 	"repo-mirrorer"

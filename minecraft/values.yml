@@ -1,0 +1,16 @@
+#@data/values
+---
+minecraft:
+  image: "itzg/minecraft-server:2021.5.1-java8"
+
+  storage:
+    class_name: hcloud-volumes
+    driver: csi.hetzner.cloud
+    size: 10Gi
+    reclaim: false
+    volume_handle: "" # <-- must be set if 'reclaim=true'
+
+  enable_network_policy: true
+
+backup:
+  image: "itzg/mc-backup:latest"

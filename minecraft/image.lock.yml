@@ -1,0 +1,7 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.27.0
+overrides:
+- image: itzg/minecraft-server:2021.5.1-java8
+  newImage: index.docker.io/itzg/minecraft-server@sha256:1f744387c4c8a188da74ada5e10bfa8e196e262c1272816447412bd3ee0879cb
+  preresolved: true

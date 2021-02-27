@@ -1,0 +1,16 @@
+name: minecraft file server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  minecraft:
+    name: minecraft
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy minecraft server
+      working-directory: minecraft
+      run: ./deploy.sh
+      env:
+        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}

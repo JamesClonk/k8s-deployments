@@ -1,0 +1,53 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:assert", "assert")
+#@ load("_ytt.lib.yml", "labels")
+
+#@ if len(data.values.minecraft.storage.class_name) == 0:
+#@  assert.fail("data.values.minecraft.storage.class_name cannot be empty")
+#@ end
+#@ if len(data.values.minecraft.storage.size) == 0:
+#@  assert.fail("data.values.minecraft.storage.size cannot be empty")
+#@ end
+
+#@ if data.values.minecraft.storage.reclaim:
+#@ if len(data.values.minecraft.storage.volume_handle) == 0:
+#@  assert.fail("data.values.minecraft.storage.volume_handle cannot be empty")
+#@ end
+#@ if len(data.values.minecraft.storage.driver) == 0:
+#@  assert.fail("data.values.minecraft.storage.driver cannot be empty")
+#@ end
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-minecraft
+  namespace: minecraft
+  labels: #@ labels("pv")
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: #@ data.values.minecraft.storage.size
+  csi:
+    driver: #@ data.values.minecraft.storage.driver
+    fsType: ext4
+    volumeHandle: #@ str(data.values.minecraft.storage.volume_handle)
+  storageClassName: #@ data.values.minecraft.storage.class_name
+#@ end
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minecraft
+  namespace: minecraft
+  labels: #@ labels("pvc")
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: #@ data.values.minecraft.storage.size
+  storageClassName: #@ data.values.minecraft.storage.class_name
+  #@ if/end data.values.minecraft.storage.reclaim:
+  volumeName: pvc-minecraft
