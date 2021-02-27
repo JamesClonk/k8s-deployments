@@ -39,13 +39,17 @@ spec:
         - name: EULA
           value: "true"
         - name: VERSION
-          value: "1.16.4"
+          value: "1.16.5"
+        #!- name: VERSION
+        #!  value: "1.16.4"
         - name: TYPE
           value: "FORGE"
         - name: FORGEVERSION
-          value: "35.1.4"
+          value: "36.0.43"
+        #!- name: FORGEVERSION
+        #!  value: "35.1.4"
         - name: ENABLE_AUTOPAUSE
-          value: "true"
+          value: "false"
         - name: SERVER_NAME
           value: "The JamesClonk Minecraft Server"
         - name: DIFFICULTY
@@ -130,23 +134,22 @@ spec:
         startupProbe:
           tcpSocket:
             port: 25565
+          initialDelaySeconds: 30
           failureThreshold: 30
           periodSeconds: 15
         readinessProbe:
           exec:
             command:
-            - mcstatus
-            - localhost
-            - ping
-          initialDelaySeconds: 15
+            - mc-monitor
+            - status
+          initialDelaySeconds: 60
           periodSeconds: 15
         livenessProbe:
           exec:
             command:
-            - mcstatus
-            - localhost
-            - ping
-          initialDelaySeconds: 15
+            - mc-monitor
+            - status
+          initialDelaySeconds: 60
           periodSeconds: 15
         volumeMounts:
         - name: storage
