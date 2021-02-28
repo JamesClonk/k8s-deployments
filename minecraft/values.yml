@@ -15,4 +15,10 @@ minecraft:
   rcon_password: "${MINECRAFT_RCON_PASSWORD}"
 
 backup:
-  image: "itzg/mc-backup:latest"
+  image: "jamesclonk/mcbackup:f3b390668671bba69835320ab82824470f6404a4"
+
+  s3:
+    access_key_id: "${MINECRAFT_S3_BACKUP_ACCESS_KEY}"
+    secret_access_key: "${MINECRAFT_S3_BACKUP_SECRET_KEY}"
+    endpoint: "${MINECRAFT_S3_BACKUP_ENDPOINT}"
+    bucket: "${MINECRAFT_S3_BACKUP_BUCKET}"

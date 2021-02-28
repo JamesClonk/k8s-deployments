@@ -91,4 +91,8 @@ export SYNCTHING_PASSWORD="${SYNCTHING_PASSWORD:=${INGRESS_BASIC_AUTH_PASSWORD}}
 ####### minecraft ######################################################################################################
 ########################################################################################################################
 export MINECRAFT_RCON_PASSWORD="${MINECRAFT_RCON_PASSWORD:=password}"
+export MINECRAFT_S3_BACKUP_ACCESS_KEY="${MINECRAFT_S3_BACKUP_ACCESS_KEY:=access_key}"
+export MINECRAFT_S3_BACKUP_SECRET_KEY="${MINECRAFT_S3_BACKUP_SECRET_KEY:=secret_key}"
+export MINECRAFT_S3_BACKUP_ENDPOINT="${MINECRAFT_S3_BACKUP_ENDPOINT:=http://example/deadbeef}" # your S3 endpoint
+export MINECRAFT_S3_BACKUP_BUCKET="${MINECRAFT_S3_BACKUP_BUCKET:=bucketname}" # S3 bucket to upload backups to
 ########################################################################################################################

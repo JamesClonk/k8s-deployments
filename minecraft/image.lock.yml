@@ -5,3 +5,6 @@ overrides:
 - image: itzg/minecraft-server:2021.5.1-java8
   newImage: index.docker.io/itzg/minecraft-server@sha256:1f744387c4c8a188da74ada5e10bfa8e196e262c1272816447412bd3ee0879cb
   preresolved: true
+- image: jamesclonk/mcbackup:f3b390668671bba69835320ab82824470f6404a4
+  newImage: index.docker.io/jamesclonk/mcbackup@sha256:c0963264a5b1ebd87812aa8e54f6d2a0ec701bed4edf810ca116255555f66eb8
+  preresolved: true

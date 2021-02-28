@@ -33,6 +33,7 @@ spec:
           allowPrivilegeEscalation: false
         ports:
         - containerPort: 25565
+        - containerPort: 25575
         env:
         - name: TZ
           value: "Europe/Zurich"
@@ -50,6 +51,8 @@ spec:
         #!  value: "35.1.4"
         - name: ENABLE_AUTOPAUSE
           value: "false"
+        - name: OVERRIDE_SERVER_PROPERTIES
+          value: "true"
         - name: SERVER_NAME
           value: "The JamesClonk Minecraft Server"
         - name: DIFFICULTY
@@ -119,11 +122,13 @@ spec:
         - name: BROADCAST_RCON_TO_OPS
           value: "true"
         - name: OP_PERMISSION_LEVEL
-          value: "true"
+          value: "1"
         - name: ENFORCE_WHITELIST
           value: "true"
         - name: GUI
           value: "false"
+        - name: SEED
+          value: "1229850204998502616"
         envFrom:
         - secretRef:
             name: minecraft
@@ -157,31 +162,51 @@ spec:
         volumeMounts:
         - name: storage
           mountPath: /data
-      #!- name: backup
-      #!  image: #@ data.values.backup.image
-      #!  securityContext:
-      #!    privileged: false
-      #!    allowPrivilegeEscalation: false
-      #!  env:
-      #!  - name: BACKUP_INTERVAL
-      #!    value: "12h"
-      #!  - name: PRUNE_BACKUPS_DAYS
-      #!    value: "10"
-      #!  - name: INITIAL_DELAY
-      #!    value: "5m"
-      #!  envFrom:
-      #!  - secretRef:
-      #!      name: minecraft
-      #!  volumeMounts:
-      #!  - name: storage
-      #!    mountPath: /data
-      #!    readOnly: true
-      #!  - name: backups
-      #!    mountPath: /backups
+      - name: backup
+        image: #@ data.values.backup.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 25575
+        env:
+        - name: BACKUP_INTERVAL
+          value: "21600" # 21600s = 6h
+        - name: INITIAL_DELAY
+          value: "600"
+        - name: FILE_RETENTION
+          value: "25"
+        - name: RCON_HOST
+          value: "localhost"
+        - name: RCON_PORT
+          value: "25575"
+        - name: RCON_WORLDPATH
+          value: "/data/world"
+        - name: RCON_SAVEPATH
+          value: "/backups"
+        - name: S3_RETENTION
+          value: "14d"
+        - name: S3_UPLOAD_ENABLED
+          value: "true"
+        envFrom:
+        - secretRef:
+            name: minecraft
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+          readOnly: true
+        - name: backups
+          mountPath: /backups
       volumes:
       - name: storage
         persistentVolumeClaim:
           claimName: minecraft
-      #!- name: backups
-      #!  persistentVolumeClaim:
-      #!    claimName: minecraft-backups
+      - name: backups
+        emptyDir: {}
