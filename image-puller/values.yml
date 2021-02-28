@@ -70,3 +70,7 @@ image_puller:
 
   #! prometheus-msteams
   - "quay.io/prometheusmsteams/prometheus-msteams:v1.4.1"
+
+  #! minecraft
+  - "itzg/minecraft-server:2021.5.1-java8"
+  - "itzg/mc-backup:latest"

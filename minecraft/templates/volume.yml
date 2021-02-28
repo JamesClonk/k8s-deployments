@@ -51,3 +51,18 @@ spec:
   storageClassName: #@ data.values.minecraft.storage.class_name
   #@ if/end data.values.minecraft.storage.reclaim:
   volumeName: pvc-minecraft
+
+#!---
+#!apiVersion: v1
+#!kind: PersistentVolumeClaim
+#!metadata:
+#!  name: minecraft-backups
+#!  namespace: minecraft
+#!  labels: #@ labels("pvc")
+#!spec:
+#!  accessModes:
+#!  - ReadWriteOnce
+#!  resources:
+#!    requests:
+#!      storage: #@ data.values.minecraft.storage.size
+#!  storageClassName: #@ data.values.minecraft.storage.class_name

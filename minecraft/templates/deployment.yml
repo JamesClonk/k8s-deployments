@@ -109,7 +109,7 @@ spec:
         - name: MEMORY
           value: "2G"
         - name: ENABLE_RCON
-          value: "false"
+          value: "true"
         - name: ENABLE_QUERY
           value: "false"
         - name: PLAYER_IDLE_TIMEOUT
@@ -124,6 +124,9 @@ spec:
           value: "true"
         - name: GUI
           value: "false"
+        envFrom:
+        - secretRef:
+            name: minecraft
         resources:
           requests:
             memory: "1Gi"
@@ -154,7 +157,31 @@ spec:
         volumeMounts:
         - name: storage
           mountPath: /data
+      #!- name: backup
+      #!  image: #@ data.values.backup.image
+      #!  securityContext:
+      #!    privileged: false
+      #!    allowPrivilegeEscalation: false
+      #!  env:
+      #!  - name: BACKUP_INTERVAL
+      #!    value: "12h"
+      #!  - name: PRUNE_BACKUPS_DAYS
+      #!    value: "10"
+      #!  - name: INITIAL_DELAY
+      #!    value: "5m"
+      #!  envFrom:
+      #!  - secretRef:
+      #!      name: minecraft
+      #!  volumeMounts:
+      #!  - name: storage
+      #!    mountPath: /data
+      #!    readOnly: true
+      #!  - name: backups
+      #!    mountPath: /backups
       volumes:
       - name: storage
         persistentVolumeClaim:
           claimName: minecraft
+      #!- name: backups
+      #!  persistentVolumeClaim:
+      #!    claimName: minecraft-backups
