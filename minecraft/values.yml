@@ -4,7 +4,8 @@ minecraft:
   image: "itzg/minecraft-server:2021.5.1-java8"
 
   storage:
-    class_name: hcloud-volumes
+    #! class_name: hcloud-volumes
+    class_name: local-path
     driver: csi.hetzner.cloud
     size: 10Gi
     reclaim: false
