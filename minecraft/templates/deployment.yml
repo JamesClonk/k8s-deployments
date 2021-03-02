@@ -171,7 +171,7 @@ spec:
         - containerPort: 25575
         env:
         - name: BACKUP_INTERVAL
-          value: "21600" # 21600s = 6h
+          value: "14400" # 21600s = 6h, 14400s = 4h
         - name: INITIAL_DELAY
           value: "600"
         - name: FILE_RETENTION
