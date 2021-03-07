@@ -122,7 +122,7 @@ spec:
         - name: BROADCAST_RCON_TO_OPS
           value: "true"
         - name: OP_PERMISSION_LEVEL
-          value: "1"
+          value: "2"
         - name: ENFORCE_WHITELIST
           value: "true"
         - name: GUI
