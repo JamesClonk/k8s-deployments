@@ -33,7 +33,6 @@ spec:
           allowPrivilegeEscalation: false
         ports:
         - containerPort: 25565
-        - containerPort: 25575
         env:
         - name: TZ
           value: "Europe/Zurich"
@@ -122,7 +121,7 @@ spec:
         - name: BROADCAST_RCON_TO_OPS
           value: "true"
         - name: OP_PERMISSION_LEVEL
-          value: "2"
+          value: "4"
         - name: ENFORCE_WHITELIST
           value: "true"
         - name: GUI
@@ -167,8 +166,6 @@ spec:
         securityContext:
           privileged: false
           allowPrivilegeEscalation: false
-        ports:
-        - containerPort: 25575
         env:
         - name: BACKUP_INTERVAL
           value: "14400" # 21600s = 6h, 14400s = 4h
