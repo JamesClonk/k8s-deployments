@@ -23,7 +23,7 @@ irvisualizer:
 
 ircollector:
   replicas: 1
-  image: "jamesclonk/ircollector:cf9b9c7919a0b5082f65fa6daf5b58b022cf976b"
+  image: "jamesclonk/ircollector:267e29d4b9c0fe29b2d813832ab9f236868013cc"
 
   iracing_auth:
     username: "${IR_VISUALIZER_IR_USERNAME}"
