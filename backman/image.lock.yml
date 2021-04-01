@@ -2,6 +2,6 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.29.0
 overrides:
-- image: jamesclonk/backman:1.25.0
-  newImage: index.docker.io/jamesclonk/backman@sha256:5ca0db4d9c20e2c69ce6218eb4d4ec1ec03b7a82fe5841f194fa5ab5266c4c4f
+- image: jamesclonk/backman:1.25.1
+  newImage: index.docker.io/jamesclonk/backman@sha256:02fb2a569c5208bef40d629bd6835c72f5aa0ad7dc77e6fe620d9d871bc60da7
   preresolved: true
