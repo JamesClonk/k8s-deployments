@@ -1,6 +1,19 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:assert", "assert")
 #@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
 
+#@ if len(data.values.postgres.username) == 0 or data.values.postgres.username == "username":
+#@  assert.fail("postgres.username is missing or invalid")
+#@ end
+#@ if len(data.values.postgres.password) == 0 or data.values.postgres.password == "password":
+#@  assert.fail("postgres.password is missing or invalid")
+#@ end
+#@ if len(data.values.postgres.hostname) == 0 or data.values.postgres.hostname == "hostname":
+#@  assert.fail("postgres.hostname is missing or invalid")
+#@ end
+#@ if len(data.values.postgres.port) == 0 or data.values.postgres.port == "0":
+#@  assert.fail("postgres.port is missing or invalid")
+#@ end
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,6 +36,26 @@ spec:
         runAsGroup: 2000
         fsGroup: 2000
       affinity: #@ podAntiAffinity("dashboard")
+      initContainers:
+      - name: init-dbs
+        image: #@ data.values.postgres.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        command: [ "/bin/sh", "-c", "psql -h ${PGHOST} -U ${PGUSER} -p ${PGPORT} -f /init-dbs.sql" ]
+        volumeMounts:
+        - name: init-dbs
+          mountPath: /init-dbs.sql
+          subPath: init-dbs.sql
+        env:
+        - name: PGUSER
+          value: #@ data.values.postgres.username
+        - name: PGPASSWORD
+          value: #@ data.values.postgres.password
+        - name: PGHOST
+          value: #@ data.values.postgres.hostname
+        - name: PGPORT
+          value: #@ data.values.postgres.port
       containers:
       - name: pgweb
         image: #@ data.values.pgweb.image
@@ -70,5 +103,8 @@ spec:
           subPath: jcio.toml
       volumes:
       - name: pgweb-bookmarks
+        secret:
+          secretName: pgweb
+      - name: init-dbs
         secret:
           secretName: pgweb

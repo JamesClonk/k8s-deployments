@@ -25,6 +25,10 @@ export REPO_MIRRORER_GITLAB_TOKEN="${REPO_MIRRORER_GITLAB_TOKEN:=token}" # your 
 ########################################################################################################################
 ####### databases ######################################################################################################
 ########################################################################################################################
+export POSTGRES_SUPERUSER_USERNAME="${POSTGRES_SUPERUSER_USERNAME:=username}"
+export POSTGRES_SUPERUSER_PASSWORD="${POSTGRES_SUPERUSER_PASSWORD:=password}"
+export POSTGRES_HOSTNAME="${POSTGRES_HOSTNAME:=hostname}"
+
 export JCIO_MOVIEDB_HOST="${JCIO_MOVIEDB_HOST:=host}"
 export JCIO_MOVIEDB_NAME="${JCIO_MOVIEDB_NAME:=dbname}"
 export JCIO_MOVIEDB_USERNAME="${JCIO_MOVIEDB_USERNAME:=username}"

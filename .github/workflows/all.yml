@@ -87,7 +87,7 @@ jobs:
   jcio:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: jcio
-    needs: [ cf-env ]
+    needs: [ backman ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -98,7 +98,7 @@ jobs:
   home-info:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: home-info
-    needs: [ jcio ]
+    needs: [ backman ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -109,7 +109,7 @@ jobs:
   irvisualizer:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: irvisualizer
-    needs: [ jcio ]
+    needs: [ backman ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -120,7 +120,7 @@ jobs:
   syncthing:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: syncthing
-    needs: [ backman ]
+    needs: [ kuard ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -131,7 +131,7 @@ jobs:
   minecraft:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: minecraft
-    needs: [ backman ]
+    needs: [ kuard ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

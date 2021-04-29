@@ -3,6 +3,14 @@
 domains:
 - "${INGRESS_DOMAIN}"
 
+postgres:
+  image: "postgres:12"
+
+  username: "${POSTGRES_SUPERUSER_USERNAME}"
+  password: "${POSTGRES_SUPERUSER_PASSWORD}"
+  hostname: "${POSTGRES_HOSTNAME}"
+  port: "5432"
+
 pgweb:
   replicas: 1
   image: "sosedoff/pgweb:0.11.7"

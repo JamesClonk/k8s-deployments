@@ -1,7 +1,10 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
-minimumRequiredVersion: 0.27.0
+minimumRequiredVersion: 0.29.0
 overrides:
+- image: postgres:12
+  newImage: index.docker.io/library/postgres@sha256:06277995d7028f4455e56f21864146ee2425c83308dc96283c7a96e6881cc826
+  preresolved: true
 - image: sosedoff/pgweb:0.11.7
   newImage: index.docker.io/sosedoff/pgweb@sha256:85e0132e0cce703a28592bb65e8355cc240d5f1cb4c4f57e2487fd3d5ce1120c
   preresolved: true
