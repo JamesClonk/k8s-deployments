@@ -5,7 +5,7 @@ domains:
 
 home_info:
   replicas: 1
-  image: "jamesclonk/home-info-dashboard:1de30ad852aec49dac71cd177589d34b4d790076"
+  image: "jamesclonk/home-info-dashboard:a8fbbb7d678bca7999d8ad1b22efcb89476b10a2"
 
   enable_network_policy: true
 
