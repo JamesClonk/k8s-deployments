@@ -12,7 +12,7 @@ metadata:
 spec:
   minAvailable: 50%
   selector:
-    matchLabels: #@ labels("www-frontend")
+    matchLabels: #@ labels("jcio-frontend")
 #@ end
 
 #@ if data.values.moviedb.frontend.replicas > 1:
