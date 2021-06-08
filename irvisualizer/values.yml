@@ -19,7 +19,7 @@ loggly_token: "${IR_VISUALIZER_LOGGLY_TOKEN}"
 
 irvisualizer:
   replicas: 2
-  image: "jamesclonk/irvisualizer:22880ccae6a684fb220dc216278ddf531fcf223a"
+  image: "jamesclonk/irvisualizer:78edc666ff6f60b5fcc2b2f9ef3ce999c6cd6d23"
 
 ircollector:
   replicas: 1
