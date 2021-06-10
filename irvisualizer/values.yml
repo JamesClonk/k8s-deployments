@@ -18,8 +18,8 @@ auth:
 loggly_token: "${IR_VISUALIZER_LOGGLY_TOKEN}"
 
 irvisualizer:
-  replicas: 1
-  image: "jamesclonk/irvisualizer:db88ff0773efe2a682e33c5694f15ffa616bd188"
+  replicas: 2
+  image: "jamesclonk/irvisualizer:b49dbcfcb5a246744dd843257406b033db21b8ad"
 
 ircollector:
   replicas: 1
