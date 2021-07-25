@@ -1,8 +1,5 @@
 #@data/values
 ---
-domains:
-- "${INGRESS_DOMAIN}"
-
 kuard:
   replicas: 1
   image: "gcr.io/kuar-demo/kuard-amd64:v0.10.0-green"
