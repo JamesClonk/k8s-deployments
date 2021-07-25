@@ -56,11 +56,12 @@ export PATH="$HOME/bin:$PATH"
 
 # install tools
 install_tool "kubectl" "https://storage.googleapis.com/kubernetes-release/release/v1.19.3/bin/linux/amd64/kubectl"
-install_tool "envsubst" "https://github.com/JamesClonk/envsubst/releases/download/v1.1.1/envsubst_1.1.1_Linux-64bit"
+install_tool "envsubst" "https://github.com/JamesClonk/envsubst/releases/download/v1.1.1/envsubst_1.1.1_Linux-64bit" # TODO: remove!
 install_tool "kapp" "https://github.com/k14s/kapp/releases/download/v0.35.0/kapp-linux-amd64"
 install_tool "ytt" "https://github.com/k14s/ytt/releases/download/v0.31.0/ytt-linux-amd64"
 install_tool "vendir" "https://github.com/k14s/vendir/releases/download/v0.16.0/vendir-linux-amd64"
 install_tool "kbld" "https://github.com/k14s/kbld/releases/download/v0.29.0/kbld-linux-amd64"
+install_tool "sops" "https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux"
 install_tool_from_tarball "hcloud" "hcloud" "https://github.com/hetznercloud/cli/releases/download/v1.19.1/hcloud-linux-amd64.tar.gz"
 install_tool_from_tarball "linux-amd64/helm" "helm" "https://get.helm.sh/helm-v3.4.0-linux-amd64.tar.gz"
 install_tool_from_tarball "k9s" "k9s" "https://github.com/derailed/k9s/releases/download/v0.23.3/k9s_Linux_x86_64.tar.gz"
@@ -77,19 +78,36 @@ EOF
 fi
 set -u
 
+# aws config
+if [ ! -d "$HOME/.aws" ]; then mkdir "$HOME/.aws"; fi
+chmod 700 "$HOME/.aws" || true
+set +u
+if [ ! -f "$HOME/.aws/config" ]; then
+	echo "writing [$HOME/.aws/config] ..."
+	cat > "$HOME/.aws/config" << EOF
+[profile kms]
+region = ${AWS_REGION}
+EOF
+	chmod 600 "$HOME/.aws/config"
+fi
+if [ ! -f "$HOME/.aws/credentials" ]; then
+	echo "writing [$HOME/.aws/credentials] ..."
+	cat > "$HOME/.aws/credentials" << EOF
+[kms]
+aws_access_key_id = ${AWS_ACCESS_KEY_ID}
+aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}
+EOF
+	chmod 600 "$HOME/.aws/credentials"
+fi
+set -u
+
 # kubectl config
 if [ ! -d "$HOME/.kube" ]; then mkdir "$HOME/.kube"; fi
 chmod 700 "$HOME/.kube" || true
 set +u
-if [ -n "${KUBECONFIG_DATA}" ]; then
-	if [ "${KUBECONFIG_DATA}" != "NONE" ]; then
-		if [ ! -f "${KUBECONFIG}" ]; then
-			echo "writing [${KUBECONFIG}] ..."
-			cat > "${KUBECONFIG}" << EOF
-${KUBECONFIG_DATA}
-EOF
-			chmod 600 "${KUBECONFIG}"
-		fi
-	fi
+if [ ! -f "${KUBECONFIG}" ]; then
+	echo "writing [${KUBECONFIG}] ..."
+	sops -d $(dirname ${BASH_SOURCE[0]})/kubeconfig.sops > "${KUBECONFIG}"
+	chmod 600 "${KUBECONFIG}"
 fi
 set -u

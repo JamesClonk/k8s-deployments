@@ -13,5 +13,8 @@ jobs:
       working-directory: kuard
       run: ./deploy.sh
       env:
-        KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+
         INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}

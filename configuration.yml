@@ -1,0 +1,9 @@
+#@data/values
+---
+#@overlay/match missing_ok=True
+ingress:
+  domains:
+  - "jamesclonk.io"
+  basic_auth:
+    username: ""
+    password: ""
