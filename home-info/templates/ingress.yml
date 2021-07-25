@@ -2,8 +2,8 @@
 #@ load("@ytt:assert", "assert")
 #@ load("_ytt.lib.yml", "labels")
 
-#@ if len(data.values.domains) == 0 or len(data.values.domains[0]) == 0 or data.values.domains[0] == "example.org":
-#@  assert.fail("domain is missing or invalid")
+#@ if len(data.values.configuration.ingress.domains) == 0 or len(data.values.configuration.ingress.domains[0]) == 0 or data.values.configuration.ingress.domains[0] == "example.org":
+#@  assert.fail("configuration.ingress.domain is missing or invalid")
 #@ end
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -21,10 +21,10 @@ spec:
   tls:
   - secretName: home-info-tls
     hosts:
-    #@ for/end host in data.values.domains:
+    #@ for/end host in data.values.configuration.ingress.domains:
     - #@ "home-info." + host
   rules:
-  #@ for/end host in data.values.domains:
+  #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "home-info." + host
     http:
       paths:

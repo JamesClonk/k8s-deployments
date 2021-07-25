@@ -2,8 +2,8 @@
 #@ load("@ytt:assert", "assert")
 #@ load("_ytt.lib.yml", "labels")
 
-#@ if len(data.values.domains) == 0 or len(data.values.domains[0]) == 0 or data.values.domains[0] == "example.org":
-#@  assert.fail("domain is missing or invalid")
+#@ if len(data.values.configuration.ingress.domains) == 0 or len(data.values.configuration.ingress.domains[0]) == 0 or data.values.configuration.ingress.domains[0] == "example.org":
+#@  assert.fail("configuration.ingress.domain is missing or invalid")
 #@ end
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -21,19 +21,19 @@ spec:
   tls:
   - secretName: jcio-tls
     hosts:
-    #@ for host in data.values.domains:
+    #@ for host in data.values.configuration.ingress.domains:
     - #@ host
     - #@ "www." + host
     #@ end
   rules:
-  #@ for/end host in data.values.domains:
+  #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ host
     http:
       paths:
       - backend:
           serviceName: jcio-frontend
           servicePort: 3000
-  #@ for/end host in data.values.domains:
+  #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "www." + host
     http:
       paths:
@@ -57,27 +57,27 @@ spec:
   tls:
   - secretName: moviedb-tls
     hosts:
-    #@ for host in data.values.domains:
+    #@ for host in data.values.configuration.ingress.domains:
     - #@ "moviedb." + host
     - #@ "moviedb-frontend." + host
     - #@ "moviedb-backend." + host
     #@ end
   rules:
-  #@ for/end host in data.values.domains:
+  #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "moviedb." + host
     http:
       paths:
       - backend:
           serviceName: moviedb-frontend
           servicePort: 3007
-  #@ for/end host in data.values.domains:
+  #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "moviedb-frontend." + host
     http:
       paths:
       - backend:
           serviceName: moviedb-frontend
           servicePort: 3007
-  #@ for/end host in data.values.domains:
+  #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "moviedb-backend." + host
     http:
       paths:

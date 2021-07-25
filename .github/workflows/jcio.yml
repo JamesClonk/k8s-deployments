@@ -16,10 +16,3 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
-
-        INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}
-        JCIO_HTTP_HMAC_SECRET: ${{ secrets.JCIO_HTTP_HMAC_SECRET }}
-        JCIO_MOVIEDB_HOST: ${{ secrets.JCIO_MOVIEDB_HOST }}
-        JCIO_MOVIEDB_NAME: ${{ secrets.JCIO_MOVIEDB_NAME }}
-        JCIO_MOVIEDB_USERNAME: ${{ secrets.JCIO_MOVIEDB_USERNAME }}
-        JCIO_MOVIEDB_PASSWORD: ${{ secrets.JCIO_MOVIEDB_PASSWORD }}

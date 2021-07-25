@@ -16,20 +16,3 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
-
-        INGRESS_DOMAIN: ${{ secrets.INGRESS_DOMAIN }}
-        JCIO_MOVIEDB_HOST: ${{ secrets.JCIO_MOVIEDB_HOST }}
-        JCIO_MOVIEDB_NAME: ${{ secrets.JCIO_MOVIEDB_NAME }}
-        JCIO_MOVIEDB_USERNAME: ${{ secrets.JCIO_MOVIEDB_USERNAME }}
-        JCIO_MOVIEDB_PASSWORD: ${{ secrets.JCIO_MOVIEDB_PASSWORD }}
-        HOME_INFO_DB_HOST: ${{ secrets.HOME_INFO_DB_HOST }}
-        HOME_INFO_DB_NAME: ${{ secrets.HOME_INFO_DB_NAME }}
-        HOME_INFO_DB_USERNAME: ${{ secrets.HOME_INFO_DB_USERNAME }}
-        HOME_INFO_DB_PASSWORD: ${{ secrets.HOME_INFO_DB_PASSWORD }}
-        IR_VISUALIZER_DB_HOST: ${{ secrets.IR_VISUALIZER_DB_HOST }}
-        IR_VISUALIZER_DB_NAME: ${{ secrets.IR_VISUALIZER_DB_NAME }}
-        IR_VISUALIZER_DB_USERNAME: ${{ secrets.IR_VISUALIZER_DB_USERNAME }}
-        IR_VISUALIZER_DB_PASSWORD: ${{ secrets.IR_VISUALIZER_DB_PASSWORD }}
-        BACKMAN_S3_HOST: ${{ secrets.BACKMAN_S3_HOST }}
-        BACKMAN_S3_KEY: ${{ secrets.BACKMAN_S3_KEY }}
-        BACKMAN_S3_SECRET: ${{ secrets.BACKMAN_S3_SECRET }}

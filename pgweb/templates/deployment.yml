@@ -2,17 +2,17 @@
 #@ load("@ytt:assert", "assert")
 #@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
 
-#@ if len(data.values.postgres.username) == 0 or data.values.postgres.username == "username":
-#@  assert.fail("postgres.username is missing or invalid")
+#@ if len(data.values.secrets.pgweb.postgres.username) == 0 or data.values.secrets.pgweb.postgres.username == "username":
+#@  assert.fail("secrets.pgweb.postgres.username is missing or invalid")
 #@ end
-#@ if len(data.values.postgres.password) == 0 or data.values.postgres.password == "password":
-#@  assert.fail("postgres.password is missing or invalid")
+#@ if len(data.values.secrets.pgweb.postgres.password) == 0 or data.values.secrets.pgweb.postgres.password == "password":
+#@  assert.fail("secrets.pgweb.postgres.password is missing or invalid")
 #@ end
-#@ if len(data.values.postgres.hostname) == 0 or data.values.postgres.hostname == "hostname":
-#@  assert.fail("postgres.hostname is missing or invalid")
+#@ if len(data.values.secrets.pgweb.postgres.hostname) == 0 or data.values.secrets.pgweb.postgres.hostname == "hostname":
+#@  assert.fail("secrets.pgweb.postgres.hostname is missing or invalid")
 #@ end
-#@ if len(data.values.postgres.port) == 0 or data.values.postgres.port == "0":
-#@  assert.fail("postgres.port is missing or invalid")
+#@ if len(data.values.secrets.pgweb.postgres.port) == 0 or data.values.secrets.pgweb.postgres.port == "0":
+#@  assert.fail("secrets.pgweb.postgres.port is missing or invalid")
 #@ end
 ---
 apiVersion: apps/v1
@@ -49,13 +49,13 @@ spec:
           subPath: init-dbs.sql
         env:
         - name: PGUSER
-          value: #@ data.values.postgres.username
+          value: #@ data.values.secrets.pgweb.postgres.username
         - name: PGPASSWORD
-          value: #@ data.values.postgres.password
+          value: #@ data.values.secrets.pgweb.postgres.password
         - name: PGHOST
-          value: #@ data.values.postgres.hostname
+          value: #@ data.values.secrets.pgweb.postgres.hostname
         - name: PGPORT
-          value: #@ data.values.postgres.port
+          value: #@ data.values.secrets.pgweb.postgres.port
       containers:
       - name: pgweb
         image: #@ data.values.pgweb.image
