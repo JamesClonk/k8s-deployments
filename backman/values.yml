@@ -1,16 +1,10 @@
 #@data/values
 ---
-domains:
-- "${INGRESS_DOMAIN}"
-
 backman:
   replicas: 1
   image: "jamesclonk/backman:1.27.2"
 
   enable_network_policy: true
-
-  username: "${BACKMAN_USERNAME}"
-  password: "${BACKMAN_PASSWORD}"
 
   storage:
     #! class_name: hcloud-volumes
@@ -19,25 +13,3 @@ backman:
     size: 10Gi
     reclaim: false
     volume_handle: "" # <-- must be set if 'reclaim=true'
-
-  s3:
-    host: "${BACKMAN_S3_HOST}"
-    key: "${BACKMAN_S3_KEY}"
-    secret: "${BACKMAN_S3_SECRET}"
-
-  postgres:
-  - name: irvisualizer_db
-    host: "${IR_VISUALIZER_DB_HOST}"
-    database: "${IR_VISUALIZER_DB_NAME}"
-    username: "${IR_VISUALIZER_DB_USERNAME}"
-    password: "${IR_VISUALIZER_DB_PASSWORD}"
-  - name: home_info_db
-    host: "${HOME_INFO_DB_HOST}"
-    database: "${HOME_INFO_DB_NAME}"
-    username: "${HOME_INFO_DB_USERNAME}"
-    password: "${HOME_INFO_DB_PASSWORD}"
-  - name: movie_db
-    host: "${JCIO_MOVIEDB_HOST}"
-    database: "${JCIO_MOVIEDB_NAME}"
-    username: "${JCIO_MOVIEDB_USERNAME}"
-    password: "${JCIO_MOVIEDB_PASSWORD}"

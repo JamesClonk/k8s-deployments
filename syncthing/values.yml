@@ -1,8 +1,5 @@
 #@data/values
 ---
-domains:
-- "${INGRESS_DOMAIN}"
-
 busybox:
   image: "busybox:1.32.0"
 
@@ -15,8 +12,5 @@ syncthing:
     size: 10Gi
     reclaim: false
     volume_handle: "" # <-- must be set if 'reclaim=true'
-
-  username: "${SYNCTHING_USERNAME}"
-  password: "${SYNCTHING_PASSWORD}"
 
   enable_network_policy: true

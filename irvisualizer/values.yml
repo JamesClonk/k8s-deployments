@@ -11,10 +11,6 @@ database:
   username: "${IR_VISUALIZER_DB_USERNAME}"
   password: "${IR_VISUALIZER_DB_PASSWORD}"
 
-auth:
-  username: "${IR_VISUALIZER_AUTH_USERNAME}"
-  password: "${IR_VISUALIZER_AUTH_PASSWORD}"
-
 loggly_token: "${IR_VISUALIZER_LOGGLY_TOKEN}"
 
 irvisualizer:
