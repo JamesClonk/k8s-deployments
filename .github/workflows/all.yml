@@ -19,6 +19,9 @@ jobs:
     - name: deploy cf-env demo app
       working-directory: cf-env
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   kuard:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -30,6 +33,9 @@ jobs:
     - name: deploy kuard demo app
       working-directory: kuard
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   pgweb:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -40,6 +46,9 @@ jobs:
     - name: deploy pgweb postgres admin ui
       working-directory: pgweb
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   backman:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -51,6 +60,9 @@ jobs:
     - name: deploy backman postgres backup app
       working-directory: backman
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   jcio:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -62,6 +74,9 @@ jobs:
     - name: deploy jcio homepage app
       working-directory: jcio
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   home-info:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -73,6 +88,9 @@ jobs:
     - name: deploy home-info app
       working-directory: home-info
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   irvisualizer:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -84,6 +102,9 @@ jobs:
     - name: deploy iRacing visualization app
       working-directory: irvisualizer
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   syncthing:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -95,6 +116,9 @@ jobs:
     - name: deploy syncthing server
       working-directory: syncthing
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   minecraft:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -106,6 +130,9 @@ jobs:
     - name: deploy minecraft server
       working-directory: minecraft
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   image-puller:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -116,6 +143,9 @@ jobs:
     - name: deploy image-puller cronjob
       working-directory: image-puller
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
 
   repo-mirrorer:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -127,3 +157,6 @@ jobs:
     - name: deploy repo-mirrorer cronjob
       working-directory: repo-mirrorer
       run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
