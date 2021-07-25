@@ -1,6 +1,6 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
-minimumRequiredVersion: 0.27.0
+minimumRequiredVersion: 0.29.0
 overrides:
 - image: jamesclonk/cf-env:89d20c44e3d6b1a4e0c0502e9d1f5bc908e81264
   newImage: index.docker.io/jamesclonk/cf-env@sha256:19ec75c211a2b05b5d9b78b5204dcf9b6d3240b275ffa35c42065d945d7f6508

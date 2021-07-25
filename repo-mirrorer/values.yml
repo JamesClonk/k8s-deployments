@@ -5,5 +5,3 @@ repo_mirrorer:
 
   cronjob: true
   run_job: false
-
-  gitlab_token: "${REPO_MIRRORER_GITLAB_TOKEN}"

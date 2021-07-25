@@ -9,8 +9,6 @@ export KUBECONFIG="$HOME/.kube/hetzner-k3s"
 ####### ingress-nginx ##################################################################################################
 ########################################################################################################################
 export INGRESS_DOMAIN="${INGRESS_DOMAIN:=example.org}" # for example "mydomain.org"
-export INGRESS_BASIC_AUTH_USERNAME="${INGRESS_BASIC_AUTH_USERNAME:=username}" # for example "my-username"
-export INGRESS_BASIC_AUTH_PASSWORD="${INGRESS_BASIC_AUTH_PASSWORD:=password}" # for example "my-super-secret-password"
 ########################################################################################################################
 
 
@@ -46,8 +44,8 @@ export IR_VISUALIZER_DB_PASSWORD="${IR_VISUALIZER_DB_PASSWORD:=password}"
 ########################################################################################################################
 ####### backman ########################################################################################################
 ########################################################################################################################
-export BACKMAN_USERNAME="${BACKMAN_USERNAME:=${INGRESS_BASIC_AUTH_USERNAME}}" # for example "my-username"
-export BACKMAN_PASSWORD="${BACKMAN_PASSWORD:=${INGRESS_BASIC_AUTH_PASSWORD}}" # for example "my-super-secret-password"
+export BACKMAN_USERNAME="${BACKMAN_USERNAME:=username}" # for example "my-username"
+export BACKMAN_PASSWORD="${BACKMAN_PASSWORD:=password}" # for example "my-super-secret-password"
 export BACKMAN_S3_HOST="${BACKMAN_S3_HOST:=host}"
 export BACKMAN_S3_KEY="${BACKMAN_S3_KEY:=access_key}"
 export BACKMAN_S3_SECRET="${BACKMAN_S3_SECRET:=secret_key}"
@@ -75,8 +73,8 @@ export HOME_INFO_TEAMS_WEBHOOK_URL="${HOME_INFO_TEAMS_WEBHOOK_URL:=http://exampl
 ####### irvisualizer ###################################################################################################
 ########################################################################################################################
 export IR_VISUALIZER_LOGGLY_TOKEN="${IR_VISUALIZER_LOGGLY_TOKEN:=token}"
-export IR_VISUALIZER_AUTH_USERNAME="${IR_VISUALIZER_AUTH_USERNAME:=${INGRESS_BASIC_AUTH_USERNAME}}"
-export IR_VISUALIZER_AUTH_PASSWORD="${IR_VISUALIZER_AUTH_PASSWORD:=${INGRESS_BASIC_AUTH_PASSWORD}}"
+export IR_VISUALIZER_AUTH_USERNAME="${IR_VISUALIZER_AUTH_USERNAME:=username}"
+export IR_VISUALIZER_AUTH_PASSWORD="${IR_VISUALIZER_AUTH_PASSWORD:=password}"
 export IR_VISUALIZER_IR_USERNAME="${IR_VISUALIZER_IR_USERNAME:=username}"
 export IR_VISUALIZER_IR_PASSWORD="${IR_VISUALIZER_IR_PASSWORD:=password}"
 ########################################################################################################################
@@ -85,8 +83,8 @@ export IR_VISUALIZER_IR_PASSWORD="${IR_VISUALIZER_IR_PASSWORD:=password}"
 ########################################################################################################################
 ####### syncthing ######################################################################################################
 ########################################################################################################################
-export SYNCTHING_USERNAME="${SYNCTHING_USERNAME:=${INGRESS_BASIC_AUTH_USERNAME}}"
-export SYNCTHING_PASSWORD="${SYNCTHING_PASSWORD:=${INGRESS_BASIC_AUTH_PASSWORD}}"
+export SYNCTHING_USERNAME="${SYNCTHING_USERNAME:=username}"
+export SYNCTHING_PASSWORD="${SYNCTHING_PASSWORD:=password}"
 ########################################################################################################################
 
 
