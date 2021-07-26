@@ -10,7 +10,7 @@ K8s deployments repository
   - ###### https://github.com/hetznercloud/cli
 
 - #### https://github.com/mozilla/sops
-  Encrypt files with AWS KMS, GCP KMS, Azure Key Vault, age, and PGP.
+  Encrypt files with AWS KMS, GCP KMS, Azure Key Vault, age, and PGP
 
 - #### https://carvel.dev (formerly https://k14s.io)
   - ###### https://get-kapp.io
