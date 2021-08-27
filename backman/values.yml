@@ -2,7 +2,7 @@
 ---
 backman:
   replicas: 1
-  image: "jamesclonk/backman:1.27.2"
+  image: "jamesclonk/backman:1.28.1"
 
   enable_network_policy: true
 
