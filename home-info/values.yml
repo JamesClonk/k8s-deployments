@@ -2,6 +2,6 @@
 ---
 home_info:
   replicas: 1
-  image: "jamesclonk/home-info-dashboard:2a5ef9dac8faba07303238d49ac2ac4c0bc6dae2"
+  image: "jamesclonk/home-info-dashboard:5df415ed394f92b85ad82cf9c768881198821562"
 
   enable_network_policy: true
