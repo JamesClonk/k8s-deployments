@@ -1,0 +1,7 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.29.0
+overrides:
+- image: adguard/adguardhome:v0.106.3
+  newImage: index.docker.io/adguard/adguardhome@sha256:de7d791b814560663fe95f9812fca2d6dd9d6507e4b1b29926cc7b4a08a676ad
+  preresolved: true

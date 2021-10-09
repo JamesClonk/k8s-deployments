@@ -1,0 +1,30 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+#@ if data.values.adguardhome.enable_network_policy:
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: adguardhome
+  namespace: adguardhome
+  labels: #@ labels("netpol")
+spec:
+  podSelector:
+    matchLabels: #@ labels("server")
+  ingress:
+  - from: #! allow access for ingress-controller
+    - namespaceSelector:
+        matchLabels:
+          namespace.kubernetes.io/name: ingress-nginx
+      podSelector: {}
+    ports:
+    - port: 3000
+  - from: #! allow access to adguardhome
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    ports:
+    - port: 53
+      protocol: UDP
+    - port: 853
+#@ end

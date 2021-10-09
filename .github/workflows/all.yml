@@ -134,10 +134,24 @@ jobs:
       if: ${{ always() }}
       run: ./cleanup.sh
 
+  adguardhome:
+    if: "!contains(github.event.head_commit.message, 'skip')"
+    name: adguardhome
+    needs: [ kuard ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy adguardhome dns
+      working-directory: adguardhome
+      run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
+
   wireguard:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: wireguard
-    needs: [ syncthing ]
+    needs: [ adguardhome ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
