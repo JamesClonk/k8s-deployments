@@ -1,0 +1,17 @@
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wireguard
+  namespace: wireguard
+  labels: #@ labels("svc")
+spec:
+  type: NodePort
+  ports:
+  - port: 51820
+    targetPort: 51820
+    nodePort: 32577
+    protocol: UDP
+  selector: #@ labels("interface")

@@ -1,0 +1,22 @@
+#@data/values
+---
+busybox:
+  image: "busybox:1.32.0"
+
+wireguard:
+  image: "masipcat/wireguard-go:latest"
+
+  enable_network_policy: true
+
+  network: "10.15.20.0/24"
+  address: "10.15.20.1/24"
+  dns: "1.1.1.1"
+  public_key: "PZVWslT6d/nHS1y85mDZOPymyKjzJ62BxFIjEYGDrEs="
+
+  clients:
+  - name: home-workstation
+    public_key: "Y8xPxPrbOJjfMFHsVOuCJATy8M9L1wOrSrJ7sLwhLHk="
+    allowed_ips: "10.15.20.5/32"
+  - name: android
+    public_key: "DcokvAl/OsUyPiEyrIEn/dh6mF3WVWbQoGqb+4UbilE="
+    allowed_ips: "10.15.20.10/32"

@@ -1,0 +1,26 @@
+#@ def labels(component):
+  app: wireguard
+  app.kubernetes.io/name: wireguard
+  app.kubernetes.io/instance: wireguard
+  app.kubernetes.io/component: #@ component
+#@ end
+
+#@ def labelSelector(component):
+  matchExpressions:
+  - key: app
+    operator: In
+    values:
+    - wireguard
+  - key: app.kubernetes.io/name
+    operator: In
+    values:
+    - wireguard
+  - key: app.kubernetes.io/instance
+    operator: In
+    values:
+    - wireguard
+  - key: app.kubernetes.io/component
+    operator: In
+    values:
+    - #@ component
+#@ end
