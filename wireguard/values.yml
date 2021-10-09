@@ -6,8 +6,6 @@ busybox:
 wireguard:
   image: "masipcat/wireguard-go:latest"
 
-  enable_network_policy: true
-
   network: "10.15.20.0/24"
   address: "10.15.20.1/24"
   dns: "1.1.1.1"
