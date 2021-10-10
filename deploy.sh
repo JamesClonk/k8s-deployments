@@ -7,6 +7,7 @@ deployments=(
 	# demo/test apps
 	"cf-env"
 	"kuard"
+	"resume"
 
 	# what's my db up to?
 	"pgweb"

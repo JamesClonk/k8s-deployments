@@ -37,6 +37,20 @@ jobs:
       if: ${{ always() }}
       run: ./cleanup.sh
 
+  resume:
+    if: "!contains(github.event.head_commit.message, 'skip')"
+    name: resume
+    needs: [ cf-env ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy resume web app
+      working-directory: resume
+      run: ./deploy.sh
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
+
   pgweb:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: pgweb

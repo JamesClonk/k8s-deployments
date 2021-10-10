@@ -1,0 +1,7 @@
+#@data/values
+---
+resume:
+  replicas: 1
+  image: "jamesclonk/resume:d14729cc24ca64c20cf45ee3b1ff187bf8ecf85d"
+
+  enable_network_policy: true
