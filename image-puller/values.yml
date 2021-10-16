@@ -21,7 +21,7 @@ image_puller:
   - "jamesclonk/basic-auth:678636aaca212f20c4e263d05b75efabdc6aef2c"
   - "jamesclonk/pgbackup:aee0398bd7634f209ecd7e1ec03f55002c3c3a57"
   - "jamesclonk/mcbackup:f3b390668671bba69835320ab82824470f6404a4"
-  - "jamesclonk/resume:029e877eff735eb8fcdcf9b3518529e6d5792e4e"
+  - "jamesclonk/resume:e104fbe6f04158fb99d2d69d905dfe6412f3b2e6"
 
   #! other stuff
   - "jamesclonk/web-container:latest"
