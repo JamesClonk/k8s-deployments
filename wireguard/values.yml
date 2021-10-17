@@ -8,7 +8,7 @@ wireguard:
 
   network: "10.15.20.0/24"
   address: "10.15.20.1/24"
-  dns: "116.203.1.126"
+  dns: "78.47.120.74"
   public_key: "PZVWslT6d/nHS1y85mDZOPymyKjzJ62BxFIjEYGDrEs="
 
   clients:
