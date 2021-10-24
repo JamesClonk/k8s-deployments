@@ -48,6 +48,9 @@ image_puller:
   - "jamesclonk/basic-auth:678636aaca212f20c4e263d05b75efabdc6aef2c"
   - "k8s.gcr.io/ingress-nginx/controller:v0.41.2@sha256:1f4f402b9c14f3ae92b11ada1dfe9893a88f0faeb0b2f4b903e2c67a0c3bf0de"
 
+  #! oauth2-proxy
+  - "quay.io/oauth2-proxy/oauth2-proxy:v7.2.0"
+
   #! kubernetes-dashboard
   - "kubernetesui/dashboard:v2.0.4"
   - "kubernetesui/metrics-scraper:v1.0.4"
