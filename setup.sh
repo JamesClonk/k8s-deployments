@@ -65,6 +65,7 @@ install_tool "kapp" "https://github.com/k14s/kapp/releases/download/v0.35.0/kapp
 install_tool "ytt" "https://github.com/k14s/ytt/releases/download/v0.31.0/ytt-linux-amd64" "32e7cdc38202b49fe673442bd22cb2b130e13f0f05ce724222a06522d7618395"
 install_tool "vendir" "https://github.com/k14s/vendir/releases/download/v0.23.0/vendir-linux-amd64" "c6a65e7e8e589e25bf5554e9575ab247e55ae71920d3d366ffd84b1571fe34ac"
 install_tool "kbld" "https://github.com/k14s/kbld/releases/download/v0.31.0/kbld-linux-amd64" "ba0be56d9e74b067f3e659de0b79100b0b9df86a2e3e0e6ff533b1e019c22c23"
+install_tool_from_tarball "cmctl" "cmctl" "https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cmctl-linux-amd64.tar.gz" "6e22fda56e0fa62cb3fab9340be23ba3fa0da341e737006a9552abdcc80c789e"
 install_tool_from_tarball "hcloud" "hcloud" "https://github.com/hetznercloud/cli/releases/download/v1.23.0/hcloud-linux-amd64.tar.gz" "500320950002dd9d24eeb47c66b3136c5318fa08c5f73e1b981a16a4dc320cad"
 install_tool_from_tarball "linux-amd64/helm" "helm" "https://get.helm.sh/helm-v3.4.0-linux-amd64.tar.gz" "58550525963821a227307590627d0c266414e4c56247a5c11559e4abd990b0ae"
 install_tool_from_tarball "k9s" "k9s" "https://github.com/derailed/k9s/releases/download/v0.23.3/k9s_Linux_x86_64.tar.gz" "51eb79a779f372961168b62d584728e478d4c8a447986c2c64ef3892beb0e53e"
