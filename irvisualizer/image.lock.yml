@@ -5,6 +5,6 @@ overrides:
 - image: jamesclonk/ircollector:68f32f409f53ddcb9c64207b3337e333c60550f9
   newImage: index.docker.io/jamesclonk/ircollector@sha256:301d3405e37d2c23e94a7ec3c5080f4b36eed5fbaffab49ba675031ffd2ae2a6
   preresolved: true
-- image: jamesclonk/irvisualizer:6565ef253838baca6d5414581f760e4d6d716912
-  newImage: index.docker.io/jamesclonk/irvisualizer@sha256:82394a1c739ed998335ecae8d3ff946f6ab21dca94a9cf146a77ab96cdb72fd5
+- image: jamesclonk/irvisualizer:33a976fc070e7362daa0bb8b9cdf7c87544f96e6
+  newImage: index.docker.io/jamesclonk/irvisualizer@sha256:f5bcf2d8fd60580921551a4249def9170b62721b015872f3e75912736f3b06f2
   preresolved: true
