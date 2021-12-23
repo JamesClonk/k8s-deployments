@@ -8,5 +8,5 @@ irvisualizer:
 
 ircollector:
   replicas: 1
-  image: "jamesclonk/ircollector:267e29d4b9c0fe29b2d813832ab9f236868013cc"
+  image: "jamesclonk/ircollector:68f32f409f53ddcb9c64207b3337e333c60550f9"
 
