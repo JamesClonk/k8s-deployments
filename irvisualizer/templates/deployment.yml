@@ -126,3 +126,53 @@ spec:
             - bash
             - -c
             - 'curl --fail http://localhost:8080/seasons --header "Authorization: ${PROBE_AUTHORIZATION}"'
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: irdiscordbot
+  namespace: irvisualizer
+  labels: #@ labels("discord")
+spec:
+  selector:
+    matchLabels: #@ labels("discord")
+  replicas: #@ data.values.irdiscordbot.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("discord")
+    spec:
+      serviceAccountName: irvisualizer
+      affinity: #@ podAntiAffinity("discord")
+      containers:
+      - name: irdiscordbot
+        image: #@ data.values.irdiscordbot.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: LOG_LEVEL
+          value: "debug"
+        envFrom:
+        - secretRef:
+            name: irvisualizer
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080

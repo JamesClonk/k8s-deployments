@@ -28,3 +28,17 @@ spec:
   selector:
     matchLabels: #@ labels("backend")
 #@ end
+
+#@ if data.values.irdiscordbot.replicas > 1:
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: irdiscordbot
+  namespace: irvisualizer
+  labels: #@ labels("pdb")
+spec:
+  minAvailable: 50%
+  selector:
+    matchLabels: #@ labels("discord")
+#@ end

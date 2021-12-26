@@ -25,3 +25,16 @@ spec:
   - port: 8080
     targetPort: 8080
   selector: #@ labels("backend")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: irdiscordbot
+  namespace: irvisualizer
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector: #@ labels("discord")

@@ -10,6 +10,6 @@ ircollector:
   replicas: 1
   image: "jamesclonk/ircollector:2e613cfabde134b869e958760732238c840cfb6b"
 
-irdiscord:
+irdiscordbot:
   replicas: 1
-  image: "jamesclonk/irdiscord:deadbeef-beefdead"
+  image: "jamesclonk/irdiscordbot:1c046cc9c56368a8254bfd67a37034867890c4af"
