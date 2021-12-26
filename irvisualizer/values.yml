@@ -4,7 +4,7 @@ enable_network_policy: true
 
 irvisualizer:
   replicas: 2
-  image: "jamesclonk/irvisualizer:a1d543478e9d762af1c87a0870afb72d94e2945b"
+  image: "jamesclonk/irvisualizer:dabc26956dcca820a2596d7b756aa56b5c8fab27"
 
 ircollector:
   replicas: 1
