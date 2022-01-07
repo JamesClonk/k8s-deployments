@@ -2,11 +2,11 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.31.0
 overrides:
-- image: jamesclonk/ircollector:2e613cfabde134b869e958760732238c840cfb6b
-  newImage: index.docker.io/jamesclonk/ircollector@sha256:7e009fc4c05d88aa3f2e68fa84d6185688f8b1e4f59f953dbbf56e4961ba3458
+- image: jamesclonk/ircollector:5c55a73bf1dcc6fbe0e2c78d39b10392aa26dc97
+  newImage: index.docker.io/jamesclonk/ircollector@sha256:711394c8b40ef8050167867e0e713295c3b6c3d0a3083556d9c248be59284d5b
   preresolved: true
-- image: jamesclonk/irdiscordbot:1c046cc9c56368a8254bfd67a37034867890c4af
-  newImage: index.docker.io/jamesclonk/irdiscordbot@sha256:79be50695eeba082a0cf978f796f1d17e1a2fba16d06433f162edee0eb0a5bc9
+- image: jamesclonk/irdiscordbot:5fb803c78ce9c994701b2d718ca10110da71935f
+  newImage: index.docker.io/jamesclonk/irdiscordbot@sha256:8a3716549ae3360114b435eb285c22c4c291d961d026d5210996867144ec1c61
   preresolved: true
 - image: jamesclonk/irvisualizer:e684a345b25b2f23d4b27e032740e5e514359934
   newImage: index.docker.io/jamesclonk/irvisualizer@sha256:9b01b3abcff4ee3ee768b6f6c97a9b64706f2d1ef1b05b145e67b9df0e8b28e7
