@@ -14,7 +14,7 @@ image_puller:
   - "jamesclonk/cf-env:89d20c44e3d6b1a4e0c0502e9d1f5bc908e81264"
   - "jamesclonk/home-info-dashboard:dc579d1540c9f24b9a8e9a86841a32637fa2f537"
   - "jamesclonk/irvisualizer:2bad2d982f9c8bc1d9d3831eb4afc3b232f4005e"
-  - "jamesclonk/ircollector:300f9cdd370333be34b77e561cfbe8d225d2af50"
+  - "jamesclonk/ircollector:aab09056c11d597677f2ec4ccc0a24e35bef12ed"
   - "jamesclonk/irdiscordbot:5fb803c78ce9c994701b2d718ca10110da71935f"
   - "jamesclonk/jcio-frontend:d87aec9e0beccc690ad2833f899d39dbe6af6203"
   - "jamesclonk/moviedb-frontend:87286a8dd8d0ff6fb9108880b51887854ad0872c"

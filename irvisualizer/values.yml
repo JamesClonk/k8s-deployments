@@ -8,7 +8,7 @@ irvisualizer:
 
 ircollector:
   replicas: 1
-  image: "jamesclonk/ircollector:300f9cdd370333be34b77e561cfbe8d225d2af50"
+  image: "jamesclonk/ircollector:aab09056c11d597677f2ec4ccc0a24e35bef12ed"
 
 irdiscordbot:
   replicas: 1
