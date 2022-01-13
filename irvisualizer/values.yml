@@ -12,4 +12,4 @@ ircollector:
 
 irdiscordbot:
   replicas: 1
-  image: "jamesclonk/irdiscordbot:5fb803c78ce9c994701b2d718ca10110da71935f"
+  image: "jamesclonk/irdiscordbot:ef76365813d04292844730725280e2f2e7b76b1a"
