@@ -8,12 +8,22 @@
       containers:
       - name: repo-mirrorer
         image: #@ data.values.repo_mirrorer.image
+        command: ["/bin/bash"]
+        args: ["-c", "cd /app; sleep 33; ./mirror.sh"]
         env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: repo-mirrorer-secret
+              key: github-token
         - name: GITLAB_TOKEN
           valueFrom:
             secretKeyRef:
               name: repo-mirrorer-secret
               key: gitlab-token
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
       resources:
         requests:
           memory: "64Mi"
@@ -21,6 +31,9 @@
         limits:
           memory: "128Mi"
           cpu: "150m"
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
 #@ end
 
 #@ if data.values.repo_mirrorer.cronjob:

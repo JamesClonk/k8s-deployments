@@ -1,7 +1,7 @@
 #@data/values
 ---
 repo_mirrorer:
-  image: "jamesclonk/repo-mirrorer:0f100962dfc32b5a15da6cc73ba3f98e007832a8"
+  image: "jamesclonk/repo-mirrorer:131393058d9c18df73ff15279b5d14cc299cfdd8"
 
   cronjob: true
   run_job: false
