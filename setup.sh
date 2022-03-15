@@ -61,7 +61,7 @@ export PATH="$HOME/bin:$PATH"
 
 # install tools
 install_tool "kubectl" "https://storage.googleapis.com/kubernetes-release/release/v1.19.13/bin/linux/amd64/kubectl" "275a97f2c825e8148b46b5b7eb62c1c76bdbadcca67f5e81f19a5985078cc185"
-install_tool "kapp" "https://github.com/k14s/kapp/releases/download/v0.35.0/kapp-linux-amd64" "0f9d4daa8c833a8e245362c77e72f4ed06d4f0a12eed6c09813c87a992201676"
+install_tool "kapp" "https://github.com/vmware-tanzu/carvel-kapp/releases/download/v0.46.0/kapp-linux-amd64" "130f648cd921761b61bb03d7a0f535d1eea26e0b5fc60e2839af73f4ea98e22f"
 install_tool "ytt" "https://github.com/k14s/ytt/releases/download/v0.31.0/ytt-linux-amd64" "32e7cdc38202b49fe673442bd22cb2b130e13f0f05ce724222a06522d7618395"
 install_tool "vendir" "https://github.com/k14s/vendir/releases/download/v0.23.0/vendir-linux-amd64" "c6a65e7e8e589e25bf5554e9575ab247e55ae71920d3d366ffd84b1571fe34ac"
 install_tool "kbld" "https://github.com/k14s/kbld/releases/download/v0.31.0/kbld-linux-amd64" "ba0be56d9e74b067f3e659de0b79100b0b9df86a2e3e0e6ff533b1e019c22c23"
