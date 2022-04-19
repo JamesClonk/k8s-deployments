@@ -18,3 +18,6 @@ wireguard:
   - name: android
     public_key: "DcokvAl/OsUyPiEyrIEn/dh6mF3WVWbQoGqb+4UbilE="
     allowed_ips: "10.15.20.10/32"
+  - name: tablet
+    public_key: "eLCO/g+8jNLl+JaTkTEY+SH80jBgKimwX9/9Naqk7Hw="
+    allowed_ips: "10.15.20.15/32"
