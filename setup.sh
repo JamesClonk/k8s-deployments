@@ -60,7 +60,7 @@ if [ ! -d "$HOME/bin" ]; then mkdir "$HOME/bin"; fi
 export PATH="$HOME/bin:$PATH"
 
 # install tools
-install_tool "kubectl" "https://storage.googleapis.com/kubernetes-release/release/v1.19.13/bin/linux/amd64/kubectl" "275a97f2c825e8148b46b5b7eb62c1c76bdbadcca67f5e81f19a5985078cc185"
+install_tool "kubectl" "https://storage.googleapis.com/kubernetes-release/release/v1.21.10/bin/linux/amd64/kubectl" "24ce60269b1ffe1ca151af8bfd3905c2427ebef620bc9286484121adf29131c0"
 install_tool "kapp" "https://github.com/vmware-tanzu/carvel-kapp/releases/download/v0.46.0/kapp-linux-amd64" "130f648cd921761b61bb03d7a0f535d1eea26e0b5fc60e2839af73f4ea98e22f"
 install_tool "ytt" "https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.40.1/ytt-linux-amd64" "11222665c627b8f0a1443534a3dde3c9b3aac08b322d28e91f0e011e3aeb7df5"
 install_tool "vendir" "https://github.com/vmware-tanzu/carvel-vendir/releases/download/v0.26.0/vendir-linux-amd64" "98057bf90e09972f156d1c4fbde350e94133bbaf2e25818b007759f5e9c8b197"
