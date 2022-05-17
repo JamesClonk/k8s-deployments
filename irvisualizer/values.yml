@@ -4,11 +4,11 @@ enable_network_policy: true
 
 irvisualizer:
   replicas: 2
-  image: "jamesclonk/irvisualizer:d545a0aa9a35c661bcf9f3a37202b30e4d88caaa"
+  image: "jamesclonk/irvisualizer:ea1f39e29294789969f7f2c53ad2807aa873254f"
 
 ircollector:
   replicas: 1
-  image: "jamesclonk/ircollector:991ce20a4aec26360bc6010e06179588b39ca6b2"
+  image: "jamesclonk/ircollector:6c3419fd40373bbb33ea607e4e87f240403ae393"
 
 irdiscordbot:
   replicas: 1
