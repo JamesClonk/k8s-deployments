@@ -2,8 +2,8 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.32.0
 overrides:
-- image: jamesclonk/ircollector:6c3419fd40373bbb33ea607e4e87f240403ae393
-  newImage: index.docker.io/jamesclonk/ircollector@sha256:34979893a1b4ba3dadb8bdf2cbc372814f05d0581794090bc4bd5dcbca32bdd8
+- image: jamesclonk/ircollector:0b732307990801a2cacda7ec3c797f0d87395030
+  newImage: index.docker.io/jamesclonk/ircollector@sha256:999a59e0b17b3acc17ac0acf6cbcb8d0f5157b64e54b246ebe7a34f5dd99106b
   preresolved: true
 - image: jamesclonk/irdiscordbot:3fa8685345970a189ec36d1fb5c9db95ec63713b
   newImage: index.docker.io/jamesclonk/irdiscordbot@sha256:bcf002036622056fdc363007183113ab9e1786b27dd431875a5a128171b5211d
