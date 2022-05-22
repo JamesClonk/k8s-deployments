@@ -8,6 +8,6 @@ overrides:
 - image: jamesclonk/irdiscordbot:3fa8685345970a189ec36d1fb5c9db95ec63713b
   newImage: index.docker.io/jamesclonk/irdiscordbot@sha256:bcf002036622056fdc363007183113ab9e1786b27dd431875a5a128171b5211d
   preresolved: true
-- image: jamesclonk/irvisualizer:ea1f39e29294789969f7f2c53ad2807aa873254f
-  newImage: index.docker.io/jamesclonk/irvisualizer@sha256:2fed87f9d1385b8fe01d7169b8809a3f81bd5bc5736b060ded57de4e9a5ba974
+- image: jamesclonk/irvisualizer:10a75dc5e32b6654b82e5b217adc546469c8c975
+  newImage: index.docker.io/jamesclonk/irvisualizer@sha256:853e3c9be7602e2f1257f70799dc50d55f7b38d2d74949acae6b7a127809dd5d
   preresolved: true
