@@ -37,14 +37,15 @@ spec:
           allowPrivilegeEscalation: false
         ports:
         - containerPort: 8080
+        command: [ "backman" ]
+        args: [ "-config", "/backman/config.json" ]
         env:
-        - name: PORT
-          value: "8080"
         - name: TZ
           value: "Europe/Zurich"
-        envFrom:
-        - secretRef:
-            name: backman
+        - name: PORT
+          value: "8080"
+        - name: SERVICE_BINDING_ROOT
+          value: "/bindings"
         resources:
           requests:
             memory: "512Mi"
@@ -58,19 +59,30 @@ spec:
             port: 8080
         livenessProbe:
           initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 5
-          exec:
-            command:
-            - bash
-            - -c
-            - 'curl --fail http://localhost:8080/api/v1/states --header "Authorization: ${PROBE_AUTHORIZATION}"'
+          httpGet:
+            path: /healthz
+            port: 8080
         volumeMounts:
         - name: storage
           mountPath: /var/run/backman
+        - mountPath: /backman/config.json
+          name: backman
+          subPath: config.json
+#@ for idx in range(len(data.values.secrets.backman.postgres)):
+#@   service = data.values.secrets.backman.postgres[idx]
+        - mountPath: #@ "/bindings/" + service.name
+          name: #@ service.name.lower().strip().replace(" ","-").replace("_","-")
+#@ end
       volumes:
       - name: storage
         persistentVolumeClaim:
           claimName: backman
+      - name: backman
+        secret:
+          secretName: backman
+#@ for idx in range(len(data.values.secrets.backman.postgres)):
+#@   service = data.values.secrets.backman.postgres[idx]
+      - name: #@ service.name.lower().strip().replace(" ","-").replace("_","-")
+        secret:
+          secretName: #@ service.name.lower().strip().replace(" ","-").replace("_","-")
+#@ end

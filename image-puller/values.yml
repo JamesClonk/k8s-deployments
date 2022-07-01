@@ -10,7 +10,7 @@ image_puller:
   #! direct jc.io stuff
   - "jamesclonk/image-puller:ef9d2a272282c4ccb199d146e71a4d8fbbdad15c"
   - "jamesclonk/repo-mirrorer:131393058d9c18df73ff15279b5d14cc299cfdd8"
-  - "jamesclonk/backman:1.28.1"
+  - "jamesclonk/backman:2.0.0"
   - "jamesclonk/cf-env:89d20c44e3d6b1a4e0c0502e9d1f5bc908e81264"
   - "jamesclonk/home-info-dashboard:b8efa3ebfb587034e05c9b6f7217b93a1d1bbd3f"
   - "jamesclonk/irvisualizer:10a75dc5e32b6654b82e5b217adc546469c8c975"
