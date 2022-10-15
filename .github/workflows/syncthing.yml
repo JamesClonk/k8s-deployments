@@ -8,7 +8,7 @@ jobs:
     name: syncthing
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: deploy syncthing server
       working-directory: syncthing
       run: ./deploy.sh

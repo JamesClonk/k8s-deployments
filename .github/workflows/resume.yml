@@ -8,7 +8,7 @@ jobs:
     name: resume
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: deploy resume web app
       working-directory: resume
       run: ./deploy.sh

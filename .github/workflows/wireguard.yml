@@ -8,7 +8,7 @@ jobs:
     name: wireguard
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: deploy wireguard server
       working-directory: wireguard
       run: ./deploy.sh

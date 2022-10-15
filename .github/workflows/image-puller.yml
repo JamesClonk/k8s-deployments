@@ -8,7 +8,7 @@ jobs:
     name: image-puller
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: deploy image-puller cronjob
       working-directory: image-puller
       run: ./deploy.sh

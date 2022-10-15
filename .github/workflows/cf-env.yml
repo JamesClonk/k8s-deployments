@@ -8,7 +8,7 @@ jobs:
     name: cf-env
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: deploy cf-env demo app
       working-directory: cf-env
       run: ./deploy.sh
