@@ -23,19 +23,19 @@ jobs:
       if: ${{ always() }}
       run: ./cleanup.sh
 
-  kuard:
-    if: "!contains(github.event.head_commit.message, 'skip')"
-    name: kuard
-    needs: [ cf-env ]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: deploy kuard demo app
-      working-directory: kuard
-      run: ./deploy.sh
-    - name: cleanup
-      if: ${{ always() }}
-      run: ./cleanup.sh
+  # kuard:
+  #   if: "!contains(github.event.head_commit.message, 'skip')"
+  #   name: kuard
+  #   needs: [ cf-env ]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: deploy kuard demo app
+  #     working-directory: kuard
+  #     run: ./deploy.sh
+  #   - name: cleanup
+  #     if: ${{ always() }}
+  #     run: ./cleanup.sh
 
   resume:
     if: "!contains(github.event.head_commit.message, 'skip')"
@@ -120,38 +120,38 @@ jobs:
       if: ${{ always() }}
       run: ./cleanup.sh
 
-  syncthing:
-    if: "!contains(github.event.head_commit.message, 'skip')"
-    name: syncthing
-    needs: [ kuard ]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: deploy syncthing server
-      working-directory: syncthing
-      run: ./deploy.sh
-    - name: cleanup
-      if: ${{ always() }}
-      run: ./cleanup.sh
+  # syncthing:
+  #   if: "!contains(github.event.head_commit.message, 'skip')"
+  #   name: syncthing
+  #   needs: [ cf-env ]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: deploy syncthing server
+  #     working-directory: syncthing
+  #     run: ./deploy.sh
+  #   - name: cleanup
+  #     if: ${{ always() }}
+  #     run: ./cleanup.sh
 
-  minecraft:
-    if: "!contains(github.event.head_commit.message, 'skip')"
-    name: minecraft
-    needs: [ kuard ]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: deploy minecraft server
-      working-directory: minecraft
-      run: ./deploy.sh
-    - name: cleanup
-      if: ${{ always() }}
-      run: ./cleanup.sh
+  # minecraft:
+  #   if: "!contains(github.event.head_commit.message, 'skip')"
+  #   name: minecraft
+  #   needs: [ cf-env ]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: deploy minecraft server
+  #     working-directory: minecraft
+  #     run: ./deploy.sh
+  #   - name: cleanup
+  #     if: ${{ always() }}
+  #     run: ./cleanup.sh
 
   adguardhome:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: adguardhome
-    needs: [ kuard ]
+    needs: [ cf-env ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

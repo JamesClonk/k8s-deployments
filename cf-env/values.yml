@@ -1,7 +1,7 @@
 #@data/values
 ---
 cf_env:
-  replicas: 2
+  replicas: 1
   image: "jamesclonk/cf-env:89d20c44e3d6b1a4e0c0502e9d1f5bc908e81264"
 
   enable_network_policy: true

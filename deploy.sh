@@ -6,7 +6,7 @@ source setup.sh
 deployments=(
 	# demo/test apps
 	"cf-env"
-	"kuard"
+	# "kuard"
 	"resume"
 
 	# what's my db up to?
@@ -20,11 +20,11 @@ deployments=(
 	"home-info"
 	"irvisualizer"
 
-	# put my files into the clouds!
-	"syncthing"
+	# # put my files into the clouds!
+	# "syncthing"
 
-	# building stuff with blocks..
-	"minecraft"
+	# # building stuff with blocks..
+	# "minecraft"
 
 	# also some cronjobs for good fun..
 	"image-puller"

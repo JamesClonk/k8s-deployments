@@ -3,14 +3,14 @@
 enable_network_policy: true
 
 jcio:
-  replicas: 2
+  replicas: 1
   image: "jamesclonk/jcio-frontend:d87aec9e0beccc690ad2833f899d39dbe6af6203"
 
 moviedb:
   frontend:
-    replicas: 2
+    replicas: 1
     image: "jamesclonk/moviedb-frontend:87286a8dd8d0ff6fb9108880b51887854ad0872c"
 
   backend:
-    replicas: 2
+    replicas: 1
     image: "jamesclonk/moviedb-backend:6abf341bd5f1d050e43ac34be3f56b0f72e4af75"
