@@ -1,6 +1,6 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
-minimumRequiredVersion: 0.29.0
+minimumRequiredVersion: 0.32.0
 overrides:
 - image: jamesclonk/jcio-frontend:d87aec9e0beccc690ad2833f899d39dbe6af6203
   newImage: index.docker.io/jamesclonk/jcio-frontend@sha256:5bf1f4c5f8d5d7b87ef487520d8e396715451981fdfe175d145394b8f4f55bce

@@ -6,18 +6,18 @@
 #@  assert.fail("configuration.ingress.domain is missing or invalid")
 #@ end
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jcio-frontend
   namespace: jcio
   labels: #@ labels("ingress")
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  ingressClassName: nginx
   tls:
   - secretName: jcio-tls
     hosts:
@@ -31,29 +31,37 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: jcio-frontend
-          servicePort: 3000
+          service:
+            name: jcio-frontend
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
   #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "www." + host
     http:
       paths:
       - backend:
-          serviceName: jcio-frontend
-          servicePort: 3000
+          service:
+            name: jcio-frontend
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
 
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: moviedb
   namespace: jcio
   labels: #@ labels("ingress")
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  ingressClassName: nginx
   tls:
   - secretName: moviedb-tls
     hosts:
@@ -68,19 +76,31 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: moviedb-frontend
-          servicePort: 3007
+          service:
+            name: moviedb-frontend
+            port:
+              number: 3007
+        path: /
+        pathType: Prefix
   #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "moviedb-frontend." + host
     http:
       paths:
       - backend:
-          serviceName: moviedb-frontend
-          servicePort: 3007
+          service:
+            name: moviedb-frontend
+            port:
+              number: 3007
+        path: /
+        pathType: Prefix
   #@ for/end host in data.values.configuration.ingress.domains:
   - host: #@ "moviedb-backend." + host
     http:
       paths:
       - backend:
-          serviceName: moviedb-backend
-          servicePort: 4007
+          service:
+            name: moviedb-backend
+            port:
+              number: 4007
+        path: /
+        pathType: Prefix
