@@ -58,32 +58,32 @@ image_puller:
   - "registry.k8s.io/ingress-nginx/controller:v1.4.0@sha256:34ee929b111ffc7aa426ffd409af44da48e5a0eea1eb2207994d9e0c0882d143"
 
   #! oauth2-proxy
-  - "quay.io/oauth2-proxy/oauth2-proxy:v7.3.0"
+  - "quay.io/oauth2-proxy/oauth2-proxy:v7.2.1"
 
   #! kubernetes-dashboard
-  - "kubernetesui/dashboard:v2.0.5"
-  - "kubernetesui/metrics-scraper:v1.0.6"
+  - "kubernetesui/dashboard:v2.6.1"
+  - "kubernetesui/metrics-scraper:v1.0.8"
 
   #! grafana
   - "busybox:1.31.1"
-  - "grafana/grafana:7.3.1"
+  - "grafana/grafana:9.2.0"
 
   #! metrics-server
   - "k8s.gcr.io/metrics-server/metrics-server:v0.5.2"
 
   #! kube-state-metrics
-  - "k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.2.4"
+  - "k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.6.0"
 
   #! loki
-  - "grafana/loki:1.6.0"
-  - "grafana/promtail:1.6.0"
+  - "grafana/loki:2.6.1"
+  - "docker.io/grafana/promtail:2.6.1"
 
   #! prometheus
-  - "jimmidyson/configmap-reload:v0.4.0"
-  - "prom/alertmanager:v0.21.0"
-  - "prom/node-exporter:v1.0.1"
-  - "prom/prometheus:v2.21.0"
-  - "prom/pushgateway:v1.2.0"
+  - "jimmidyson/configmap-reload:v0.5.0"
+  - "quay.io/prometheus/alertmanager:v0.24.0"
+  - "quay.io/prometheus/node-exporter:v1.3.1"
+  - "quay.io/prometheus/prometheus:v2.39.1"
+  - "prom/pushgateway:v1.4.3"
 
   #! prometheus-msteams
   - "quay.io/prometheusmsteams/prometheus-msteams:v1.4.1"
