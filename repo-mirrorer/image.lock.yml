@@ -1,7 +1,7 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
-minimumRequiredVersion: 0.31.0
+minimumRequiredVersion: 0.32.0
 overrides:
-- image: jamesclonk/repo-mirrorer:131393058d9c18df73ff15279b5d14cc299cfdd8
-  newImage: index.docker.io/jamesclonk/repo-mirrorer@sha256:241ad771fa386f4b699bb2f01982114cbb23ce64e1f963c21ecfb9a191a34e45
+- image: jamesclonk/repo-mirrorer:83548d8c17618a57d377467eea8e34264be3dde4
+  newImage: index.docker.io/jamesclonk/repo-mirrorer@sha256:4f9477d95d903fe2c68249928c1959ff604dba312a3db5bd7e7475544da47029
   preresolved: true
