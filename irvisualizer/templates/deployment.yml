@@ -22,6 +22,10 @@ spec:
         prometheus.io/scrape: "true"
     spec:
       serviceAccountName: irvisualizer
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
       affinity: #@ podAntiAffinity("frontend")
       containers:
       - name: irvisualizer
@@ -85,6 +89,10 @@ spec:
         prometheus.io/scrape: "true"
     spec:
       serviceAccountName: irvisualizer
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
       affinity: #@ podAntiAffinity("backend")
       containers:
       - name: ircollector
@@ -144,6 +152,10 @@ spec:
       labels: #@ labels("discord")
     spec:
       serviceAccountName: irvisualizer
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
       affinity: #@ podAntiAffinity("discord")
       containers:
       - name: irdiscordbot

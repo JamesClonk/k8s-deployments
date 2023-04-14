@@ -2,6 +2,6 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.32.0
 overrides:
-- image: jamesclonk/resume:e104fbe6f04158fb99d2d69d905dfe6412f3b2e6
-  newImage: index.docker.io/jamesclonk/resume@sha256:b44951f6e177c91ea9ac96f89b064503f61b58f77aef1d090104863e576968a2
+- image: jamesclonk/resume:4e006833c8743c963036cb3fbcbf6e94fe3ccb74
+  newImage: index.docker.io/jamesclonk/resume@sha256:558e0f9f68517fa45ae68264a9fc43172a13c7dd4ee724b5d792b9c344b49867
   preresolved: true

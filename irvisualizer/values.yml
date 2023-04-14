@@ -4,12 +4,12 @@ enable_network_policy: true
 
 irvisualizer:
   replicas: 1
-  image: "jamesclonk/irvisualizer:7fd858faf1aaaeb8852b21043cb12edd96967619"
+  image: "jamesclonk/irvisualizer:a64ea895fd9ed175e4c71844de426fe90f13f863"
 
 ircollector:
   replicas: 1
-  image: "jamesclonk/ircollector:145e65de08b58971158560acd16e8aaa4dd1f12d"
+  image: "jamesclonk/ircollector:bb30c1360ea08d3a9e50a94822273122d48d13b9"
 
 irdiscordbot:
   replicas: 1
-  image: "jamesclonk/irdiscordbot:be5d3ebc5b542450acfded83a9cd3da3d79a35bb"
+  image: "jamesclonk/irdiscordbot:6c9a2d50955090d8e19f27c41d11ec965f980d0e"
