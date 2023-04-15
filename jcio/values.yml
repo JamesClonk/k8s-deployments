@@ -4,7 +4,7 @@ enable_network_policy: true
 
 jcio:
   replicas: 1
-  image: "jamesclonk/jcio-frontend:770d6b91c339bb722f9f2509d7f7f4a3de20ebab"
+  image: "jamesclonk/jcio-frontend:942d37e2fadd52c250b1732899aa6566396d4f91"
 
 moviedb:
   frontend:

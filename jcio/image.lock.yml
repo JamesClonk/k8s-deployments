@@ -2,8 +2,8 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.32.0
 overrides:
-- image: jamesclonk/jcio-frontend:770d6b91c339bb722f9f2509d7f7f4a3de20ebab
-  newImage: index.docker.io/jamesclonk/jcio-frontend@sha256:f6b30082028c827f6ae879501952e2ce85c2b690058bde32b93303152d27ae58
+- image: jamesclonk/jcio-frontend:942d37e2fadd52c250b1732899aa6566396d4f91
+  newImage: index.docker.io/jamesclonk/jcio-frontend@sha256:b35b842ad3eb8cb49b0e4b5aecebd474f99da480ed8ed068f1497f9a0fd676bf
   preresolved: true
 - image: jamesclonk/moviedb-backend:6abf341bd5f1d050e43ac34be3f56b0f72e4af75
   newImage: index.docker.io/jamesclonk/moviedb-backend@sha256:0a3b889a7fa8417787e41b0a87de7cc08c8e1a19864d9306c2eb470e88109785
