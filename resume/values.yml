@@ -2,6 +2,6 @@
 ---
 resume:
   replicas: 1
-  image: "jamesclonk/resume:4e006833c8743c963036cb3fbcbf6e94fe3ccb74"
+  image: "jamesclonk/resume:7b30c92e6787eddaec36a9335d3d421c681e0efe"
 
   enable_network_policy: true
