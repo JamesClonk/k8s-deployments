@@ -1,4 +1,8 @@
 # k8s-deployments
+
+[![Build](https://img.shields.io/github/actions/workflow/status/JamesClonk/k8s-deployments/all.yml?branch=master&label=Deployment)](https://github.com/JamesClonk/k8s-deployments/actions/workflows/all.yml)
+[![Platform](https://img.shields.io/badge/Platform-Kubernetes-blue)](https://kubernetes.io/)
+
 K8s deployments repository
 
 ### Tools used
