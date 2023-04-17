@@ -1,9 +1,19 @@
 #!/bin/bash
 set -e
 set -u
-source $(dirname ${BASH_SOURCE[0]})/sops.sh # prepare sops
-source $(dirname ${BASH_SOURCE[0]})/env.sh # source env configuration files
+set -o pipefail
+source $(dirname ${BASH_SOURCE[0]})/.env* 1>/dev/null 2>&1 || true # source any hidden env config files if available
 
+########################################################################################################################
+# environment configuration
+########################################################################################################################
+export CONFIGURATION_FILE="$(dirname ${BASH_SOURCE[0]})/configuration.yml"
+export SECRETS_FILE="$(dirname ${BASH_SOURCE[0]})/secrets.sops"
+export KUBECONFIG="$HOME/.kube/k8s-deployments"
+
+########################################################################################################################
+# helper functions
+########################################################################################################################
 function basic_auth() {
 	local -r username="$1"; shift
 	local -r password="$1"; shift
@@ -55,11 +65,16 @@ function install_tool_from_tarball {
 	sha256sum "$HOME/bin/${tool_name}" | grep "${tool_checksum}" >/dev/null || (echo "checksum failed for [${tool_name}]" && rm -f "$HOME/bin/${tool_name}" && exit 1)
 }
 
+########################################################################################################################
 # $HOME/bin
+########################################################################################################################
 if [ ! -d "$HOME/bin" ]; then mkdir "$HOME/bin"; fi
 export PATH="$HOME/bin:$PATH"
 
+########################################################################################################################
 # install tools
+########################################################################################################################
+install_tool "sops" "https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64" "53aec65e45f62a769ff24b7e5384f0c82d62668dd96ed56685f649da114b4dbb"
 install_tool "kubectl" "https://storage.googleapis.com/kubernetes-release/release/v1.25.8/bin/linux/amd64/kubectl" "80e70448455f3d19c3cb49bd6ff6fc913677f4f240d368fa2b9f0d400c8cd16e"
 install_tool "kapp" "https://github.com/vmware-tanzu/carvel-kapp/releases/download/v0.46.0/kapp-linux-amd64" "130f648cd921761b61bb03d7a0f535d1eea26e0b5fc60e2839af73f4ea98e22f"
 install_tool "ytt" "https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.40.1/ytt-linux-amd64" "11222665c627b8f0a1443534a3dde3c9b3aac08b322d28e91f0e011e3aeb7df5"
@@ -74,11 +89,34 @@ install_tool_from_tarball "hcloud" "hcloud" "https://github.com/hetznercloud/cli
 install_tool_from_tarball "linux-amd64/helm" "helm" "https://get.helm.sh/helm-v3.10.3-linux-amd64.tar.gz" "cc5223b23fd2ccdf4c80eda0acac7a6a5c8cdb81c5b538240e85fe97aa5bc3fb"
 install_tool_from_tarball "k9s" "k9s" "https://github.com/derailed/k9s/releases/download/v0.23.3/k9s_Linux_x86_64.tar.gz" "51eb79a779f372961168b62d584728e478d4c8a447986c2c64ef3892beb0e53e"
 
+########################################################################################################################
 # git config
+########################################################################################################################
 git config --local core.hooksPath .githooks/
 git config --local diff.sopsdiffer.textconv "sops -d"
 
+########################################################################################################################
+# aws config for SOPS
+########################################################################################################################
+set +u
+if [ -z "${AWS_REGION}" ]; then
+	echo "AWS_REGION must be set!"
+	exit 1
+fi
+if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
+	echo "AWS_ACCESS_KEY_ID must be set!"
+	exit 1
+fi
+if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
+	echo "AWS_SECRET_ACCESS_KEY must be set!"
+	exit 1
+fi
+set -u
+set -o pipefail
+
+########################################################################################################################
 # $HOME/.ssh
+########################################################################################################################
 if [ ! -d "$HOME/.ssh" ]; then mkdir "$HOME/.ssh"; fi
 chmod 700 "$HOME/.ssh" || true
 set +u
@@ -89,8 +127,11 @@ EOF
 	chmod 600 "$HOME/.ssh/id_rsa"
 fi
 set -u
+set -o pipefail
 
+########################################################################################################################
 # kubectl config
+########################################################################################################################
 if [ ! -d "$HOME/.kube" ]; then mkdir "$HOME/.kube"; fi
 chmod 700 "$HOME/.kube" || true
 set +u
@@ -100,3 +141,4 @@ if [ ! -f "${KUBECONFIG}" ]; then
 	chmod 600 "${KUBECONFIG}"
 fi
 set -u
+set -o pipefail
