@@ -98,25 +98,6 @@ git config --local core.hooksPath .githooks/
 git config --local diff.sopsdiffer.textconv "sops -d"
 
 ########################################################################################################################
-# aws config for SOPS
-########################################################################################################################
-set +u
-if [ -z "${AWS_REGION}" ]; then
-	echo "AWS_REGION must be set!"
-	exit 1
-fi
-if [ -z "${AWS_ACCESS_KEY_ID}" ]; then
-	echo "AWS_ACCESS_KEY_ID must be set!"
-	exit 1
-fi
-if [ -z "${AWS_SECRET_ACCESS_KEY}" ]; then
-	echo "AWS_SECRET_ACCESS_KEY must be set!"
-	exit 1
-fi
-set -u
-set -o pipefail
-
-########################################################################################################################
 # $HOME/.ssh
 ########################################################################################################################
 if [ ! -d "$HOME/.ssh" ]; then mkdir "$HOME/.ssh"; fi
