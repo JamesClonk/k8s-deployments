@@ -19,3 +19,9 @@
 
 # optional/hidden env configuration files
 .env*
+
+# kubeconfig
+/kubeconfig
+
+# sops unencrypted
+*_unencrypted
