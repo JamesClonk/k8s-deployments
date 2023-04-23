@@ -200,3 +200,41 @@ jobs:
     - name: cleanup
       if: ${{ always() }}
       run: ./cleanup.sh
+
+  testing:
+    if: "!contains(github.event.head_commit.message, 'skip')"
+    name: k8s e2e testing
+    needs: [ repo-mirrorer, wireguard, irvisualizer, home-info, jcio ]
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout k8s-testing
+      uses: actions/checkout@v3
+      with:
+        repository: JamesClonk/k8s-testing
+        ref: master
+    - name: setup ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+        bundler-cache: true
+    - name: setup chrome
+      uses: ./.github/actions/setup-chrome
+
+    - uses: actions/checkout@v3
+      with:
+        path: repo
+    - name: setup kubeconfig
+      working-directory: repo
+      run: ./setup.sh
+
+    - name: run k8s-testing specs
+      run: |
+        export KUBECONFIG=${HOME}/.kube/k8s-deployments
+        make test
+
+    - name: cleanup
+      if: ${{ always() }}
+      working-directory: repo
+      run: |
+        rm -f ${HOME}/.kube/k8s-deployments || true
+        ./cleanup.sh
