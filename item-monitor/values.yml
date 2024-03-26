@@ -1,0 +1,4 @@
+#@data/values
+---
+item_monitor:
+  image: "jamesclonk/item-monitor:9353f75"

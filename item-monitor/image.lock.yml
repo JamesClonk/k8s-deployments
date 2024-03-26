@@ -1,0 +1,7 @@
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.32.0
+overrides:
+- image: jamesclonk/item-monitor:9353f75
+  newImage: index.docker.io/jamesclonk/item-monitor@sha256:d42091cc41289c3f113d80a021a3b059d8b6ffdd211c40522a5b541ff083fc8e
+  preresolved: true

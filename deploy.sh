@@ -30,6 +30,9 @@ deployments=(
 	# # building stuff with blocks..
 	# "minecraft"
 
+	# # monitor stuff on websites..
+	"item-monitor"
+
 	# also some cronjobs for good fun..
 	"image-puller"
 	"repo-mirrorer"

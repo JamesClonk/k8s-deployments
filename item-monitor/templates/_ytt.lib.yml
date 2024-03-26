@@ -1,0 +1,35 @@
+#@ def labels(component):
+  app: item-monitor
+  app.kubernetes.io/name: item-monitor
+  app.kubernetes.io/instance: item-monitor
+  app.kubernetes.io/component: #@ component
+#@ end
+
+#@ def labelSelector(component):
+  matchExpressions:
+  - key: app
+    operator: In
+    values:
+    - item-monitor
+  - key: app.kubernetes.io/name
+    operator: In
+    values:
+    - item-monitor
+  - key: app.kubernetes.io/instance
+    operator: In
+    values:
+    - item-monitor
+  - key: app.kubernetes.io/component
+    operator: In
+    values:
+    - #@ component
+#@ end
+
+#@ def podAntiAffinity(component):
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        topologyKey: kubernetes.io/hostname
+        labelSelector: #@ labelSelector(component)
+#@ end
