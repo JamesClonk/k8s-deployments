@@ -43,8 +43,8 @@ spec:
             memory: "32Mi"
             cpu: "50m"
           limits:
-            memory: "64Mi"
-            cpu: "100m"
+            memory: "128Mi"
+            cpu: "250m"
         volumeMounts:
         - mountPath: /item-monitor/app/config.yaml
           name: config
