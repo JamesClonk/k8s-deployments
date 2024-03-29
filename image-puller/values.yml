@@ -23,7 +23,7 @@ image_puller:
   - "jamesclonk/pgbackup:aee0398bd7634f209ecd7e1ec03f55002c3c3a57"
   - "jamesclonk/mcbackup:f3b390668671bba69835320ab82824470f6404a4"
   - "jamesclonk/resume:7b30c92e6787eddaec36a9335d3d421c681e0efe"
-  - "jamesclonk/item-monitor:9353f75"
+  - "jamesclonk/item-monitor:1022361"
 
   #! other stuff
   - "jamesclonk/web-container:latest"

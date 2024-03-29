@@ -5,16 +5,3 @@ configuration:
   ingress:
     domains:
     - "jamesclonk.io"
-
-  item_monitor:
-    monitors:
-    - name: galaxus
-      items:
-      - name: Scarpa Vapor V
-        url: https://www.galaxus.ch/de/s3/product/scarpa-vapor-v-kletterschuhe-42-kletterschuhe-10611477
-        value: 125
-        regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-      - name: Scarpa Arpia V
-        url: https://www.galaxus.ch/de/s3/product/scarpa-arpia-v-42-kletterschuhe-41901081
-        value: 110
-        regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
