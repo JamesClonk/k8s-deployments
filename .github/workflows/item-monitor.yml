@@ -1,0 +1,19 @@
+name: item-monitor application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  item-monitor:
+    name: item-monitor
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: deploy item-monitor app
+      working-directory: item-monitor
+      run: ./deploy.sh
+      env:
+        SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+    - name: cleanup
+      if: ${{ always() }}
+      run: ./cleanup.sh
