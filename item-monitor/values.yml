@@ -10,11 +10,7 @@ item_monitor:
       url: https://www.galaxus.ch/de/s3/product/scarpa-vapor-s-42-kletterschuhe-24594482
       value: 120
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    - name: Shimano GRX RX610 Crankset
-      url: https://www.galaxus.ch/de/s3/product/shimano-grx-fc-rx610-165-mm-velokurbel-37757783
-      value: 115
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Continental Terra Speed
       url: https://www.galaxus.ch/de/s3/product/continental-terra-speed-protection-28-x-170-45-622-veloreifen-31958269
-      value: 43
+      value: 35
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
