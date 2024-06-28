@@ -10,17 +10,9 @@ item_monitor:
       url: https://www.galaxus.ch/de/s3/product/scarpa-vapor-s-42-kletterschuhe-24594482
       value: 120
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    - name: Philips Hue Argenta 3x
-      url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-350-lm-gu10-wandleuchte-deckenleuchte-11235563
-      value: 177
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    - name: Philips Hue Argenta 2x
-      url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-350-lm-gu10-wandleuchte-deckenleuchte-11235561
-      value: 125
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue Argenta 4x
       url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-1400-lm-gu10-wandleuchte-deckenleuchte-11235565
-      value: 209
+      value: 207
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue Argenta 1x
       url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-350-lm-gu10-wandleuchte-deckenleuchte-11235559
