@@ -6,28 +6,19 @@ item_monitor:
   monitors:
   - name: galaxus
     items:
-    - name: Scarpa Vapor S
-      url: https://www.galaxus.ch/de/s3/product/scarpa-vapor-s-42-kletterschuhe-24594482
-      value: 120
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    - name: Philips Hue Argenta 4x
-      url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-1400-lm-gu10-wandleuchte-deckenleuchte-11235565
-      value: 207
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue Argenta 1x
       url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-350-lm-gu10-wandleuchte-deckenleuchte-11235559
-      value: 60
+      value: 55
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue GU10 3x
       url: https://www.galaxus.ch/de/s14/product/philips-hue-white-color-ambiance-bt-gu10-570-w-350-lm-3-x-g-leuchtmittel-16446773
-      value: 101
+      value: 100
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue Full-Set Combo GU10 3x
       url: https://www.galaxus.ch/de/s14/product/philips-hue-white-color-ambiance-starterset-gu10-570-w-350-lm-3-x-g-leuchtmittel-11235548
-      value: 134
+      value: 131
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue LED Lightstrips
       url: https://www.galaxus.ch/de/s14/product/philips-hue-lightstrips-basis-bt-rgbw-200-cm-indoor-led-streifen-13274601
-      value: 57
+      value: 55
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    
