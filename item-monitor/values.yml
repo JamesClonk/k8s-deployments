@@ -22,3 +22,11 @@ item_monitor:
       url: https://www.galaxus.ch/de/s14/product/philips-hue-lightstrips-basis-bt-rgbw-200-cm-indoor-led-streifen-13274601
       value: 55
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
+    - name: HP Thunderbolt Docking Station
+      url: https://www.galaxus.ch/de/s1/product/hp-thunderbolt-120-w-g4-dock-thunderbolt-dockingstation-usb-hub-21359396
+      value: 190
+      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
+    - name: Outdoorchef Ambri Grill
+      url: https://www.galaxus.ch/de/s4/product/outdoorchef-ambri-480-g-evo-580-kw-gasgrill-17761804
+      value: 350
+      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
