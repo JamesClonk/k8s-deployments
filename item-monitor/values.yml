@@ -6,10 +6,6 @@ item_monitor:
   monitors:
   - name: galaxus
     items:
-    - name: Philips Hue Argenta 1x
-      url: https://www.galaxus.ch/de/s14/product/philips-hue-argenta-basis-bt-350-lm-gu10-wandleuchte-deckenleuchte-11235559
-      value: 55
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: Philips Hue GU10 3x
       url: https://www.galaxus.ch/de/s14/product/philips-hue-white-color-ambiance-bt-gu10-570-w-350-lm-3-x-g-leuchtmittel-16446773
       value: 100
@@ -18,15 +14,11 @@ item_monitor:
       url: https://www.galaxus.ch/de/s14/product/philips-hue-white-color-ambiance-starterset-gu10-570-w-350-lm-3-x-g-leuchtmittel-11235548
       value: 131
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    - name: Philips Hue LED Lightstrips
-      url: https://www.galaxus.ch/de/s14/product/philips-hue-lightstrips-basis-bt-rgbw-200-cm-indoor-led-streifen-13274601
-      value: 55
-      regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
     - name: HP Thunderbolt Docking Station
       url: https://www.galaxus.ch/de/s1/product/hp-thunderbolt-120-w-g4-dock-thunderbolt-dockingstation-usb-hub-21359396
       value: 190
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
-    - name: Outdoorchef Ambri Grill
-      url: https://www.galaxus.ch/de/s4/product/outdoorchef-ambri-480-g-evo-580-kw-gasgrill-17761804
-      value: 350
+    - name: HP Thunderbolt G4 Docking Station
+      url: https://www.galaxus.ch/de/s1/product/hp-thunderbolt-g4-dock-thunderbolt-2-ports-dockingstation-usb-hub-21359395
+      value: 190
       regex: <meta property="product:price:amount" content="([0-9.]+)"\/>
