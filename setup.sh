@@ -15,31 +15,37 @@ export KUBECONFIG="$HOME/.kube/k8s-deployments"
 # helper functions
 ########################################################################################################################
 function basic_auth() {
-	local -r username="$1"; shift
-	local -r password="$1"; shift
+	local -r username="$1"
+	shift
+	local -r password="$1"
+	shift
 	echo "${username}:$(openssl passwd -apr1 \"${password}\")"
 }
 
 function retry() {
-	local -r -i max_attempts="$1"; shift
-	local -r -i sleep_time="$1"; shift
+	local -r -i max_attempts="$1"
+	shift
+	local -r -i sleep_time="$1"
+	shift
 	local -i attempt_num=1
 	until "$@"; do
-		if (( attempt_num == max_attempts ))
-	then
-		echo "#$attempt_num failures!"
-		exit 1
-	else
-		echo "#$(( attempt_num++ )): trying again in $sleep_time seconds ..."
-		sleep $sleep_time
+		if ((attempt_num == max_attempts)); then
+			echo "#$attempt_num failures!"
+			exit 1
+		else
+			echo "#$((attempt_num++)): trying again in $sleep_time seconds ..."
+			sleep $sleep_time
 		fi
 	done
 }
 
 function install_tool {
-	local -r tool_name="$1"; shift
-	local -r tool_url="$1"; shift
-	local -r tool_checksum="$1"; shift
+	local -r tool_name="$1"
+	shift
+	local -r tool_url="$1"
+	shift
+	local -r tool_checksum="$1"
+	shift
 	if [ ! -f "$HOME/bin/${tool_name}" ]; then
 		echo "downloading [${tool_name}] ..."
 		wget -q "${tool_url}" -O "$HOME/bin/${tool_name}" 2>/dev/null
@@ -49,10 +55,14 @@ function install_tool {
 }
 
 function install_tool_from_tarball {
-	local -r tool_path="$1"; shift
-	local -r tool_name="$1"; shift
-	local -r tool_url="$1"; shift
-	local -r tool_checksum="$1"; shift
+	local -r tool_path="$1"
+	shift
+	local -r tool_name="$1"
+	shift
+	local -r tool_url="$1"
+	shift
+	local -r tool_checksum="$1"
+	shift
 	if [ ! -f "$HOME/bin/${tool_name}" ]; then
 		echo "downloading [${tool_name}] ..."
 		wget -q "${tool_url}" -O "$HOME/bin/${tool_name}.tgz" 2>/dev/null
@@ -74,7 +84,7 @@ export PATH="$HOME/bin:$PATH"
 ########################################################################################################################
 # install tools
 ########################################################################################################################
-install_tool "sops" "https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64" "53aec65e45f62a769ff24b7e5384f0c82d62668dd96ed56685f649da114b4dbb"
+install_tool "sops" "https://github.com/mozilla/sops/releases/download/v3.9.1/sops-v3.9.1.linux.amd64" "cd795109851c3a483bbaa66d15d19ddb2227ac0352b39e25d96b67d51edb6225"
 install_tool "kubectl" "https://storage.googleapis.com/kubernetes-release/release/v1.25.8/bin/linux/amd64/kubectl" "80e70448455f3d19c3cb49bd6ff6fc913677f4f240d368fa2b9f0d400c8cd16e"
 install_tool "kapp" "https://github.com/vmware-tanzu/carvel-kapp/releases/download/v0.46.0/kapp-linux-amd64" "130f648cd921761b61bb03d7a0f535d1eea26e0b5fc60e2839af73f4ea98e22f"
 install_tool "ytt" "https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.40.1/ytt-linux-amd64" "11222665c627b8f0a1443534a3dde3c9b3aac08b322d28e91f0e011e3aeb7df5"
@@ -103,7 +113,7 @@ if [ ! -d "$HOME/.ssh" ]; then mkdir "$HOME/.ssh"; fi
 chmod 700 "$HOME/.ssh" || true
 set +u
 if [ ! -z "${HETZNER_PRIVATE_SSH_KEY}" ]; then
-	cat > "$HOME/.ssh/id_rsa" << EOF
+	cat >"$HOME/.ssh/id_rsa" <<EOF
 ${HETZNER_PRIVATE_SSH_KEY}
 EOF
 	chmod 600 "$HOME/.ssh/id_rsa"
@@ -119,7 +129,7 @@ chmod 700 "$HOME/.kube" || true
 set +u
 if [ ! -f "${KUBECONFIG}" ]; then
 	echo "writing [${KUBECONFIG}] ..."
-	sops -d $(dirname ${BASH_SOURCE[0]})/kubeconfig.sops > "${KUBECONFIG}"
+	sops -d $(dirname ${BASH_SOURCE[0]})/kubeconfig.sops >"${KUBECONFIG}"
 	chmod 600 "${KUBECONFIG}"
 fi
 set -u
