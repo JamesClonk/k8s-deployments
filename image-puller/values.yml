@@ -12,7 +12,7 @@ image_puller:
   - "jamesclonk/repo-mirrorer:83548d8c17618a57d377467eea8e34264be3dde4"
   - "jamesclonk/backman:2.0.0"
   - "jamesclonk/cf-env:89d20c44e3d6b1a4e0c0502e9d1f5bc908e81264"
-  - "jamesclonk/home-info-dashboard:5b1d8897741635bfd8c46004edd45c1eab5c858b"
+  - "jamesclonk/home-info-dashboard:a5f5909a5988161f0c800bea08d09d430b5cb27a"
   - "jamesclonk/irvisualizer:625399ccc65d3eea2b06f2536d41a77b1cc876df"
   - "jamesclonk/ircollector:571721fe7796bb80b571db9e325405a4c531e8a1"
   - "jamesclonk/irdiscordbot:c032a58d922d3f71ee0bc39c4821e97bbd7a9ca0"
