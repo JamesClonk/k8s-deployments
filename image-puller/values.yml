@@ -94,12 +94,6 @@ image_puller:
   - "itzg/minecraft-server:2021.5.1-java8"
   - "itzg/mc-backup:latest"
 
-  #! syncthing
-  - "busybox:1.32.0"
-  - "syncthing/syncthing:1.11.1"
-
-  #! adguardhome
-  - "adguard/adguardhome:v0.106.3"
-
   #! wireguard
-  - "index.docker.io/masipcat/wireguard-go@sha256:972b15ba139b3e612d96c80ebc7fc4e8e63b1b54b4afe9a14049660ef94247f8"
+  - "busybox:1.32.0"
+  - "index.docker.io/masipcat/wireguard-go:0.0.20230223"

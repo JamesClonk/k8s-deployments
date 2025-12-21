@@ -4,20 +4,16 @@ busybox:
   image: "busybox:1.32.0"
 
 wireguard:
-  image: "masipcat/wireguard-go:latest"
+  image: "masipcat/wireguard-go:0.0.20230223"
 
   network: "10.15.20.0/24"
   address: "10.15.20.1/24"
-  dns: "78.47.120.74"
   public_key: "PZVWslT6d/nHS1y85mDZOPymyKjzJ62BxFIjEYGDrEs="
 
   clients:
-  - name: home-workstation
-    public_key: "Y8xPxPrbOJjfMFHsVOuCJATy8M9L1wOrSrJ7sLwhLHk="
-    allowed_ips: "10.15.20.5/32"
-  - name: android
-    public_key: "DcokvAl/OsUyPiEyrIEn/dh6mF3WVWbQoGqb+4UbilE="
+  - name: work-laptop
+    public_key: "JPi51YG+n1slsHOo9iYR9SUehcFQTup6ksZaPyfpjxI="
     allowed_ips: "10.15.20.10/32"
-  - name: tablet
-    public_key: "eLCO/g+8jNLl+JaTkTEY+SH80jBgKimwX9/9Naqk7Hw="
+  - name: phone
+    public_key: "8yb2L/sCq7tEAB4O/DjdB8S80OQFDGdZKlqJ7MJbq1U="
     allowed_ips: "10.15.20.15/32"

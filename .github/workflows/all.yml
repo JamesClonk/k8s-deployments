@@ -118,20 +118,6 @@ jobs:
       if: ${{ always() }}
       run: ./cleanup.sh
 
-  # syncthing:
-  #   if: "!contains(github.event.head_commit.message, 'skip')"
-  #   name: syncthing
-  #   needs: [ cf-env ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: deploy syncthing server
-  #     working-directory: syncthing
-  #     run: ./deploy.sh
-  #   - name: cleanup
-  #     if: ${{ always() }}
-  #     run: ./cleanup.sh
-
   # minecraft:
   #   if: "!contains(github.event.head_commit.message, 'skip')"
   #   name: minecraft
@@ -146,24 +132,10 @@ jobs:
   #     if: ${{ always() }}
   #     run: ./cleanup.sh
 
-  adguardhome:
-    if: "!contains(github.event.head_commit.message, 'skip')"
-    name: adguardhome
-    needs: [ cf-env ]
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: deploy adguardhome dns
-      working-directory: adguardhome
-      run: ./deploy.sh
-    - name: cleanup
-      if: ${{ always() }}
-      run: ./cleanup.sh
-
   wireguard:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: wireguard
-    needs: [ adguardhome ]
+    needs: [ cf-env ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

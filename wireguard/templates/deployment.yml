@@ -44,6 +44,8 @@ spec:
         ports:
         - containerPort: 51820
           protocol: UDP
+        - containerPort: 8080
+          protocol: TCP
         command:
         - sh
         - -c
@@ -51,6 +53,16 @@ spec:
         env:
         - name: LOG_LEVEL
           value: info
+        - name: ENABLE_HEALTHCHECK
+          value: "true"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
         resources:
           requests:
             memory: "64Mi"

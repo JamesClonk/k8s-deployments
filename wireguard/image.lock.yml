@@ -1,10 +1,10 @@
 apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
-minimumRequiredVersion: 0.29.0
+minimumRequiredVersion: 0.47.0
 overrides:
 - image: busybox:1.32.0
   newImage: index.docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678
   preresolved: true
-- image: masipcat/wireguard-go:latest
-  newImage: index.docker.io/masipcat/wireguard-go@sha256:972b15ba139b3e612d96c80ebc7fc4e8e63b1b54b4afe9a14049660ef94247f8
+- image: masipcat/wireguard-go:0.0.20230223
+  newImage: index.docker.io/masipcat/wireguard-go@sha256:e61623dd37b86f046337f3df62ac4c8305a635c00cd3c5497190dbdfc62e6d2e
   preresolved: true

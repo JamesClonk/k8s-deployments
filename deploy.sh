@@ -19,13 +19,13 @@ deployments=(
 	# all your backups are belong to us!
 	"backman"
 
+	# we need a VPN!
+	"wireguard"
+
 	# actual useful apps go here..
 	"jcio"
 	"home-info"
 	"irvisualizer"
-
-	# # put my files into the clouds!
-	# "syncthing"
 
 	# # building stuff with blocks..
 	# "minecraft"
