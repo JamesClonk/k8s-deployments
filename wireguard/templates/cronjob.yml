@@ -1,0 +1,32 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yml", "labels")
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restart-wireguard
+  namespace: wireguard
+  labels: #@ labels("cronjob")
+spec:
+  schedule: "37 03 * * 0,3"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      namespace: wireguard
+    spec:
+      template:
+        metadata:
+          namespace: wireguard
+        spec:
+          serviceAccountName: restart-wireguard
+          restartPolicy: Never
+          containers:
+          - name: kubectl-container
+            image: #@ data.values.kubectl.image
+            command:
+            - /bin/sh
+            - -c
+            - kubectl rollout restart deployment wireguard -n wireguard

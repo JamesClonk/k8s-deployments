@@ -3,6 +3,9 @@
 busybox:
   image: "busybox:1.32.0"
 
+kubectl:
+  image: "alpine/k8s:1.34.3"
+
 wireguard:
   image: "masipcat/wireguard-go:0.0.20230223"
 

@@ -96,4 +96,5 @@ image_puller:
 
   #! wireguard
   - "busybox:1.32.0"
+  - "alpine/k8s:1.34.3"
   - "index.docker.io/masipcat/wireguard-go:0.0.20230223"

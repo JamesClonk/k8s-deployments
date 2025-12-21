@@ -2,6 +2,9 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.47.0
 overrides:
+- image: alpine/k8s:1.34.3
+  newImage: index.docker.io/alpine/k8s@sha256:890dd451bf18b11237b7e5cc55acdcc3ff0fd189658f9349332909f68d514a77
+  preresolved: true
 - image: busybox:1.32.0
   newImage: index.docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678
   preresolved: true
