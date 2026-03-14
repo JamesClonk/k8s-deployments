@@ -34,7 +34,7 @@
 		- jcio
 		- kuard
 		- minecraft
-		- pgweb
+		- ~pgweb~
 		- ~repo-mirrorer~
 		- ~resume~
 		- ~wireguard~

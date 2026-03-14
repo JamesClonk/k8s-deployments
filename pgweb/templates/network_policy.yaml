@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("_ytt.lib.yml", "labels")
+#@ load("_ytt.lib.yaml", "labels")
 
 #@ if data.values.pgweb.enable_network_policy:
 ---
@@ -20,10 +20,10 @@ spec:
       podSelector: {}
     ports:
     - port: 8081
-  - from: #! allow access for ingress-controller
+  - from: #! allow access for gateway-api-controller
     - namespaceSelector:
         matchLabels:
-          namespace.kubernetes.io/name: ingress-nginx
+          namespace.kubernetes.io/name: envoy-gateway-system
       podSelector: {}
     ports:
     - port: 8081

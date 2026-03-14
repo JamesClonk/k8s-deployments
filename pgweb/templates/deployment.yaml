@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:assert", "assert")
-#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+#@ load("_ytt.lib.yaml", "labels", "podAntiAffinity")
 
 #@ if len(data.values.secrets.pgweb.postgres.username) == 0 or data.values.secrets.pgweb.postgres.username == "username":
 #@  assert.fail("secrets.pgweb.postgres.username is missing or invalid")
