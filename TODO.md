@@ -30,7 +30,7 @@
 		- image-puller
 		- irvisualizer
 		- item-monitor
-		- jcio
+		- ~jcio~
 		- ~minecraft~
 		- ~pgweb~
 		- ~repo-mirrorer~
