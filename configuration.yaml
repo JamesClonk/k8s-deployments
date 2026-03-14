@@ -4,4 +4,4 @@
 configuration:
   ingress:
     domains:
-    - "jamesclonk.io"
+    - "jamesclonk.com" # TODO: change in prod!

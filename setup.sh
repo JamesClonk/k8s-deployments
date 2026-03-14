@@ -7,7 +7,7 @@ source $(dirname ${BASH_SOURCE[0]})/.env* 1>/dev/null 2>&1 || true # source any 
 ########################################################################################################################
 # environment configuration
 ########################################################################################################################
-export CONFIGURATION_FILE="$(dirname ${BASH_SOURCE[0]})/configuration.yml"
+export CONFIGURATION_FILE="$(dirname ${BASH_SOURCE[0]})/configuration.yaml"
 export SECRETS_FILE="$(dirname ${BASH_SOURCE[0]})/secrets.sops"
 export KUBECONFIG="$HOME/.kube/k8s-deployments"
 

@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:assert", "assert")
-#@ load("_ytt.lib.yml", "labels")
+#@ load("_ytt.lib.yaml", "labels")
 
 #@ if len(data.values.configuration.ingress.domains) == 0 or len(data.values.configuration.ingress.domains[0]) == 0 or data.values.configuration.ingress.domains[0] == "example.org":
 #@  assert.fail("configuration.ingress.domain is missing or invalid")
