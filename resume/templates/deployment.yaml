@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("_ytt.lib.yml", "labels", "podAntiAffinity")
+#@ load("_ytt.lib.yaml", "labels", "podAntiAffinity")
 
 ---
 apiVersion: apps/v1
