@@ -1,7 +1,0 @@
-#@data/values
----
-kuard:
-  replicas: 1
-  image: "gcr.io/kuar-demo/kuard-amd64:v0.10.0-green"
-
-  enable_network_policy: true

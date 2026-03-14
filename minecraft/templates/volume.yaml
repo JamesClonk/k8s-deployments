@@ -1,6 +1,6 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:assert", "assert")
-#@ load("_ytt.lib.yml", "labels")
+#@ load("_ytt.lib.yaml", "labels")
 
 #@ if len(data.values.minecraft.storage.class_name) == 0:
 #@  assert.fail("data.values.minecraft.storage.class_name cannot be empty")

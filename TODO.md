@@ -14,7 +14,6 @@
 		- irvisualizer
 		- item-monitor
 		- jcio
-		- kuard
 		- minecraft
 		- pgweb
 		- repo-mirrorer
@@ -32,8 +31,7 @@
 		- irvisualizer
 		- item-monitor
 		- jcio
-		- kuard
-		- minecraft
+		- ~minecraft~
 		- ~pgweb~
 		- ~repo-mirrorer~
 		- ~resume~
