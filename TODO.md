@@ -36,7 +36,7 @@
 		- minecraft
 		- pgweb
 		- repo-mirrorer
-		- resume
+		- ~resume~
 		- wireguard
 
 - go through all remaining "# TODO:" comments
