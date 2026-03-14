@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("_ytt.lib.yml", "labels")
+#@ load("_ytt.lib.yaml", "labels")
 
 #@ def jobTemplate():
   template:
@@ -38,7 +38,7 @@
 
 #@ if data.values.repo_mirrorer.cronjob:
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: repo-mirrorer

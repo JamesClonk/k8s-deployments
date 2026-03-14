@@ -35,9 +35,9 @@
 		- kuard
 		- minecraft
 		- pgweb
-		- repo-mirrorer
+		- ~repo-mirrorer~
 		- ~resume~
-		- wireguard
+		- ~wireguard~
 
 - go through all remaining "# TODO:" comments
 
