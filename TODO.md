@@ -23,20 +23,6 @@
 - migrate all ytt "values.yml" to "values.yaml" (needs a change to all shellscripts which interact with ytt)
 - migrate all kbld "image.lock.yml" to "image.lock.yaml" (needs a change to all shellscripts which interact with kbld)
 
-- update deployments (from .yml to .yaml, add httproute.yaml, update network_policy.yaml for envoy-gateway):
-		- ~backman~
-		- ~cf-env~
-		- ~home-info~
-		- ~image-puller~
-		- irvisualizer
-		- ~item-monitor~
-		- ~jcio~
-		- ~minecraft~
-		- ~pgweb~
-		- ~repo-mirrorer~
-		- ~resume~
-		- ~wireguard~
-
 - go through all remaining "# TODO:" comments
 
 - go through image-puller and update all necessary values / sha-checksums / etc..
