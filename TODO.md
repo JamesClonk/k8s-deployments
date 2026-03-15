@@ -29,7 +29,7 @@
 		- home-info
 		- image-puller
 		- irvisualizer
-		- item-monitor
+		- ~item-monitor~
 		- ~jcio~
 		- ~minecraft~
 		- ~pgweb~
