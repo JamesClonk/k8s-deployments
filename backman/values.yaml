@@ -2,7 +2,7 @@
 ---
 backman:
   replicas: 1
-  image: "jamesclonk/backman:2.0.0"
+  image: "jamesclonk/backman:2.5.3"
 
   enable_network_policy: true
 
@@ -10,6 +10,6 @@ backman:
     #! class_name: hcloud-volumes
     class_name: local-path
     driver: csi.hetzner.cloud
-    size: 10Gi
+    size: 15Gi
     reclaim: false
     volume_handle: "" # <-- must be set if 'reclaim=true'

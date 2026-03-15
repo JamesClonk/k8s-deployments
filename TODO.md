@@ -24,7 +24,7 @@
 - migrate all kbld "image.lock.yml" to "image.lock.yaml" (needs a change to all shellscripts which interact with kbld)
 
 - update deployments (from .yml to .yaml, add httproute.yaml, update network_policy.yaml for envoy-gateway):
-		- backman
+		- ~backman~
 		- ~cf-env~
 		- home-info
 		- ~image-puller~
