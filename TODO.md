@@ -27,7 +27,7 @@
 		- backman
 		- ~cf-env~
 		- home-info
-		- image-puller
+		- ~image-puller~
 		- irvisualizer
 		- ~item-monitor~
 		- ~jcio~
