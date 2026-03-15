@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ load("_ytt.lib.yml", "labels")
+#@ load("_ytt.lib.yaml", "labels")
 
 #@ if data.values.home_info.replicas > 1:
 ---

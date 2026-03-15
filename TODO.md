@@ -26,7 +26,7 @@
 - update deployments (from .yml to .yaml, add httproute.yaml, update network_policy.yaml for envoy-gateway):
 		- ~backman~
 		- ~cf-env~
-		- home-info
+		- ~home-info~
 		- ~image-puller~
 		- irvisualizer
 		- ~item-monitor~
