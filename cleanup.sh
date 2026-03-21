@@ -10,6 +10,15 @@ source $(dirname ${BASH_SOURCE[0]})/.env* 1>/dev/null 2>&1 || true # source any 
 export CONFIGURATION_FILE="$(dirname ${BASH_SOURCE[0]})/configuration.yaml"
 export SECRETS_FILE="$(dirname ${BASH_SOURCE[0]})/secrets.sops"
 export KUBECONFIG="$HOME/.kube/k8s-deployments"
+export LOCAL_WIREGUARD_FILE="$HOME/.tmp/hetzner0.conf"
+
+########################################################################################################################
+# wireguard
+########################################################################################################################
+echo "taking down wireguard with [${LOCAL_WIREGUARD_FILE}] ..."
+sudo wg-quick down "${LOCAL_WIREGUARD_FILE}" || true
+echo "removing [${LOCAL_WIREGUARD_FILE}] ..."
+rm -f "${LOCAL_WIREGUARD_FILE}" || true
 
 ########################################################################################################################
 # $HOME/.ssh

@@ -10,6 +10,7 @@ source $(dirname ${BASH_SOURCE[0]})/.env* 1>/dev/null 2>&1 || true # source any 
 export CONFIGURATION_FILE="$(dirname ${BASH_SOURCE[0]})/configuration.yaml"
 export SECRETS_FILE="$(dirname ${BASH_SOURCE[0]})/secrets.sops"
 export KUBECONFIG="$HOME/.kube/k8s-deployments"
+export LOCAL_WIREGUARD_FILE="$HOME/.tmp/hetzner0.conf"
 
 ########################################################################################################################
 # helper functions
@@ -112,8 +113,39 @@ git config --local core.hooksPath .githooks/
 git config --local diff.sopsdiffer.textconv "sops -d"
 
 ########################################################################################################################
+# wireguard client
+########################################################################################################################
+export INGRESS_DOMAIN="jamesclonk.io" # TODO: render this with plato!
+export HETZNER_WIREGUARD_SERVER_RANGE=$(yq -e eval '.configuration.hetzner.wireguard.server.range' ${CONFIGURATION_FILE})
+export HETZNER_WIREGUARD_SERVER_PORT=$(yq -e eval '.configuration.hetzner.wireguard.server.port' ${CONFIGURATION_FILE})
+export HETZNER_WIREGUARD_SERVER_PUBLIC_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.server.public_key' -)
+export HETZNER_WIREGUARD_CLIENT_IP=$(yq -e eval '.configuration.hetzner.wireguard.client.ip' ${CONFIGURATION_FILE})
+export HETZNER_WIREGUARD_CLIENT_PUBLIC_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.client.public_key' -)
+export HETZNER_WIREGUARD_CLIENT_PRIVATE_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.client.private_key' -)
+export HETZNER_PRIVATE_NETWORK_SUBNET=$(yq -e eval '.configuration.hetzner.private_network.subnet' ${CONFIGURATION_FILE})
+
+if [ ! -d "$HOME/.tmp" ]; then mkdir "$HOME/.tmp"; fi
+chmod 700 "$HOME/.tmp" || true
+if [ ! -f "${LOCAL_WIREGUARD_FILE}" ]; then
+	cat >"${LOCAL_WIREGUARD_FILE}" <<EOF
+[Interface]
+Address = ${HETZNER_WIREGUARD_CLIENT_IP}
+PrivateKey = ${HETZNER_WIREGUARD_CLIENT_PRIVATE_KEY}
+
+[Peer]
+PublicKey = ${HETZNER_WIREGUARD_SERVER_PUBLIC_KEY}
+Endpoint = ${INGRESS_DOMAIN}:${HETZNER_WIREGUARD_SERVER_PORT}
+AllowedIPs = ${HETZNER_WIREGUARD_SERVER_RANGE}, ${HETZNER_PRIVATE_NETWORK_SUBNET}
+PersistentKeepalive = 25
+EOF
+	chmod 600 "${LOCAL_WIREGUARD_FILE}"
+fi
+sudo wg-quick up "${LOCAL_WIREGUARD_FILE}" || true
+
+########################################################################################################################
 # $HOME/.ssh
 ########################################################################################################################
+export HETZNER_PRIVATE_SSH_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.ssh.private_key' -)
 if [ ! -d "$HOME/.ssh" ]; then mkdir "$HOME/.ssh"; fi
 chmod 700 "$HOME/.ssh" || true
 set +u

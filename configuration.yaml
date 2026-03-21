@@ -2,6 +2,18 @@
 ---
 #@overlay/match missing_ok=True
 configuration:
+  hetzner:
+    wireguard:
+      server:
+        range: 10.10.250.0/24 # TODO: render with plato?!
+        ip: 10.10.250.1 # TODO: render with plato?!
+        port: 58585 # TODO: render with plato?!
+      client:
+        ip: 10.10.250.10 # TODO: render with plato?!
+
+    private_network:
+      subnet: 10.8.0.0/24 # TODO: render with plato?!
+
   ingress:
     domains:
     - "jamesclonk.io"
