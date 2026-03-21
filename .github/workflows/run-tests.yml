@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: install wireguard tools
-      run: ./github_wireguard.sh
     - name: checkout k8s-testing
       uses: actions/checkout@v3
       with:
@@ -30,6 +28,9 @@ jobs:
     - uses: actions/checkout@v3
       with:
         path: repo
+    - name: install wireguard tools
+      working-directory: repo
+      run: ./github_wireguard.sh
     - name: setup kubeconfig
       working-directory: repo
       run: ./setup.sh
