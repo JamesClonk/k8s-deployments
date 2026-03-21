@@ -8,9 +8,9 @@ jobs:
     name: item-monitor
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy item-monitor app
       working-directory: item-monitor
       run: ./deploy.sh

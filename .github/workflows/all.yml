@@ -13,9 +13,9 @@ jobs:
     name: cf-env
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy cf-env demo app
       working-directory: cf-env
       run: ./deploy.sh
@@ -29,9 +29,9 @@ jobs:
     needs: [ cf-env ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy resume web app
       working-directory: resume
       run: ./deploy.sh
@@ -44,9 +44,9 @@ jobs:
     name: pgweb
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy pgweb postgres admin ui
       working-directory: pgweb
       run: ./deploy.sh
@@ -60,9 +60,9 @@ jobs:
     needs: [ pgweb ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy backman postgres backup app
       working-directory: backman
       run: ./deploy.sh
@@ -76,9 +76,9 @@ jobs:
     needs: [ backman ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy jcio homepage app
       working-directory: jcio
       run: ./deploy.sh
@@ -92,9 +92,9 @@ jobs:
     needs: [ backman ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy home-info app
       working-directory: home-info
       run: ./deploy.sh
@@ -108,9 +108,9 @@ jobs:
     needs: [ backman ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy iRacing visualization app
       working-directory: irvisualizer
       run: ./deploy.sh
@@ -138,9 +138,9 @@ jobs:
     needs: [ cf-env ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy wireguard server
       working-directory: wireguard
       run: ./deploy.sh
@@ -153,9 +153,9 @@ jobs:
     name: image-puller
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy image-puller cronjob
       working-directory: image-puller
       run: ./deploy.sh
@@ -169,9 +169,9 @@ jobs:
     needs: [ image-puller ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy repo-mirrorer cronjob
       working-directory: repo-mirrorer
       run: ./deploy.sh
@@ -185,9 +185,9 @@ jobs:
     needs: [ repo-mirrorer ]
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy item-monitor app
       working-directory: item-monitor
       run: ./deploy.sh
@@ -219,6 +219,9 @@ jobs:
     - uses: actions/checkout@v3
       with:
         path: repo
+    - name: install wireguard tools
+      working-directory: repo
+      run: ./github_wireguard.sh
     - name: setup kubeconfig
       working-directory: repo
       run: ./setup.sh

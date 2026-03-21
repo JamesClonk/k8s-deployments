@@ -8,9 +8,9 @@ jobs:
     name: jcio
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy jcio homepage app
       working-directory: jcio
       run: ./deploy.sh

@@ -8,9 +8,9 @@ jobs:
     name: minecraft
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy minecraft server
       working-directory: minecraft
       run: ./deploy.sh

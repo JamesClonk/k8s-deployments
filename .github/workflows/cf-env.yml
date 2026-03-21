@@ -8,9 +8,9 @@ jobs:
     name: cf-env
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: install wireguard tools
       run: ./github_wireguard.sh
-    - uses: actions/checkout@v3
     - name: deploy cf-env demo app
       working-directory: cf-env
       run: ./deploy.sh
