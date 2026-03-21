@@ -8,6 +8,9 @@ jobs:
     name: backman
     runs-on: ubuntu-latest
     steps:
+    - name: install wireguard tools
+      working-directory: repo
+      run: ./github_wireguard.sh
     - uses: actions/checkout@v3
     - name: deploy backman postgres backup app
       working-directory: backman
