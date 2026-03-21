@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: install wireguard tools
-      working-directory: repo
+      working-directory: .
       run: ./github_wireguard.sh
     - uses: actions/checkout@v3
     - name: deploy cf-env demo app
