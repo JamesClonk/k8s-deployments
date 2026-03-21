@@ -13,7 +13,6 @@ jobs:
 
     steps:
     - name: install wireguard tools
-      working-directory: .
       run: ./github_wireguard.sh
     - name: checkout k8s-testing
       uses: actions/checkout@v3
