@@ -1,0 +1,110 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:assert", "assert")
+#@ load("_ytt.lib.yaml", "labels", "podAntiAffinity")
+
+#@ if len(data.values.secrets.pgweb.postgres.username) == 0 or data.values.secrets.pgweb.postgres.username == "username":
+#@  assert.fail("secrets.pgweb.postgres.username is missing or invalid")
+#@ end
+#@ if len(data.values.secrets.pgweb.postgres.password) == 0 or data.values.secrets.pgweb.postgres.password == "password":
+#@  assert.fail("secrets.pgweb.postgres.password is missing or invalid")
+#@ end
+#@ if len(data.values.secrets.pgweb.postgres.hostname) == 0 or data.values.secrets.pgweb.postgres.hostname == "hostname":
+#@  assert.fail("secrets.pgweb.postgres.hostname is missing or invalid")
+#@ end
+#@ if len(data.values.secrets.pgweb.postgres.port) == 0 or data.values.secrets.pgweb.postgres.port == "0":
+#@  assert.fail("secrets.pgweb.postgres.port is missing or invalid")
+#@ end
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgweb
+  namespace: pgweb
+  labels: #@ labels("dashboard")
+spec:
+  selector:
+    matchLabels: #@ labels("dashboard")
+  replicas: #@ data.values.pgweb.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("dashboard")
+    spec:
+      serviceAccountName: pgweb
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+      affinity: #@ podAntiAffinity("dashboard")
+      initContainers:
+      - name: init-dbs
+        image: #@ data.values.postgres.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        command: [ "/bin/sh", "-c", "psql -h ${PGHOST} -U ${PGUSER} -p ${PGPORT} -f /init-dbs.sql" ]
+        volumeMounts:
+        - name: init-dbs
+          mountPath: /init-dbs.sql
+          subPath: init-dbs.sql
+        env:
+        - name: PGUSER
+          value: #@ data.values.secrets.pgweb.postgres.username
+        - name: PGPASSWORD
+          value: #@ data.values.secrets.pgweb.postgres.password
+        - name: PGHOST
+          value: #@ data.values.secrets.pgweb.postgres.hostname
+        - name: PGPORT
+          value: #@ data.values.secrets.pgweb.postgres.port
+      containers:
+      - name: pgweb
+        image: #@ data.values.pgweb.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8081
+        command: ["/usr/bin/pgweb"]
+        args: ["--bind=0.0.0.0", "--listen=8081", "--bookmarks-dir=/pgweb/bookmarks"]
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "150m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          failureThreshold: 5
+          initialDelaySeconds: 15
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: pgweb-bookmarks
+          mountPath: /pgweb/bookmarks/home_info.toml
+          subPath: home_info.toml
+        - name: pgweb-bookmarks
+          mountPath: /pgweb/bookmarks/irvisualizer.toml
+          subPath: irvisualizer.toml
+        - name: pgweb-bookmarks
+          mountPath: /pgweb/bookmarks/jcio.toml
+          subPath: jcio.toml
+      volumes:
+      - name: pgweb-bookmarks
+        secret:
+          secretName: pgweb
+      - name: init-dbs
+        secret:
+          secretName: pgweb

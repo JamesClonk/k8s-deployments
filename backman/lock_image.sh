@@ -7,5 +7,5 @@ source ../setup.sh
 # lock image
 echo "locking images for [backman] ..."
 sops -d ../secrets.sops |
-	ytt --ignore-unknown-comments -f templates -f values.yml -f ../configuration.yml -f - |
-	kbld -f - --lock-output "image.lock.yml"
+	ytt --ignore-unknown-comments -f templates -f values.yaml -f ../configuration.yaml -f - |
+	kbld -f - --lock-output "image.lock.yaml"

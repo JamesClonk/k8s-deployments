@@ -1,7 +1,0 @@
-#@data/values
----
-#@overlay/match missing_ok=True
-configuration:
-  ingress:
-    domains:
-    - "jamesclonk.io"

@@ -21,20 +21,6 @@ jobs:
       if: ${{ always() }}
       run: ./cleanup.sh
 
-  # kuard:
-  #   if: "!contains(github.event.head_commit.message, 'skip')"
-  #   name: kuard
-  #   needs: [ cf-env ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: deploy kuard demo app
-  #     working-directory: kuard
-  #     run: ./deploy.sh
-  #   - name: cleanup
-  #     if: ${{ always() }}
-  #     run: ./cleanup.sh
-
   resume:
     if: "!contains(github.event.head_commit.message, 'skip')"
     name: resume

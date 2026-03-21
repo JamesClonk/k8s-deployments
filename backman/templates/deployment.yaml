@@ -1,0 +1,88 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yaml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backman
+  namespace: backman
+  labels: #@ labels("gui")
+spec:
+  selector:
+    matchLabels: #@ labels("gui")
+  replicas: #@ data.values.backman.replicas
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: #@ labels("gui")
+      annotations:
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: backman
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+      affinity: #@ podAntiAffinity("gui")
+      containers:
+      - name: backman
+        image: #@ data.values.backman.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        command: [ "backman" ]
+        args: [ "-config", "/backman/config.json" ]
+        env:
+        - name: TZ
+          value: "Europe/Zurich"
+        - name: PORT
+          value: "8080"
+        - name: SERVICE_BINDING_ROOT
+          value: "/bindings"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 8080
+        livenessProbe:
+          initialDelaySeconds: 15
+          httpGet:
+            path: /healthz
+            port: 8080
+        volumeMounts:
+        - name: storage
+          mountPath: /var/run/backman
+        - mountPath: /backman/config.json
+          name: backman
+          subPath: config.json
+#@ for idx in range(len(data.values.secrets.backman.postgres)):
+#@   service = data.values.secrets.backman.postgres[idx]
+        - mountPath: #@ "/bindings/" + service.name
+          name: #@ service.name.lower().strip().replace(" ","-").replace("_","-")
+#@ end
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: backman
+      - name: backman
+        secret:
+          secretName: backman
+#@ for idx in range(len(data.values.secrets.backman.postgres)):
+#@   service = data.values.secrets.backman.postgres[idx]
+      - name: #@ service.name.lower().strip().replace(" ","-").replace("_","-")
+        secret:
+          secretName: #@ service.name.lower().strip().replace(" ","-").replace("_","-")
+#@ end
