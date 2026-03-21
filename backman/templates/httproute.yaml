@@ -45,11 +45,11 @@ spec:
     name: backman
   oidc:
     provider:
-      issuer: https://dex.jamesclonk.com/dex # TODO: template via plato!!!
+      issuer: https://dex.jamesclonk.io/dex # TODO: template via plato!!!
     clientID: envoy-gateway
     clientSecret:
       name: backman-oidc-client-secret
-    redirectURL: https://backman.jamesclonk.com/oauth2/callback # TODO: template via plato!!!
+    redirectURL: https://backman.jamesclonk.io/oauth2/callback # TODO: template via plato!!!
     logoutPath: /logout
 
 ---

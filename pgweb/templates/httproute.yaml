@@ -45,11 +45,11 @@ spec:
     name: pgweb
   oidc:
     provider:
-      issuer: https://dex.jamesclonk.com/dex # TODO: template via plato!!!
+      issuer: https://dex.jamesclonk.io/dex # TODO: template via plato!!!
     clientID: envoy-gateway
     clientSecret:
       name: pgweb-oidc-client-secret
-    redirectURL: https://pgweb.jamesclonk.com/oauth2/callback # TODO: template via plato!!!
+    redirectURL: https://pgweb.jamesclonk.io/oauth2/callback # TODO: template via plato!!!
     logoutPath: /logout
 
 ---

@@ -45,11 +45,11 @@ spec:
     name: cf-env
   oidc:
     provider:
-      issuer: https://dex.jamesclonk.com/dex # TODO: template via plato!!!
+      issuer: https://dex.jamesclonk.io/dex # TODO: template via plato!!!
     clientID: envoy-gateway
     clientSecret:
       name: cf-env-oidc-client-secret
-    redirectURL: https://cf-env.jamesclonk.com/oauth2/callback # TODO: template via plato!!!
+    redirectURL: https://cf-env.jamesclonk.io/oauth2/callback # TODO: template via plato!!!
     logoutPath: /logout
 
 ---
