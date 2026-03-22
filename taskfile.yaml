@@ -13,6 +13,11 @@ tasks:
     cmds:
     - task: plato render
 
+  setup:
+    desc: "Setup environment"
+    cmds:
+    - bash setup.sh
+
   deploy:
     desc: "Deploy all apps"
     cmds:
