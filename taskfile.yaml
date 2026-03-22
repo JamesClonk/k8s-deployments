@@ -1,0 +1,54 @@
+---
+version: '3'
+set: [errexit, nounset, pipefail]
+
+tasks:
+  default:
+    desc: "List all tasks"
+    cmds:
+    - task -l
+
+  render:
+    desc: "Render the templates"
+    cmds:
+    - task: plato render
+
+  deploy:
+    desc: "Deploy all apps"
+    cmds:
+    - task: cf-env:deploy
+    - task: resume:deploy
+    - task: jcio:deploy
+    - task: home-info:deploy
+    - task: irvisualizer:deploy
+    - task: backman:deploy
+    - task: pgweb:deploy
+    - task: item-monitor:deploy
+    - task: image-puller:deploy
+    - task: repo-mirrorer:deploy
+    - task: wireguard:deploy
+    - task: list-apps
+    - task: cleanup
+
+  list-apps:
+    desc: "List all running apps"
+    cmds:
+    - bash list_apps.sh
+
+  cleanup:
+    desc: "Cleanup environment, remove confidential files"
+    cmds:
+    - bash cleanup.sh
+
+includes:
+  backman: ./backman
+  cf-env: ./cf-env
+  home-info: ./home-info
+  image-puller: ./image-puller
+  irvisualizer: ./irvisualizer
+  item-monitor: ./item-monitor
+  jcio: ./jcio
+  pgweb: ./pgweb
+  repo-mirrorer: ./repo-mirrorer
+  resume: ./resume
+  wireguard: ./wireguard
