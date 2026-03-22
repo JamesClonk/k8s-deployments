@@ -1,5 +1,9 @@
 # TODO
 
+- add task, taskfiles
+	- overall commands to root dir
+	- all individual commands to all subdirs (deploy, diff, lock-image, etc)
+
 - switch all templating & secrets management to `plato`
 	- dont plato-render secrets into helm chart values.yamls, since helm chart output gets stored in git
 	- all helm chart dependencies need to be accounted for and mirrored/vendired too! No internet!
