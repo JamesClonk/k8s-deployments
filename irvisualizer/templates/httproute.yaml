@@ -30,6 +30,12 @@ spec:
     - path:
         type: PathPrefix
         value: /
+    filters:
+    - type: ResponseHeaderModifier
+      responseHeaderModifier:
+        set:
+        - name: Strict-Transport-Security
+          value: "max-age=31536000; includeSubDomains"
 
 ---
 apiVersion: gateway.networking.k8s.io/v1
@@ -56,3 +62,9 @@ spec:
     - path:
         type: PathPrefix
         value: /
+    filters:
+    - type: ResponseHeaderModifier
+      responseHeaderModifier:
+        set:
+        - name: Strict-Transport-Security
+          value: "max-age=31536000; includeSubDomains"
