@@ -21,17 +21,17 @@ tasks:
   deploy:
     desc: "Deploy all apps"
     cmds:
-    - task: cf-env:deploy
-    - task: resume:deploy
-    - task: jcio:deploy
-    - task: home-info:deploy
-    - task: irvisualizer:deploy
-    - task: backman:deploy
-    - task: pgweb:deploy
-    - task: item-monitor:deploy
-    - task: image-puller:deploy
-    - task: repo-mirrorer:deploy
-    - task: wireguard:deploy
+    - task: cf-env:all
+    - task: resume:all
+    - task: jcio:all
+    - task: home-info:all
+    - task: irvisualizer:all
+    - task: backman:all
+    - task: pgweb:all
+    - task: item-monitor:all
+    - task: image-puller:all
+    - task: repo-mirrorer:all
+    - task: wireguard:all
     - task: list-apps
     - task: cleanup
 
