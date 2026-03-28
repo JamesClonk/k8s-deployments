@@ -5,4 +5,5 @@ set -o pipefail
 source $(dirname ${BASH_SOURCE[0]})/setup.sh
 
 # list apps
+echo "displaying all apps ..."
 kapp list
