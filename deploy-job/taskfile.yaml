@@ -1,0 +1,49 @@
+---
+version: '3'
+set: [errexit, nounset, pipefail]
+
+tasks:
+  default:
+    desc: "List all tasks"
+    cmds:
+    - task -l
+
+  all:
+    desc: "Deploy, display and test app"
+    dir: '{{.TASKFILE_DIR}}'
+    cmds:
+    - task: deploy
+    - task: status
+    # - task: test
+
+  deploy:
+    desc: "Deploy app"
+    dir: '{{.TASKFILE_DIR}}'
+    cmds:
+    - bash deploy.sh
+
+  diff:
+    desc: "Run a diff to the kubernetes cluster"
+    dir: '{{.TASKFILE_DIR}}'
+    cmds:
+    - bash diff.sh
+
+  status:
+    desc: "Display the app status"
+    dir: '{{.TASKFILE_DIR}}'
+    cmds:
+    - bash status.sh
+
+  lock_image:
+    desc: "Lock images"
+    dir: '{{.TASKFILE_DIR}}'
+    cmds:
+    - bash lock_image.sh
+
+  # test:
+  #   desc: "Test app"
+  #   dir: '{{.TASKFILE_DIR}}/../../k8s-testing'
+  #   if: '[ -f spec/spec_helper.rb ]'
+  #   cmds:
+  #   - pwd
+  #   - bundle exec rspec spec/image_puller_spec.rb

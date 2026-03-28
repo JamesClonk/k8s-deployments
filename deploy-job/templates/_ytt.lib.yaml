@@ -1,0 +1,5 @@
+#@ def labels():
+  app: deploy-job
+  app.kubernetes.io/name: deploy-job
+  app.kubernetes.io/instance: deploy-job
+#@ end

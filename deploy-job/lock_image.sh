@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+set -u
+set -o pipefail
+source ../setup.sh
+
+# lock image
+echo "locking images for [deploy-job] ..."
+sops -d ../secrets.sops |
+	ytt --ignore-unknown-comments -f templates -f values.yaml -f ../configuration.yaml -f - |
+	kbld -f - --lock-output "image.lock.yaml"

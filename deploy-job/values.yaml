@@ -1,0 +1,4 @@
+#@data/values
+---
+image_puller:
+  image: "ghcr.io/jamesclonk/k8s-container:58b5388ba20bb78d2fb628c885b667ce31da6d54"

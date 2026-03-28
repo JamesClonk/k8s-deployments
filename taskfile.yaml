@@ -32,6 +32,7 @@ tasks:
     - task: image-puller:all
     - task: repo-mirrorer:all
     - task: wireguard:all
+    - task: deploy-job:all
     - task: list-apps
     - task: cleanup
 
@@ -48,6 +49,7 @@ tasks:
 includes:
   backman: ./backman
   cf-env: ./cf-env
+  deploy-job: ./deploy-job
   home-info: ./home-info
   image-puller: ./image-puller
   irvisualizer: ./irvisualizer

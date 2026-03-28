@@ -1,0 +1,42 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yaml", "labels")
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: deploy-job
+  namespace: deploy-job
+  labels: #@ labels()
+spec:
+  schedule: "37 09 * * 1"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: deploy-job
+            image: #@ data.values.image_puller.image
+            command:
+            - /bin/bash
+            - -c
+            - date; echo Hello World
+            volumeMounts:
+            - name: age-file
+              mountPath: /container/.sops/age/keys.txt
+              subPath: keys.txt
+          volumes:
+          - name: age-file
+            secret:
+              secretName: deploy-job
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
