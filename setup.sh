@@ -165,9 +165,13 @@ if [ ! -d "$HOME/.kube" ]; then mkdir "$HOME/.kube"; fi
 chmod 700 "$HOME/.kube" || true
 set +u
 if [ ! -f "${KUBECONFIG}" ]; then
-	echo "writing [${KUBECONFIG}] ..."
+	echo "writing KUBECONFIG to [${KUBECONFIG}] ..."
 	sops -d $(dirname ${BASH_SOURCE[0]})/kubeconfig.sops >"${KUBECONFIG}"
 	chmod 600 "${KUBECONFIG}"
+fi
+if [ ! -f "$HOME/.kube/config" ]; then
+	cp -f "${KUBECONFIG}" "$HOME/.kube/config"
+	chmod 600 "$HOME/.kube/config"
 fi
 set -u
 set -o pipefail

@@ -12,5 +12,5 @@ kubectl get ns || true
 # list apps
 echo ""
 echo "displaying all apps ..."
-which kapp
-kapp list --kubeconfig "$KUBECONFIG"
+kapp version
+kapp list -A
