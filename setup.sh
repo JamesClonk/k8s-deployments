@@ -11,6 +11,7 @@ export CONFIGURATION_FILE="$(dirname ${BASH_SOURCE[0]})/configuration.yaml"
 export SECRETS_FILE="$(dirname ${BASH_SOURCE[0]})/secrets.sops"
 export KUBECONFIG="$HOME/.kube/k8s-deployments"
 export LOCAL_WIREGUARD_FILE="$HOME/.tmp/hetzner0.conf"
+export KAPP_NAMESPACE="default"
 
 ########################################################################################################################
 # helper functions
