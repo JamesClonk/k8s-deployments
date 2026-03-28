@@ -23,16 +23,21 @@ spec:
             image: #@ data.values.image_puller.image
             command:
             - /bin/bash
-            - -c
-            - date; git clone https://github.com/JamesClonk/k8s-deployments.git; cd k8s-deployments; list_apps.sh
+            - /container/script/deploy.sh
             volumeMounts:
             - name: age-file
               mountPath: /container/.sops/age/keys.txt
               subPath: keys.txt
+            - name: deploy-script
+              mountPath: /container/script/deploy.sh
+              subPath: deploy.sh
           volumes:
           - name: age-file
             secret:
               secretName: deploy-job
+          - name: deploy-script
+            configMap:
+              name: deploy-job
           resources:
             requests:
               memory: "512Mi"

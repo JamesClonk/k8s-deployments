@@ -1,0 +1,25 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yaml", "labels")
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deploy-job
+  namespace: deploy-job
+  labels: #@ labels()
+  annotations:
+    kapp.k14s.io/versioned: ""
+data:
+  deploy.sh: |
+    #!/bin/bash
+    set -e
+    set -u
+    set -o pipefail
+
+    date
+    sleep 33
+
+    git clone https://github.com/JamesClonk/k8s-deployments.git
+    cd k8s-deployments
+    ./list_apps.sh
