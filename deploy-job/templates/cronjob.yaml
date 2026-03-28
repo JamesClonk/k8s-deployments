@@ -11,8 +11,8 @@ metadata:
 spec:
   schedule: "37 09 * * 1"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 5
-  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
