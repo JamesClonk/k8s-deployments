@@ -4,9 +4,13 @@ set -u
 set -o pipefail
 source $(dirname ${BASH_SOURCE[0]})/setup.sh
 
-# list apps
-echo "displaying all apps ..."
-echo ${KUBECONFIG} || true
+echo ""
+echo "displaying cluster information ..."
 kubectl cluster-info || true
 kubectl get ns || true
-kapp list
+
+# list apps
+echo ""
+echo "displaying all apps ..."
+which kapp
+kapp list --kubeconfig "$KUBECONFIG"
