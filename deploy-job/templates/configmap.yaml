@@ -29,6 +29,13 @@ data:
     make install
     popd
 
+    pushd k8s-infrastructure
+    task render
+    pushd rendered
+    task deploy
+    popd
+    popd
+
     pushd k8s-deployments
     task deploy
     popd
