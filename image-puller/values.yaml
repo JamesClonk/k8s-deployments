@@ -24,7 +24,7 @@ image_puller:
   - "jamesclonk/mcbackup:f3b390668671bba69835320ab82824470f6404a4"
   - "jamesclonk/resume:4d91da6105afdf29b423a7b90d653136f810ffee"
   - "jamesclonk/item-monitor:1022361"
-  - "jamesclonk/prometheus-msteams:workflows"
+  - "ghcr.io/jamesclonk/k8s-container:58b5388ba20bb78d2fb628c885b667ce31da6d54"
 
   #! other stuff
   - "jamesclonk/web-container:latest"
