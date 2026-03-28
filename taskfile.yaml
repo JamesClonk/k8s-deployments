@@ -21,6 +21,7 @@ tasks:
   deploy:
     desc: "Deploy all apps"
     cmds:
+    - task: setup
     - task: cf-env:all
     - task: resume:all
     - task: jcio:all
