@@ -24,7 +24,7 @@ spec:
             command:
             - /bin/bash
             - -c
-            - date; echo Hello World
+            - date; git clone https://github.com/JamesClonk/k8s-deployments.git; cd k8s-deployments; list_apps.sh
             volumeMounts:
             - name: age-file
               mountPath: /container/.sops/age/keys.txt
