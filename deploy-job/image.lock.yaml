@@ -2,6 +2,6 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.32.0
 overrides:
-- image: ghcr.io/jamesclonk/k8s-container:46daff67c0b254f9a78222e457c3955910ee0aeb
-  newImage: ghcr.io/jamesclonk/k8s-container@sha256:72172eabc7a9a14b362b965b5a325104bdf8da1bdf8c03e111e0a6ebc7533377
+- image: ghcr.io/jamesclonk/k8s-container:d4dfd710260bac5d0e2130cda3f08f9278944b46
+  newImage: ghcr.io/jamesclonk/k8s-container@sha256:f081cc02f8e1f0438c170515ae53110fa424feb7be9cf31343bca5eed739e332
   preresolved: true
