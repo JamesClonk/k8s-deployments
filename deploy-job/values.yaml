@@ -4,4 +4,4 @@ busybox:
   image: "busybox:1.32.0"
 
 deploy_job:
-  image: "ghcr.io/jamesclonk/k8s-container:d4dfd710260bac5d0e2130cda3f08f9278944b46"
+  image: "ghcr.io/jamesclonk/k8s-container:97ba439e61b0cbc79888951ebcd2cf3b4eb536b1"
