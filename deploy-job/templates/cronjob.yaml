@@ -23,13 +23,13 @@ spec:
             image: #@ data.values.image_puller.image
             command:
             - /bin/bash
-            - /container/script/deploy.sh
+            - /root/script/deploy.sh
             volumeMounts:
             - name: age-file
-              mountPath: /container/.sops/age/keys.txt
+              mountPath: /root/.config/sops/age/keys.txt
               subPath: keys.txt
             - name: deploy-script
-              mountPath: /container/script/deploy.sh
+              mountPath: /root/script/deploy.sh
               subPath: deploy.sh
           volumes:
           - name: age-file
