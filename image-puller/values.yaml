@@ -24,7 +24,7 @@ image_puller:
   - "jamesclonk/mcbackup:f3b390668671bba69835320ab82824470f6404a4"
   - "jamesclonk/resume:4d91da6105afdf29b423a7b90d653136f810ffee"
   - "jamesclonk/item-monitor:1022361"
-  - "ghcr.io/jamesclonk/k8s-container:97ba439e61b0cbc79888951ebcd2cf3b4eb536b1"
+  - "ghcr.io/jamesclonk/k8s-container:ed26e975b80145e911cd710f467ee694b4e7f8c5"
 
   #! other stuff
   - "jamesclonk/web-container:latest"

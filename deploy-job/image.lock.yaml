@@ -5,6 +5,6 @@ overrides:
 - image: busybox:1.32.0
   newImage: index.docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678
   preresolved: true
-- image: ghcr.io/jamesclonk/k8s-container:97ba439e61b0cbc79888951ebcd2cf3b4eb536b1
-  newImage: ghcr.io/jamesclonk/k8s-container@sha256:2b6f2b5b36ba22e15362f0ea3bb084dd28b74ffb92e1507d2a12e27aab1a21fd
+- image: ghcr.io/jamesclonk/k8s-container:ed26e975b80145e911cd710f467ee694b4e7f8c5
+  newImage: ghcr.io/jamesclonk/k8s-container@sha256:a553174ac7ac45932ba78fdfaf3a51b269559a2bc3fc9173abd5ba8c664db27a
   preresolved: true
