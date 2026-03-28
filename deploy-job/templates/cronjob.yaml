@@ -10,7 +10,7 @@ metadata:
   labels: #@ labels()
 spec:
   schedule: "37 09 * * 1"
-  concurrencyPolicy: Replace
+  concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 5
   jobTemplate:
@@ -18,12 +18,29 @@ spec:
       template:
         spec:
           restartPolicy: Never
+          initContainers:
+          - name: init
+            image: #@ data.values.busybox.image
+            command:
+            - sh
+            - -c
+            - sysctl -w net.ipv4.ip_forward=1 && sysctl -w net.ipv4.conf.all.forwarding=1
+            securityContext:
+              privileged: true
+              capabilities:
+                add:
+                - NET_ADMIN
           containers:
           - name: deploy-job
-            image: #@ data.values.image_puller.image
+            image: #@ data.values.deploy_job.image
             command:
             - /bin/bash
             - /root/script/deploy.sh
+            securityContext:
+              privileged: true
+              capabilities:
+                add:
+                - NET_ADMIN
             volumeMounts:
             - name: age-file
               mountPath: /root/.config/sops/age/keys.txt

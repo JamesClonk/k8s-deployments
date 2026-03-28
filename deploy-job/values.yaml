@@ -1,4 +1,7 @@
 #@data/values
 ---
-image_puller:
+busybox:
+  image: "busybox:1.32.0"
+
+deploy_job:
   image: "ghcr.io/jamesclonk/k8s-container:d4dfd710260bac5d0e2130cda3f08f9278944b46"

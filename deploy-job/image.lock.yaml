@@ -2,6 +2,9 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 minimumRequiredVersion: 0.32.0
 overrides:
+- image: busybox:1.32.0
+  newImage: index.docker.io/library/busybox@sha256:bde48e1751173b709090c2539fdf12d6ba64e88ec7a4301591227ce925f3c678
+  preresolved: true
 - image: ghcr.io/jamesclonk/k8s-container:d4dfd710260bac5d0e2130cda3f08f9278944b46
   newImage: ghcr.io/jamesclonk/k8s-container@sha256:f081cc02f8e1f0438c170515ae53110fa424feb7be9cf31343bca5eed739e332
   preresolved: true
