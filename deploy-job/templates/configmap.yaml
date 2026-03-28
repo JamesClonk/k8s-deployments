@@ -21,6 +21,8 @@ data:
     sleep 33
     export PATH="$HOME/bin:$PATH"
 
+    git clone https://github.com/JamesClonk/k8s-infrastructue.git
     git clone https://github.com/JamesClonk/k8s-deployments.git
+    git clone https://github.com/JamesClonk/k8s-testing.git
     cd k8s-deployments
     task deploy
