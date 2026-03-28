@@ -174,5 +174,6 @@ if [ ! -f "$HOME/.kube/config" ]; then
 	cp -f "${KUBECONFIG}" "$HOME/.kube/config"
 	chmod 600 "$HOME/.kube/config"
 fi
+kubectl config set-context --current --namespace=default || true
 set -u
 set -o pipefail
