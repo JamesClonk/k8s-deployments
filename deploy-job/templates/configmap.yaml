@@ -24,6 +24,8 @@ data:
     git clone https://github.com/JamesClonk/k8s-infrastructure.git
     git clone https://github.com/JamesClonk/k8s-deployments.git
     git clone https://github.com/JamesClonk/k8s-testing.git
+    # for kapp
+    export FORCE_COLOR=1
 
     pushd k8s-testing
     make install
