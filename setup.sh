@@ -123,11 +123,27 @@ export HETZNER_WIREGUARD_SERVER_PUBLIC_KEY=$(sops -d ${SECRETS_FILE} | yq -e eva
 export HETZNER_WIREGUARD_CLIENT_IP=$(yq -e eval '.configuration.hetzner.wireguard.client.ip' ${CONFIGURATION_FILE})
 export HETZNER_WIREGUARD_CLIENT_PUBLIC_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.client.public_key' -)
 export HETZNER_WIREGUARD_CLIENT_PRIVATE_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.client.private_key' -)
+export HETZNER_WIREGUARD_JOB_IP=$(yq -e eval '.configuration.hetzner.wireguard.job.ip' ${CONFIGURATION_FILE})
+export HETZNER_WIREGUARD_JOB_PUBLIC_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.job.public_key' -)
+export HETZNER_WIREGUARD_JOB_PRIVATE_KEY=$(sops -d ${SECRETS_FILE} | yq -e eval '.secrets.hetzner.wireguard.job.private_key' -)
 export HETZNER_PRIVATE_NETWORK_SUBNET=$(yq -e eval '.configuration.hetzner.private_network.subnet' ${CONFIGURATION_FILE})
 
 if [ ! -d "$HOME/.tmp" ]; then mkdir "$HOME/.tmp"; fi
 chmod 700 "$HOME/.tmp" || true
 if [ ! -f "${LOCAL_WIREGUARD_FILE}" ]; then
+	cat >"${LOCAL_WIREGUARD_FILE}" <<EOF
+[Interface]
+Address = ${HETZNER_WIREGUARD_JOB_IP}
+PrivateKey = ${HETZNER_WIREGUARD_JOB_PRIVATE_KEY}
+
+[Peer]
+PublicKey = ${HETZNER_WIREGUARD_SERVER_PUBLIC_KEY}
+Endpoint = ${INGRESS_DOMAIN}:${HETZNER_WIREGUARD_SERVER_PORT}
+AllowedIPs = ${HETZNER_WIREGUARD_SERVER_RANGE}, ${HETZNER_PRIVATE_NETWORK_SUBNET}
+PersistentKeepalive = 25
+EOF
+fi
+if [[ "$(hostname)" == "ULRXWP001" ]]; then
 	cat >"${LOCAL_WIREGUARD_FILE}" <<EOF
 [Interface]
 Address = ${HETZNER_WIREGUARD_CLIENT_IP}
@@ -139,8 +155,8 @@ Endpoint = ${INGRESS_DOMAIN}:${HETZNER_WIREGUARD_SERVER_PORT}
 AllowedIPs = ${HETZNER_WIREGUARD_SERVER_RANGE}, ${HETZNER_PRIVATE_NETWORK_SUBNET}
 PersistentKeepalive = 25
 EOF
-	chmod 600 "${LOCAL_WIREGUARD_FILE}"
 fi
+chmod 600 "${LOCAL_WIREGUARD_FILE}"
 sudo wg-quick up "${LOCAL_WIREGUARD_FILE}" || true
 
 ########################################################################################################################
