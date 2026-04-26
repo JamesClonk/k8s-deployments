@@ -1,0 +1,40 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yaml", "labels", "podAntiAffinity")
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kaizagaden
+  namespace: kaizagaden
+  labels: #@ labels("app")
+spec:
+  selector:
+    matchLabels: #@ labels("app")
+  replicas: #@ data.values.kaizagaden.replicas
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels: #@ labels("app")
+    spec:
+      serviceAccountName: kaizagaden
+      affinity: #@ podAntiAffinity("app")
+      containers:
+      - name: kaizagaden
+        image: #@ data.values.kaizagaden.image
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "150m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080

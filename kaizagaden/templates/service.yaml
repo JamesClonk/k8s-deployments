@@ -1,0 +1,14 @@
+#@ load("_ytt.lib.yaml", "labels")
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kaizagaden
+  namespace: kaizagaden
+  labels: #@ labels("svc")
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector: #@ labels("app")

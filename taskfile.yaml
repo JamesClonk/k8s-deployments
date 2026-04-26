@@ -33,6 +33,7 @@ tasks:
     - task: image-puller:all
     - task: repo-mirrorer:all
     - task: wireguard:all
+    - task: kaizagaden:all
     - task: deploy-job:all
     - task: list-apps
     - task: cleanup
@@ -60,3 +61,4 @@ includes:
   repo-mirrorer: ./repo-mirrorer
   resume: ./resume
   wireguard: ./wireguard
+  kaizagaden: ./kaizagaden

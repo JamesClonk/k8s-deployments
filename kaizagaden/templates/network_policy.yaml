@@ -1,0 +1,23 @@
+#@ load("@ytt:data", "data")
+#@ load("_ytt.lib.yaml", "labels")
+
+#@ if data.values.kaizagaden.enable_network_policy:
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: kaizagaden
+  namespace: kaizagaden
+  labels: #@ labels("netpol")
+spec:
+  podSelector:
+    matchLabels: #@ labels("app")
+  ingress:
+  - from: #! allow access for gateway-api-controller
+    - namespaceSelector:
+        matchLabels:
+          namespace.kubernetes.io/name: envoy-gateway-system
+      podSelector: {}
+    ports:
+    - port: 8080
+#@ end

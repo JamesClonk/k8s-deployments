@@ -1,0 +1,7 @@
+#@data/values
+---
+kaizagaden:
+  replicas: 1
+  image: "jamesclonk/kaizagaden:5622d25"
+
+  enable_network_policy: true
