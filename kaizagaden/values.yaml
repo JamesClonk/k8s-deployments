@@ -2,6 +2,6 @@
 ---
 kaizagaden:
   replicas: 1
-  image: "jamesclonk/kaizagaden:850edad"
+  image: "jamesclonk/kaizagaden:2f3d6c3"
 
   enable_network_policy: true
